@@ -1,0 +1,714 @@
+[
+  {
+    "name": "91Club",
+    "logo": "91Club.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      },
+      {
+        "name": "Auto Play",
+        "features": "Auto Play system for enhanced winning",
+        "price": "₹2,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Auto Play",
+        "features": "Auto Play system for enhanced winning",
+        "price": "₹4,499",
+        "validity": "2 Month"
+      }
+    ]
+  },
+  {
+    "name": "IN999",
+    "logo": "in999.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      },
+      {
+        "name": "Auto Play",
+        "features": "Auto Play system for enhanced winning",
+        "price": "₹2,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Auto Play",
+        "features": "Auto Play system for enhanced winning",
+        "price": "₹4,499",
+        "validity": "2 Month"
+      }
+    ]
+  },
+  {
+    "name": "Big Daddy (BDG)",
+    "logo": "bdg.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "BDG WIN",
+    "logo": "bdgwin.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "Big Mumbai",
+    "logo": "bigmumbai.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "DiuWin",
+    "logo": "diuwin.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "OkWin",
+    "logo": "okwin.jpg",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "Tiranga",
+    "logo": "tiranga.png",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "55Club",
+    "logo": "55club.jpg",
+    "desc": "WinGo, Aviator, Mines, and more",
+    "plans": [
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹1,799",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Big & Small mode for regular play",
+        "price": "₹3,299",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 1 Min",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo 30 Sec",
+        "features": "Number mode for advanced play",
+        "price": "₹5,799",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Aviator",
+        "features": "Advanced prediction for Aviator game",
+        "price": "₹3,499",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Mines",
+        "features": "For the popular crash game format",
+        "price": "₹2,999",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Wingo VIP Package",
+        "features": "All features included",
+        "price": "₹8,999",
+        "validity": "15 Days"
+      }
+    ]
+  },
+  {
+    "name": "Zupee",
+    "logo": "zupee.png",
+    "desc": "Professional dice controller and auto-play system for enhanced winning.",
+    "plans": [
+      {
+        "name": "Ludo Supereme",
+        "features": "Dice controller",
+        "price": "₹2,899",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Ludo Supereme",
+        "features": "Dice controller",
+        "price": "₹3,999",
+        "validity": "2 Month"
+      },
+      {
+        "name": "Ludo Supereme",
+        "features": "Auto Play mode for enhanced winning",
+        "price": "₹3,199",
+        "validity": "1 Month"
+      },
+      {
+        "name": "Ludo Supereme",
+        "features": "Auto Play mode for enhanced winning",
+        "price": "₹6,499",
+        "validity": "2 Month"
+      }
+    ]
+  }
+]

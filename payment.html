@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment - King Patcher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Responsive improvements for better stacking and spacing on all devices */
+        @media (max-width: 1200px) {
+            html {
+                font-size: 15px;
+            }
+
+            .container {
+                max-width: 98vw;
+                padding: 0 0.5rem;
+            }
+
+            .payment-card {
+                max-width: 98vw;
+            }
+        }
+
+        @media (max-width: 900px) {
+            html {
+                font-size: 14px;
+            }
+
+            .payment-card {
+                grid-template-columns: 1fr;
+                max-width: 98vw;
+            }
+
+            .payment-info,
+            .payment-form {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            html {
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 0 0.2rem;
+            }
+
+            .payment-info,
+            .payment-form {
+                padding: 1.2rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            html {
+                font-size: 12px;
+            }
+
+            .payment-main {
+                padding: 1rem 0 0.5rem 0;
+            }
+
+            .payment-card {
+                border-radius: 0.5rem;
+                box-shadow: none;
+            }
+
+            .payment-info,
+            .payment-form {
+                padding: 0.7rem 0.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            html {
+                font-size: 11px;
+            }
+        }
+
+        :root {
+            --primary: #05f901;
+            --primary-dark: #04d200;
+            --primary-light: #4dfd4a;
+            --dark: #070a15;
+            --darker: #080e1b;
+            --light: #f0f0f0;
+            --lighter: #ffffff;
+            --gray: #8a9bb0;
+            --border: rgba(255, 255, 255, 0.08);
+            --bg-card: rgba(12, 18, 32, 0.95);
+            --bg-modal: rgba(8, 14, 26, 0.95);
+
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 35px rgba(0, 0, 0, 0.5);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #040915, #070d1c);
+            color: var(--lighter);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(8, 14, 26, 0.95);
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            padding: 0.8rem 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(5, 249, 1, 0.1);
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 56px;
+        }
+
+        /* Added back button style */
+        .back-button {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(5, 249, 1, 0.1);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .back-button:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -1px;
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                min-height: unset;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .back-button {
+                position: static;
+                margin-bottom: 0.3rem;
+                transform: none;
+                width: 36px;
+                height: 36px;
+                margin-left: 0.2rem;
+            }
+
+            .logo {
+                justify-content: flex-start;
+                font-size: 1.3rem;
+            }
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 1.6rem;
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                min-height: unset;
+                padding-top: 0.3rem;
+                padding-bottom: 0.3rem;
+            }
+
+            .back-button {
+                position: static;
+                margin-bottom: 0.2rem;
+                transform: none;
+                width: 30px;
+                height: 30px;
+                margin-left: 0.1rem;
+            }
+
+            .logo {
+                justify-content: flex-start;
+                font-size: 1.1rem;
+            }
+        }
+
+        .logo .king {
+            color: var(--light);
+        }
+
+        .logo .patcher {
+            color: var(--primary);
+        }
+
+        /* Payment Main Section */
+        .payment-main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 0;
+        }
+
+        .payment-card {
+            background: var(--bg-card);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            max-width: 1000px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-out forwards;
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-info {
+            padding: 3rem;
+            background: rgba(10, 20, 40, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-info::before {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -30%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(5, 249, 1, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .payment-info-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light);
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .payment-instructions {
+            margin-bottom: 2rem;
+        }
+
+        .instructions-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .instructions-list li {
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .instructions-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .instructions-list li i {
+            color: var(--primary);
+            background: rgba(5, 249, 1, 0.1);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .contact-support {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .payment-form {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-header .section-title {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .qr-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .qr-overlay {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .qr-blur {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(5, 249, 1, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .qr-code {
+            width: 160px;
+            height: 160px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .qr-code-inner {
+            background: #222;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 1px;
+            padding: 5px;
+        }
+
+        .qr-block {
+            background: #fff;
+        }
+
+        .qr-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .upi-id-container {
+            background: rgba(10, 20, 40, 0.5);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .upi-id-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(5, 249, 1, 0.2);
+        }
+
+        .upi-id {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            background: rgba(5, 249, 1, 0.1);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--light);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(10, 20, 40, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--lighter);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(5, 249, 1, 0.2);
+        }
+
+        .file-upload {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: rgba(10, 20, 40, 0.3);
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(5, 249, 1, 0.05);
+        }
+
+        .file-upload i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .file-text {
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .file-subtext {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .btn-container {
+            margin-top: 2rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: var(--dark);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 15px rgba(5, 249, 1, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(5, 249, 1, 0.5);
+        }
+
+        .help-section {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .help-btn {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(10, 20, 40, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .help-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .help-btn i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, rgba(5, 12, 22, 0.95), rgba(3, 7, 14, 0.95));
+            padding: 4rem 0 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo .king {
+            color: var(--light);
+        }
+
+        .footer-logo .patcher {
+            color: var(--primary);
+        }
+
+        .footer-tagline {
+            color: var(--gray);
+            font-size: 0.95rem;
+            max-width: 500px;
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.8rem;
+            margin: 1rem 0;
+        }
+
+        .social-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+            width: 70px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            margin-bottom: 0.7rem;
+            border: 1px solid var(--border);
+            color: var(--primary);
+        }
+
+        .social-btn:hover .social-icon {
+            background: var(--primary);
+            color: var(--darker);
+            box-shadow: 0 0 15px rgba(5, 249, 1, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .social-name {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .help-container {
+            margin: 1rem 0;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(138, 155, 181, 0.7);
+            font-size: 0.85rem;
+            width: 100%;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .payment-card {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-info {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 2rem 0;
+            }
+
+            .payment-info,
+            .payment-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .help-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Minimal Header -->
+    <header>
+        <div class="container header-content">
+            <!-- Added Back Button -->
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <a href="#" class="logo">
+                <i class="fas fa-crown"></i>
+                <span class="king">KING</span><span class="patcher">PATCHER</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Payment Main Section -->
+    <div class="payment-main">
+        <div class="container">
+            <div class="payment-card">
+                <div class="payment-info">
+                    <div class="payment-info-content">
+                        <h2 class="section-title">Complete Your <span>Payment</span></h2>
+
+                        <div class="payment-instructions">
+                            <p>Please follow the instructions below to complete your payment:</p>
+
+                            <ul class="instructions-list">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Scan the QR code with any UPI app or send to the provided UPI ID</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>After payment, fill in the UTR number and upload payment screenshot</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Once verified, your purchase will be activated within 15 minutes</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>The payment method cannot be changed once submitted</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>For any issues, contact us via WhatsApp or Telegram</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="contact-support">
+                            <h3 class="section-title">Contact <span>Support</span></h3>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4>WhatsApp Support</h4>
+                                    <p>+91 98765 43210 (24×7)</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4>Email Support</h4>
+                                    <p>support@kingpatcher.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-form">
+                    <div class="payment-header">
+                        <h2 class="section-title">Payment <span>Details</span></h2>
+                        <div id="selectedProductDetails"
+                            style="margin-top:1.2rem; margin-bottom:1.2rem; background:rgba(5,249,1,0.07); border-radius:8px; padding:1rem; color:var(--primary); font-weight:600; text-align:center;">
+                        </div>
+                    </div>
+                    <div class="qr-code-container">
+                        <div class="qr-overlay">
+                            <div class="qr-blur"></div>
+                            <div class="qr-code"
+                                style="background:#fff;display:flex;align-items:center;justify-content:center;padding:0;">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=upi://pay?pa=sanjay-357@bpunity&pn=Your%20Payee%20Name&cu=INR"
+                                    alt="UPI QR Code"
+                                    style="width:160px;height:160px;object-fit:contain;border-radius:12px;">
+                            </div>
+                        </div>
+                        <div class="qr-info">
+                            <h3>UPI QR Code</h3>
+                            <p>Scan with any UPI app to pay instantly</p>
+                        </div>
+                    </div>
+                    <div class="upi-id-container">
+                        <span class="upi-id">sanjay-357@bpunity</span>
+                        <button class="copy-btn" id="copyBtn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Transaction Amount</label>
+                        <input type="text" class="form-input" id="productAmount" value="$89.99" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mobile Number</label>
+                        <input type="tel" class="form-input" id="mobileNumber" placeholder="Enter your WhatsApp number"
+                            maxlength="10" pattern="\\d{10}" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="emailInput"
+                            placeholder="Enter your email (e.g. demo@demo.com)"
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">UTR Transaction Number</label>
+                        <input type="text" class="form-input" id="utrNumber"
+                            placeholder="Enter your 12-digit UTR number" maxlength="12" pattern="\\d{12}"
+                            inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Payment Screenshot</label>
+                        <div class="file-upload" id="fileUploadBox">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p class="file-text" id="fileText">Upload Screenshot</p>
+                            <small class="file-subtext">PNG, JPG or PDF files only (Max 5MB)</small>
+                            <input type="file" id="screenshotInput" accept="image/png, image/jpeg, application/pdf"
+                                style="display:none;">
+                        </div>
+                    </div>
+                    <div class="btn-container">
+                        <button class="submit-btn">
+                            <i class="fas fa-lock"></i> Verify & Complete Payment
+                        </button>
+                        <div id="formError"
+                            style="color:#ff4d4f; margin-top:1rem; text-align:center; font-weight:600; display:none;">
+                        </div>
+                        <div id="formSuccess"
+                            style="color:var(--primary); margin-top:1rem; text-align:center; font-weight:600; display:none;">
+                        </div>
+                    </div>
+                    <div class="help-section">
+                        <div class="help-btn">
+                            <i class="fas fa-question-circle"></i>
+                            <h4>Help Center</h4>
+                            <p>Find answers to common questions</p>
+                        </div>
+                        <div class="help-btn">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Video Tutorial</h4>
+                            <p>How to pay and upload proof</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="king">KING</span><span class="patcher">PATCHER</span>
+                </div>
+
+                <p class="footer-tagline">
+                    The industry's most advanced prediction tool platform
+                </p>
+                https://instagram.com/kingpatcherapp
+                <div class="footer-social">
+                    <a href="https://t.me/Kingpatcherofficial" class="social-btn">
+                        <div class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <span class="social-name">Telegram</span>
+                    </a>
+                    <a href="" class="social-btn"></a>
+                    <div class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <span class="social-name">Instagram</span>
+                    </a>
+                    <a href="https://t.me/supraowner" class="social-btn">
+                        <div class="social-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <span class="social-name">Support</span>
+                    </a>
+                </div>
+
+                <div class="copyright">
+                    &copy; 2023 King Patcher | AI Prediction Toolkit<br>
+                    For entertainment purposes only | All rights reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Show selected product and mode from localStorage
+        window.addEventListener('DOMContentLoaded', function () {
+            const productName = localStorage.getItem('selectedProduct') || 'No product selected';
+            const modeName = localStorage.getItem('selectedMode') || '';
+            let foundPrice = '';
+            fetch('details.json')
+                .then(res => res.json())
+                .then(products => {
+                    let product = products.find(p => p.name === productName);
+                    if (!product) return;
+                    let plan = product.plans.find(pl => pl.name === modeName);
+                    foundPrice = plan ? plan.price : '';
+                    const detailsDiv = document.getElementById('selectedProductDetails');
+                    detailsDiv.innerHTML = `<span style="color:var(--light);">Product:</span> ${product.name} <br><span style="color:var(--light);">Mode:</span> ${modeName ? modeName : 'N/A'}${foundPrice ? `<br><span style=\"color:var(--light);\">Price:</span> ${foundPrice}` : ''}`;
+                    if (foundPrice) {
+                        document.getElementById('productAmount').value = foundPrice;
+                    }
+                });
+        });
+
+        // Copy UPI ID to clipboard
+        document.getElementById('copyBtn').addEventListener('click', function () {
+            const upiId = 'sanjay-357@bpunity';
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = upiId;
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-copy"></i> Copy';
+            }, 2000);
+        });
+
+        // File upload logic
+        const fileUploadBox = document.getElementById('fileUploadBox');
+        const screenshotInput = document.getElementById('screenshotInput');
+        const fileText = document.getElementById('fileText');
+        let uploadedFile = null;
+        fileUploadBox.addEventListener('click', function () {
+            screenshotInput.click();
+        });
+        screenshotInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const allowedTypes = ['image/png', 'image/jpeg', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                fileText.textContent = 'Invalid file type!';
+                fileText.style.color = '#ff4d4f';
+                uploadedFile = null;
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                fileText.textContent = 'File too large! Max 5MB';
+                fileText.style.color = '#ff4d4f';
+                uploadedFile = null;
+                return;
+            }
+            fileText.textContent = file.name;
+            fileText.style.color = 'var(--primary)';
+            uploadedFile = file;
+        });
+
+        // Form animations
+        fileUploadBox.addEventListener('mouseenter', () => {
+            fileUploadBox.style.transform = 'translateY(-3px)';
+        });
+        fileUploadBox.addEventListener('mouseleave', () => {
+            fileUploadBox.style.transform = 'translateY(0)';
+        });
+        const helpBtns = document.querySelectorAll('.help-btn');
+        helpBtns.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'translateY(-5px)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Input restrictions for UTR, phone, and Gmail
+        document.getElementById('utrNumber').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 12);
+        });
+        document.getElementById('mobileNumber').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
+        document.getElementById('emailInput').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
+        });
+
+        // Form submission with validation and screenshot check
+        document.querySelector('.submit-btn').addEventListener('click', function () {
+            const utr = document.getElementById('utrNumber').value;
+            const phone = document.getElementById('mobileNumber').value;
+            const email = document.getElementById('emailInput').value;
+            const errorDiv = document.getElementById('formError');
+            const successDiv = document.getElementById('formSuccess');
+            let error = '';
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            this.disabled = true;
+            // Validate fields
+            if (!uploadedFile) error = 'Please upload a valid payment screenshot.';
+            else if (utr.length !== 12) error = 'UTR number must be exactly 12 digits.';
+            else if (!/^[0-9]{12}$/.test(utr)) error = 'UTR number must be 12 digits.';
+            else if (phone.length !== 10) error = 'Mobile number must be exactly 10 digits.';
+            else if (!/^[0-9]{10}$/.test(phone)) error = 'Mobile number must be 10 digits.';
+            else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) error = 'Please enter a valid email address.';
+            if (error) {
+                errorDiv.textContent = error;
+                errorDiv.style.display = 'block';
+                this.innerHTML = '<i class="fas fa-times-circle"></i> Error';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-lock"></i> Verify & Complete Payment';
+                    this.disabled = false;
+                }, 2000);
+                return;
+            }
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            // Simulate processing
+            setTimeout(() => {
+                if (utr === '963852741096') {
+                    // Admin success modal
+                    showAdminSuccess();
+                    this.innerHTML = '<i class="fas fa-check"></i> Payment Verified!';
+                } else {
+                    showUserSuccessModal();
+                    this.innerHTML = '<i class="fas fa-check"></i> Submitted!';
+                }
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-lock"></i> Verify & Complete Payment';
+                    this.disabled = false;
+                }, 3500);
+            }, 1800);
+            // User success modal (like admin modal, but with user message)
+            function showUserSuccessModal() {
+                if (document.getElementById('userSuccessModal')) return;
+                const modal = document.createElement('div');
+                modal.id = 'userSuccessModal';
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100vw';
+                modal.style.height = '100vh';
+                modal.style.background = 'rgba(8,14,26,0.97)';
+                modal.style.zIndex = '9999';
+                modal.style.display = 'flex';
+                modal.style.alignItems = 'center';
+                modal.style.justifyContent = 'center';
+                modal.innerHTML = `
+                <div style=\"background:var(--bg-modal);border-radius:18px;max-width:95vw;width:400px;padding:2.5rem 1.5rem;text-align:center;box-shadow:0 8px 40px rgba(5,249,1,0.15);position:relative;\">
+                    <button onclick=\"document.getElementById('userSuccessModal').remove()\" style=\"position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;color:var(--gray);cursor:pointer;\"><i class='fas fa-times'></i></button>
+                    <i class=\"fas fa-check-circle\" style=\"font-size:2.5rem;color:var(--primary);\"></i>
+                    <h2 style=\"margin:1.2rem 0 0.5rem 0;color:var(--primary);font-family:'Montserrat',sans-serif;\">Payment Request Submitted</h2>
+                    <p style=\"color:var(--light);margin-bottom:1.2rem;\">Your payment request has been submitted!<br>After successful verification, your tool will be delivered within 12 hours on your Gmail ID or WhatsApp number.</p>
+                    <div style=\"margin:1.2rem 0 0.5rem 0;\">
+                        <button onclick=\"window.open('https://wa.me/919876543210','_blank')\" style=\"padding:0.7rem 1.5rem;background:rgba(5,249,1,0.1);color:var(--primary);border:none;border-radius:7px;font-weight:600;cursor:pointer;margin-right:0.5rem;\"><i class=\"fab fa-whatsapp\"></i> Help</button>
+                        <button onclick=\"window.open('mailto:support@kingpatcher.com','_blank')\" style=\"padding:0.7rem 1.5rem;background:rgba(5,249,1,0.1);color:var(--primary);border:none;border-radius:7px;font-weight:600;cursor:pointer;\"><i class=\"fas fa-envelope\"></i> Email</button>
+                    </div>
+                    <div style=\"margin-top:1.2rem;color:var(--gray);font-size:0.95rem;\">For any issues, contact support. Thank you for your trust!</div>
+                </div>
+            `;
+                document.body.appendChild(modal);
+            }
+        });
+
+        // Admin success modal
+        function showAdminSuccess() {
+            if (document.getElementById('adminModal')) return;
+            const modal = document.createElement('div');
+            modal.id = 'adminModal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100vw';
+            modal.style.height = '100vh';
+            modal.style.background = 'rgba(8,14,26,0.97)';
+            modal.style.zIndex = '9999';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.innerHTML = `
+                <div style="background:var(--bg-modal);border-radius:18px;max-width:95vw;width:400px;padding:2.5rem 1.5rem;text-align:center;box-shadow:0 8px 40px rgba(5,249,1,0.15);position:relative;">
+                    <button onclick="document.getElementById('adminModal').remove()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;color:var(--gray);cursor:pointer;"><i class='fas fa-times'></i></button>
+                    <i class="fas fa-crown" style="font-size:2.5rem;color:var(--primary);"></i>
+                    <h2 style="margin:1.2rem 0 0.5rem 0;color:var(--primary);font-family:'Montserrat',sans-serif;">Admin Access Granted</h2>
+                    <p style="color:var(--light);margin-bottom:1.2rem;">Download your tool below. <br>Password: <b style='color:var(--primary);'>KING2025</b></p>
+                    <a href="#" style="display:inline-block;margin:1rem 0 0.5rem 0;padding:0.9rem 2.2rem;background:linear-gradient(to right,var(--primary),var(--primary-dark));color:var(--dark);font-weight:700;border-radius:8px;text-decoration:none;font-size:1.1rem;box-shadow:0 2px 10px rgba(5,249,1,0.15);"><i class="fas fa-download"></i> Download Tool</a>
+                    <div style="margin:1.2rem 0 0.5rem 0;">
+                        <button onclick="window.open('https://wa.me/919876543210','_blank')" style="padding:0.7rem 1.5rem;background:rgba(5,249,1,0.1);color:var(--primary);border:none;border-radius:7px;font-weight:600;cursor:pointer;margin-right:0.5rem;"><i class="fab fa-whatsapp"></i> Help</button>
+                        <button onclick="window.open('mailto:support@kingpatcher.com','_blank')" style="padding:0.7rem 1.5rem;background:rgba(5,249,1,0.1);color:var(--primary);border:none;border-radius:7px;font-weight:600;cursor:pointer;"><i class="fas fa-envelope"></i> Email</button>
+                    </div>
+                    <div style="margin-top:1.2rem;color:var(--gray);font-size:0.95rem;">For professional use only. Contact support for any issues.</div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+
+</html>
