@@ -3000,28 +3000,21 @@ function vt(n) {
   );
 }
 function Io() {
+  var n = "";
   try {
-    var n = localStorage.getItem("ar_token");
-    if (n) {
-      var t = JSON.parse(n);
-      var r = typeof t === "string" ? t : t.value || "";
-      if (r) return r;
+    var t = localStorage.getItem("ar_token");
+    if (t) {
+      var e = JSON.parse(t);
+      n = typeof e === "string" ? e : e.value || "";
     }
-  } catch (e) {}
-  try {
-    var o = localStorage.getItem("token");
-    if (o) {
-      try {
-        var u = JSON.parse(o);
-        if (typeof u === "string") return u;
-        if (u.value) return u.value;
-        if (u.token) return u.token;
-      } catch (i) {
-        return o;
-      }
-    }
-  } catch (e) {}
-  return "";
+  } catch (r) {}
+  if (!n)
+    try {
+      n = localStorage.getItem("token") || sessionStorage.getItem("token") || "";
+    } catch (r) {}
+  if (!n) return "";
+  n = n.replace(/^Bearer\s+/i, "");
+  return n;
 }
 function Qo(n) {
   if (!n) return;
@@ -3062,7 +3055,7 @@ function rt(n, t, e, o) {
 }
 function wt(n, t, e) {
   var o = Io(),
-    i = t.charAt(0) === "/" ? Yo + t : t,
+    i = t,
     l = {
       Authorization: "Bearer " + o,
       "Content-Type": "application/json",
