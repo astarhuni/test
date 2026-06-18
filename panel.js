@@ -3769,11 +3769,11 @@ var D = {
 };
 var vn,
   Yn = 0;
-var Yo = "https://91clubapi.com",
+var Yo = "https://imgametransit.com",
   Do = "/#/wallet/Recharge",
   Bo = "light",
   Ao = "OKWIN",
-  so = "cqz6091.com",
+  so = "okwin06.com",
   De = "";
 function _(n) {
   let t = String(n == null ? "" : n).trim();
