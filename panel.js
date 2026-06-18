@@ -3103,12 +3103,12 @@ async function qt(n) {
   return wt("GET", "/api/Lottery/GetWinLossResult", t);
 }
 async function We(n) {
-  return rt("GET", Yo + "/WinGo/" + n + ".json?ts=" + Date.now());
+  return rt("GET", "/WinGo/" + n + ".json?ts=" + Date.now());
 }
 async function Ue(n) {
   return rt(
     "GET",
-    Yo + "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now(),
+    "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now(),
   );
 }
 var Wn = "WinGo_30S",
