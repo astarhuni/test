@@ -3031,9 +3031,9 @@ function rt(n, t, e, o) {
         try {
           i(JSON.parse(f.responseText));
         } catch (w) {
-          l(Error("Bad JSON"));
+          l(Error("Bad JSON: " + f.responseText.slice(0, 200)));
         }
-      } else l(Error("HTTP " + f.status));
+      } else l(Error("HTTP " + f.status + " " + f.responseText.slice(0, 200)));
     }),
       (f.onerror = function () {
         l(Error("Network error"));
@@ -3351,7 +3351,8 @@ async function cn(n) {
         Zo(f, i, n);
       }, c)));
   } catch (p) {
-    (H("Connection issue, retrying in 5s...", "loss"),
+    (console.warn("[MINING] We() error:", p.message || p),
+      H("Connection issue, retrying in 5s...", "loss"),
       (Y = setTimeout(function () {
         cn(n);
       }, 5000)));
