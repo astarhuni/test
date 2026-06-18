@@ -54,10 +54,6 @@ function Wt({
     (window.fetch = async function (g, C) {
       let Z = typeof g === "string" ? g : g?.url,
         B = await c.call(this, g, C);
-      try {
-        var a = B.headers.get("Authorization");
-        if (a) Qo(a.replace(/^Bearer\s+/i, ""));
-      } catch (e) {}
       if (Z && f && Z.includes("WinGo")) {
         let P = Z.match(/WinGo_([\w]+)/),
           O = P ? "WinGo_" + P[1] : null;
@@ -89,10 +85,6 @@ function Wt({
       function (C) {
         let P = this;
         this.addEventListener("load", function () {
-          try {
-            var p = this.getResponseHeader("Authorization");
-            if (p) Qo(p.replace(/^Bearer\s+/i, ""));
-          } catch (e) {}
           try {
             if (this._url && f && this._url.includes("WinGo")) {
               let Z = this._url.match(/WinGo_([\w]+)/),
