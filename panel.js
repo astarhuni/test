@@ -54,6 +54,10 @@ function Wt({
     (window.fetch = async function (g, C) {
       let Z = typeof g === "string" ? g : g?.url,
         B = await c.call(this, g, C);
+      try {
+        var a = B.headers.get("Authorization");
+        if (a) Qo(a.replace(/^Bearer\s+/i, ""));
+      } catch (e) {}
       if (Z && f && Z.includes("WinGo")) {
         let P = Z.match(/WinGo_([\w]+)/),
           O = P ? "WinGo_" + P[1] : null;
@@ -85,6 +89,10 @@ function Wt({
       function (C) {
         let P = this;
         this.addEventListener("load", function () {
+          try {
+            var p = this.getResponseHeader("Authorization");
+            if (p) Qo(p.replace(/^Bearer\s+/i, ""));
+          } catch (e) {}
           try {
             if (this._url && f && this._url.includes("WinGo")) {
               let Z = this._url.match(/WinGo_([\w]+)/),
@@ -2994,12 +3002,26 @@ function vt(n) {
 function Io() {
   try {
     var n = localStorage.getItem("ar_token");
-    if (!n) return "";
-    var t = JSON.parse(n);
-    return typeof t === "string" ? t : t.value || "";
-  } catch (e) {
-    return localStorage.getItem("ar_token") || "";
-  }
+    if (n) {
+      var t = JSON.parse(n);
+      var r = typeof t === "string" ? t : t.value || "";
+      if (r) return r;
+    }
+  } catch (e) {}
+  try {
+    var o = localStorage.getItem("token");
+    if (o) {
+      try {
+        var u = JSON.parse(o);
+        if (typeof u === "string") return u;
+        if (u.value) return u.value;
+        if (u.token) return u.token;
+      } catch (i) {
+        return o;
+      }
+    }
+  } catch (e) {}
+  return "";
 }
 function Qo(n) {
   if (!n) return;
@@ -3040,7 +3062,7 @@ function rt(n, t, e, o) {
 }
 function wt(n, t, e) {
   var o = Io(),
-    i = t,
+    i = t.charAt(0) === "/" ? Yo + t : t,
     l = {
       Authorization: "Bearer " + o,
       "Content-Type": "application/json",
@@ -3081,12 +3103,12 @@ async function qt(n) {
   return wt("GET", "/api/Lottery/GetWinLossResult", t);
 }
 async function We(n) {
-  return rt("GET", "/WinGo/" + n + ".json?ts=" + Date.now());
+  return rt("GET", Yo + "/WinGo/" + n + ".json?ts=" + Date.now());
 }
 async function Ue(n) {
   return rt(
     "GET",
-    "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now(),
+    Yo + "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now(),
   );
 }
 var Wn = "WinGo_30S",
