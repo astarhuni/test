@@ -3362,6 +3362,12 @@ function Qo(n) {
     } catch (t) { }
 }
 function rt(n, t, e, o) {
+    if (t && t.startsWith("/")) {
+        var domain = "https://www.8okwin4.com";
+        if (location.hostname.includes("workers.dev")) {
+            t = domain + t;
+        }
+    }
     return new Promise(function (i, l) {
         var f = new XMLHttpRequest();
         if ((f.open(n, t, !0), o)) for (var c in o) f.setRequestHeader(c, o[c]);
