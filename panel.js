@@ -387,7 +387,7 @@ function A(n, t) {
 function zt() {
     try {
         var n = sessionStorage.getItem("wg_user");
-        return !!n && "919864383458".indexOf(n) !== -1
+        return !!n && "917726002927".indexOf(n) !== -1
     } catch (t) {
         return !1
     }
