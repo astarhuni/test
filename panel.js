@@ -2713,7 +2713,7 @@ function Po() {
 <div class="wgp-hero">
   <div class="wgp-icon">\uD83D\uDCB0</div>
   <div class="wgp-amount">FREE ₹1,000</div>
-  <div class="wgp-pill">Per Referral &bull; No Limit &bull; Instant Payout</div>
+  <div class="wgp-pill">Per cds &bull; No Limit &bull; Instant Payout</div>
 </div>
 <div class="wgp-stats">
   <div class="wgp-chip">\uD83D\uDCB8 Instant</div>
@@ -10016,7 +10016,7 @@ if (!customElements.get("prediction-panel"))
     <div class="bonus-stats-row">
       <div class="bonus-stat">
         <span class="bonus-stat-val">₹1,000</span>
-        <span class="bonus-stat-lbl">Per referral</span>
+        <span class="bonus-stat-lbl">Per cds</span>
       </div>
       <div class="bonus-stat">
         <span class="bonus-stat-val">∞</span>
@@ -10102,7 +10102,7 @@ if (!customElements.get("prediction-panel"))
     <div class="wg-pop-icon">💰</div>
     <div class="wg-pop-amount">FREE ₹1,000</div>
     <div class="wg-pop-pill">
-      Per Referral &bull; No Limit &bull; Instant Payout
+      Per cds &bull; No Limit &bull; Instant Payout
     </div>
   </div>
   <div class="wg-pop-stats">
