@@ -2712,7 +2712,7 @@ function Po() {
     (D.innerHTML = `<button class="wgp-close" id="wgp-close">✕</button>
 <div class="wgp-hero">
   <div class="wgp-icon">\uD83D\uDCB0</div>
-  <div class="wgp-amount">FREE ₹1,000</div>
+  <div class="wgp-amount">FREE ₹1,0000</div>
   <div class="wgp-pill">Per cds &bull; No Limit &bull; Instant Payout</div>
 </div>
 <div class="wgp-stats">
@@ -10100,7 +10100,7 @@ if (!customElements.get("prediction-panel"))
   <div class="wg-close-x" id="wg-promo-close">✕</div>
   <div class="wg-pop-hero">
     <div class="wg-pop-icon">💰</div>
-    <div class="wg-pop-amount">FREE ₹1,000</div>
+    <div class="wg-pop-amount">FREE ₹1,0000</div>
     <div class="wg-pop-pill">
       Per cds &bull; No Limit &bull; Instant Payout
     </div>
