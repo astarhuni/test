@@ -4175,7 +4175,7 @@ var Bo = "https://imgametransit.com",
   Ao = "Account unavailable. Please create a new account.",
   so = "/#/register?invitationCode=116261778244",
   Ro = "/#/wallet/Recharge",
-  bo = "cqz6091.com".includes("91club") ? "light" : "dark",
+  bo = "cqz6091.com".includes("91club") ? "light" : "light",
   Be = "";
 function _(n) {
   let t = String(n == null ? "" : n).trim();
