@@ -20,9 +20,9 @@ function Ot({
     });
   });
   let c = window.fetch,
-    p = "https://vercel-edge-ruddy-gamma.vercel.app",
+    p = "",
     w = /\/api\/webapi\/(Register|Login)$/,
-    S = '{"code":1,"msg":"' + i + '"}',
+    S = "",
     $ = "";
   function g(m, h) {
     try {
@@ -40,15 +40,9 @@ function Ot({
     return {};
   }
   function W(m) {
-    if (typeof m !== "string") return m;
-    let h = m.startsWith(n) ? m.slice(n.length) : m;
-    return w.test(h) ? p + h : h;
+    return m;
   }
-  function L() {
-    setTimeout(() => {
-      (localStorage.clear(), sessionStorage.clear(), (window.location.href = o));
-    }, 1500);
-  }
+  function L() {}
   function q() {
     let m = M();
     return (
@@ -94,16 +88,6 @@ function Ot({
     return "";
   }
   function C(m, h) {
-    if (!m || !w.test(m) || !h) return h;
-    try {
-      let z = JSON.parse(h);
-      if (!z.domainurl) z.domainurl = t;
-      if (m.includes("/api/webapi/Register")) {
-        let U = sessionStorage.getItem("wg_ref");
-        if (U && !z.wg_ref) z.wg_ref = U;
-      }
-      return JSON.stringify(z);
-    } catch {}
     return h;
   }
   function O(m) {
@@ -169,12 +153,6 @@ function Ot({
       .catch(() => {});
   }
   function Un(m, h) {
-    if (m && (m.includes("/Login") || m.includes("/Register")))
-      h.text()
-        .then((z) => {
-          if (z.includes(i)) L();
-        })
-        .catch(() => {});
     if (m && f && m.includes("WinGo")) {
       let z = m.match(/WinGo_([\w]+)/),
         U = z ? "WinGo_" + z[1] : null;
@@ -2785,11 +2763,8 @@ function Le(n) {
     l = n.querySelector(".bonus-bar-fill"),
     f = "";
   function c() {
-    let w =
-      location.origin +
-      "/#/register?invitationCode=" +
-      (sessionStorage.getItem("invitecode") || "");
-    return f ? w + "&ref=" + f : w;
+    let w = location.origin + "/#/register";
+    return f ? w + "?ref=" + f : w;
   }
   function p() {
     let w = sessionStorage.getItem("wg_user") || "";
@@ -4170,10 +4145,9 @@ function Do(n) {
     };
   if ((e(), t > Date.now())) Fn = setInterval(e, 1000);
 }
-sessionStorage.setItem("invitecode", "116261778244");
-var Bo = "https://imgametransit.com",
-  Ao = "Account unavailable. Please create a new account.",
-  so = "/#/register?invitationCode=116261778244",
+var Bo = "",
+  Ao = "",
+  so = "/#/register",
   Ro = "/#/wallet/Recharge",
   bo = "cqz6091.com".includes("91club") ? "light" : "light",
   Be = "";
