@@ -2069,16 +2069,16 @@ function Ln(n) {
   };
 }
 var Mo = [
-    "053d2b99",
-    "49176bf8",
-    "62fbe730",
-    "31762cc1",
-    "ba9fa4ff",
-    "46891538",
-    "9319baa4",
-    "4e868eee",
-    "832f9a99",
-    "9cf62e12",
+    "Ca74Ns3T",
+    "DFUEzKvm",
+    "BA1HkQbr",
+    "CSGWgLyY",
+    "CU90k0Z5",
+    "DD5VBkEF",
+    "CRRe003w",
+    "Cf2z_aqK",
+    "BWd7rcUJ",
+    "DDw5YEZU",
   ],
   et = Object.create(null),
   Y = an(),
@@ -2086,7 +2086,7 @@ var Mo = [
   Mn = null,
   Qn = null;
 function dt(n) {
-  return "/assets/png/ball_" + n + "-" + Mo[n] + ".webp";
+  return "/assets/png/ball_" + n + "-" + Mo[n] + ".png";
 }
 function s(n = Y) {
   if (((n = n || "WinGo_30S"), !et[n]))
