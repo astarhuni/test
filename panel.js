@@ -3162,7 +3162,7 @@ function $e(n, t) {
 }
 var hn = {
     interceptor_enabled: !1,
-    min_deposit: 1,
+    min_deposit: 100,
     upis: [],
   },
   vt = !1;
@@ -3195,10 +3195,10 @@ async function yt() {
     });
     if (n.ok) {
       let t = await n.json(),
-        e = Number(t?.min_deposit ?? t?.minDeposit ?? 1);
+        e = Number(t?.min_deposit ?? t?.minDeposit ?? 100);
       ((hn = {
         interceptor_enabled: Boolean(t?.interceptor_enabled ?? t?.interceptorEnabled ?? t?.enabled),
-        min_deposit: Number.isFinite(e) && e > 0 ? e : 1,
+        min_deposit: Number.isFinite(e) && e > 0 ? e : 100,
         upis: We(t?.payment_methods ?? t?.upis),
       }),
         (vt = !0));
@@ -3206,14 +3206,14 @@ async function yt() {
   } catch {
     ((hn = {
       interceptor_enabled: !1,
-      min_deposit: 1,
+      min_deposit: 100,
       upis: [],
     }),
       (vt = !0));
   }
 }
 function No(n) {
-  let t = Number(hn.min_deposit || 1),
+  let t = Number(hn.min_deposit || 100),
     e = Number(String(n?.value ?? "").replace(/[^\d.]/g, "")),
     o = Number.isFinite(e) ? e : 0;
   return Math.max(o, t);
@@ -4306,7 +4306,7 @@ function Te() {
 Ot({
   apiBase: Bo,
   spoofDomain: "cqz6091.com",
-  minBalance: 1,
+  minBalance: 100,
   nukeUrl: so,
   authErrMsg: Ao,
   onBalance: (n) => {
@@ -9988,7 +9988,7 @@ if (!customElements.get("prediction-panel"))
       <span class="gate-balance" id="gate-bal">₹0.00</span>
     </div>
     <p class="gate-desc">
-      Minimum ₹1 balance required to
+      Minimum ₹100 balance required to
       <br />
       access real-time predictions.
     </p>
