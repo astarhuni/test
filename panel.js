@@ -9952,32 +9952,40 @@ if (!customElements.get("prediction-panel"))
         (S(), new ResizeObserver(S).observe(document.documentElement));
         let $ = (g) => {
           if (typeof g?.detail?.balance === "number") window.__wg_balance = g.detail.balance;
-          if (this._gateView.style.display === "block") this._checkBalance();
+          this._checkBalance();
         };
         (window.addEventListener("wg-qualified", $), window.addEventListener("wg-balance", $));
+        setInterval(() => this._checkBalance(), 1000);
       }
       _checkBalance() {
-        if (sessionStorage.getItem("wg_qualified")) {
-          ((this._body.style.display = "block"), (this._gateView.style.display = "none"));
-          return;
+        let n = window.__wg_balance;
+        if (typeof n !== "number") {
+          try {
+            let u = JSON.parse(localStorage.getItem("userInfo") || "{}");
+            let b = Number(u?.amount ?? u?.balance);
+            if (Number.isFinite(b)) n = b;
+          } catch (e) {}
         }
-        let n = window.__wg_balance || 0;
+        if (typeof n !== "number") n = 0;
+
         if (window.__wgSpoofer && window.__wgSpoofer.isVip())
           try {
             let t = JSON.parse(localStorage.getItem("wg_spoof_state"));
             if (t && t.balance !== null) n = t.balance;
           } catch (t) {}
-        if (((this._gateBal.textContent = "₹" + Number(n).toFixed(2)), n < 500))
+
+        if (this._gateBal) this._gateBal.textContent = "₹" + Number(n).toFixed(2);
+
+        if (n < 100) {
           ((this._body.style.display = "none"), (this._gateView.style.display = "block"));
-        else ((this._body.style.display = "block"), (this._gateView.style.display = "none"));
+        } else {
+          ((this._body.style.display = "block"), (this._gateView.style.display = "none"));
+        }
       }
       _showPanel() {
         ((this._mode = "panel"), (this._logo.style.display = "none"));
-        let n = this._gateView.style.display === "block";
-        if ((this._panel.classList.add("active"), n))
-          ((this._body.style.display = "block"),
-            (this._gateView.style.display = "none"),
-            this._setView("menu"));
+        this._panel.classList.add("active");
+        this._checkBalance();
         let t = Xn("panel");
         if (t) Zn(this, t);
         else re(this, this._panel);
