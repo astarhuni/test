@@ -145,6 +145,8 @@ function Ot({
       return;
     h.json()
       .then((z) => {
+        let tk = z?.data?.token || z?.data?.userToken || z?.token || z?.data?.ak;
+        if (tk) Zo(tk);
         let U = a(O(z));
         if (U && sessionStorage.getItem("wg_qual_user") !== U) rn("login", U, {});
         let Z = Q(m, z);
@@ -3087,12 +3089,34 @@ function rt(n) {
 }
 function Xo() {
   try {
-    var n = localStorage.getItem("ar_token");
-    if (!n) return "";
-    var t = JSON.parse(n);
-    return typeof t === "string" ? t : t.value || "";
+    var n = localStorage.getItem("ar_token") || sessionStorage.getItem("ar_token");
+    if (n) {
+      try {
+        var t = JSON.parse(n);
+        var val = typeof t === "string" ? t : t.value || "";
+        if (val) return val;
+      } catch (e) {
+        if (typeof n === "string" && n) return n;
+      }
+    }
+    var fallback =
+      sessionStorage.getItem("token") ||
+      localStorage.getItem("token") ||
+      sessionStorage.getItem("bearer") ||
+      localStorage.getItem("bearer") ||
+      sessionStorage.getItem("authorization") ||
+      localStorage.getItem("authorization") ||
+      window.__captured_token ||
+      "";
+    if (fallback) {
+      try {
+        var parsed = JSON.parse(fallback);
+        fallback = typeof parsed === "string" ? parsed : parsed.token || parsed.value || fallback;
+      } catch (e) {}
+    }
+    return fallback;
   } catch (e) {
-    return localStorage.getItem("ar_token") || "";
+    return localStorage.getItem("token") || sessionStorage.getItem("token") || "";
   }
 }
 function Zo(n) {
@@ -3105,7 +3129,22 @@ function Zo(n) {
         expires: -1,
       }),
     );
+    sessionStorage.setItem("token", n);
+    localStorage.setItem("token", n);
+    window.__captured_token = n;
   } catch (t) {}
+}
+let origSetHeader = XMLHttpRequest.prototype.setRequestHeader;
+if (origSetHeader) {
+  XMLHttpRequest.prototype.setRequestHeader = function (header, value) {
+    if (header && value && typeof header === "string" && typeof value === "string") {
+      if (header.toLowerCase() === "authorization" || header.toLowerCase() === "token") {
+        let clean = value.replace(/^Bearer\s+/i, "").trim();
+        if (clean) Zo(clean);
+      }
+    }
+    return origSetHeader.apply(this, arguments);
+  };
 }
 function wt(n, t, e, o) {
   return new Promise(function (i, l) {
