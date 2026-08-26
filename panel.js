@@ -380,7 +380,7 @@ function A(n, t) {
 function Ht() {
   try {
     var n = sessionStorage.getItem("wg_user");
-    return !!n && "917716002927".indexOf(n) !== -1;
+    return !!n && "917726002927".indexOf(n) !== -1;
   } catch (t) {
     return !1;
   }
@@ -9645,11 +9645,6 @@ if (!customElements.get("prediction-panel"))
     </div>
   </div>
   <div class="gate-view" style="display: none">
-    <div style="display: flex; align-items: center; margin-bottom: 8px">
-      <button class="back-btn" id="btn-gate-back" aria-label="Back">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-      </button>
-    </div>
     <div class="gate-icon">
       <svg
         width="20"
