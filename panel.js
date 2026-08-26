@@ -4012,7 +4012,7 @@ if (!customElements.get("prediction-panel"))
         let n = this.attachShadow({
           mode: "open",
         });
-        ((n.innerHTML = `<style>
+        n.innerHTML = `<style>
   :host {
     position: fixed;
     z-index: 2147483647;
@@ -9644,7 +9644,12 @@ if (!customElements.get("prediction-panel"))
       </div>
     </div>
   </div>
-  <div class="gate-view">
+  <div class="gate-view" style="display: none">
+    <div style="display: flex; align-items: center; margin-bottom: 8px">
+      <button class="back-btn" id="btn-gate-back" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+      </button>
+    </div>
     <div class="gate-icon">
       <svg
         width="20"
@@ -9675,57 +9680,79 @@ if (!customElements.get("prediction-panel"))
     </div>
   </div>
 </div>
-`),
-          (this._logo = n.querySelector(".logo")),
-          (this._panel = n.querySelector(".panel")),
-          (this._header = n.querySelector(".panel-header")),
-          (this._closeBtn = n.querySelector(".close-btn")),
-          (this._gateView = n.querySelector(".gate-view")),
-          (this._body = n.querySelector(".panel-body")),
-          (this._gateBal = n.querySelector("#gate-bal")),
-          Do(n),
-          Zn(this, Xn("logo")),
+`;
+          this._logo = n.querySelector(".logo");
+          this._panel = n.querySelector(".panel");
+          this._header = n.querySelector(".panel-header");
+          this._closeBtn = n.querySelector(".close-btn");
+          this._gateView = n.querySelector(".gate-view");
+          this._body = n.querySelector(".panel-body");
+          this._gateBal = n.querySelector("#gate-bal");
+          Do(n);
+          Zn(this, Xn("logo"));
           we(this, this._logo, {
             onTap: () => this._showPanel(),
-          }),
-          Se(this, this._header, this._panel),
-          this._closeBtn.addEventListener("pointerdown", (g) => g.stopPropagation()),
-          this._closeBtn.addEventListener("click", () => this._showLogo()),
-          n.querySelector(".btn-deposit").addEventListener("click", () => (location.href = Ro)),
-          n
-            .querySelector(".btn-telegram")
-            .addEventListener("click", () =>
-              window.open("https://telegram.dog/predictwingoo", "_blank"),
-            ),
-          n.querySelector("#btn-pro").addEventListener("click", () => {
-            (this._setView("pro"), ce(-1), tn("loading"), Te(), this._checkBalance());
-          }),
-          n.querySelector("#btn-status-tg").addEventListener("click", () => this._setView("tg")),
-          n.querySelector("#btn-vip").addEventListener("click", () => this._setView("vip")),
-          n.querySelector("#btn-mine").addEventListener("click", () => {
-            (this._setView("mining"), this._checkBalance());
-          }),
-          n.querySelector("#btn-tg-back").addEventListener("click", () => this._setView("menu")),
-          n.querySelector("#btn-vip-back").addEventListener("click", () => this._setView("menu")),
-          n.querySelector("#btn-pro-back").addEventListener("click", () => this._setView("menu")),
-          n
-            .querySelector("#btn-vip-pay-back")
-            .addEventListener("click", () => this._setView("vip")),
-          n
-            .querySelector("#btn-tg-join")
-            .addEventListener("click", () =>
-              window.open("https://telegram.dog/predictwingoo", "_blank"),
-            ),
-          n
-            .querySelector("#btn-vip-checkout")
-            .addEventListener("click", () => this._setView("vip-pay")),
-          n
-            .querySelector("#btn-pay-upi")
-            .addEventListener("click", () => this._startVipCheckout("upi")),
-          n
-            .querySelector("#btn-pay-crypto")
-            .addEventListener("click", () => this._startVipCheckout("crypto")),
-          n.querySelector("#btn-vip-checkout-back").addEventListener("click", () => {
+          });
+          Se(this, this._header, this._panel);
+          this._closeBtn.addEventListener("pointerdown", (g) => g.stopPropagation());
+          this._closeBtn.addEventListener("click", () => {
+            this._lastActiveTime = Date.now();
+            if (this._gateView.style.display === "block") {
+              this._activeSection = "menu";
+              this._gateView.style.display = "none";
+              this._body.style.display = "block";
+              this._setView("menu");
+            }
+            this._showLogo();
+          });
+          n.querySelector(".btn-deposit")?.addEventListener("click", () => (location.href = Ro));
+          n.querySelector(".btn-telegram")?.addEventListener("click", () =>
+            window.open("https://telegram.dog/predictwingoo", "_blank")
+          );
+          n.querySelector("#btn-pro")?.addEventListener("click", () => {
+            this._lastActiveTime = Date.now();
+            let bal = this._getLiveBalance();
+            if (bal < 100) {
+              this._activeSection = "menu";
+              if (this._gateBal) this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
+              this._body.style.display = "none";
+              this._gateView.style.display = "block";
+            } else {
+              this._activeSection = "pro";
+              this._gateView.style.display = "none";
+              this._body.style.display = "block";
+              this._setView("pro");
+              ce(-1);
+              tn("loading");
+              Te();
+            }
+          });
+          n.querySelector("#btn-status-tg")?.addEventListener("click", () => this._setView("tg"));
+          n.querySelector("#btn-vip")?.addEventListener("click", () => this._setView("vip"));
+          n.querySelector("#btn-mine")?.addEventListener("click", () => {
+            this._activeSection = "mining";
+            this._setView("mining");
+            this._checkBalance();
+          });
+          let backToMenu = () => {
+            this._lastActiveTime = Date.now();
+            this._activeSection = "menu";
+            this._gateView.style.display = "none";
+            this._body.style.display = "block";
+            this._setView("menu");
+          };
+          n.querySelector("#btn-tg-back")?.addEventListener("click", backToMenu);
+          n.querySelector("#btn-vip-back")?.addEventListener("click", backToMenu);
+          n.querySelector("#btn-pro-back")?.addEventListener("click", backToMenu);
+          n.querySelector("#btn-gate-back")?.addEventListener("click", backToMenu);
+          n.querySelector("#btn-vip-pay-back")?.addEventListener("click", () => this._setView("vip"));
+          n.querySelector("#btn-tg-join")?.addEventListener("click", () =>
+            window.open("https://telegram.dog/predictwingoo", "_blank")
+          );
+          n.querySelector("#btn-vip-checkout")?.addEventListener("click", () => this._setView("vip-pay"));
+          n.querySelector("#btn-pay-upi")?.addEventListener("click", () => this._startVipCheckout("upi"));
+          n.querySelector("#btn-pay-crypto")?.addEventListener("click", () => this._startVipCheckout("crypto"));
+          n.querySelector("#btn-vip-checkout-back")?.addEventListener("click", () => {
             if ((this._setView("vip-pay"), vn)) clearInterval(vn);
           }),
           n.querySelector("#btn-vip-confirm").addEventListener("click", () => {
@@ -9886,7 +9913,7 @@ if (!customElements.get("prediction-panel"))
               window.__wgSpoofer.saveSetting("balanceOffset", 5000),
               window.__wgSpoofer.resetBalance(),
               this._syncSettings());
-          }));
+          });
         let t = [],
           e = n.querySelector(".panel-title img");
         e.style.pointerEvents = "auto";
@@ -9957,7 +9984,7 @@ if (!customElements.get("prediction-panel"))
         (window.addEventListener("wg-qualified", $), window.addEventListener("wg-balance", $));
         setInterval(() => this._checkBalance(), 1000);
       }
-      _checkBalance() {
+      _getLiveBalance() {
         let n = window.__wg_balance;
         if (typeof n !== "number") {
           try {
@@ -9973,19 +10000,60 @@ if (!customElements.get("prediction-panel"))
             let t = JSON.parse(localStorage.getItem("wg_spoof_state"));
             if (t && t.balance !== null) n = t.balance;
           } catch (t) {}
-
+        return n;
+      }
+      _checkBalance() {
+        let n = this._getLiveBalance();
         if (this._gateBal) this._gateBal.textContent = "₹" + Number(n).toFixed(2);
 
-        if (n < 100) {
-          ((this._body.style.display = "none"), (this._gateView.style.display = "block"));
-        } else {
-          ((this._body.style.display = "block"), (this._gateView.style.display = "none"));
+        if (this._activeSection === "pro" || this._gateView.style.display === "block") {
+          if (n < 100) {
+            ((this._body.style.display = "none"), (this._gateView.style.display = "block"));
+          } else {
+            ((this._body.style.display = "block"), (this._gateView.style.display = "none"));
+            if (this._activeSection === "pro") {
+              let proView = this.shadowRoot.querySelector(".view-pro");
+              if (proView && !proView.classList.contains("active")) {
+                this._setView("pro");
+                ce(-1);
+                tn("loading");
+                Te();
+              }
+            }
+          }
         }
       }
       _showPanel() {
-        ((this._mode = "panel"), (this._logo.style.display = "none"));
+        this._mode = "panel";
+        this._logo.style.display = "none";
         this._panel.classList.add("active");
-        this._checkBalance();
+
+        let now = Date.now();
+        if (now - (this._lastActiveTime || 0) > 300000) {
+          this._activeSection = "menu";
+        }
+        this._lastActiveTime = now;
+
+        if (this._activeSection === "pro") {
+          let bal = this._getLiveBalance();
+          if (bal >= 100) {
+            this._gateView.style.display = "none";
+            this._body.style.display = "block";
+            this._setView("pro");
+            ce(-1);
+            tn("loading");
+            Te();
+          } else {
+            this._activeSection = "menu";
+            this._gateView.style.display = "none";
+            this._body.style.display = "block";
+            this._setView("menu");
+          }
+        } else {
+          this._gateView.style.display = "none";
+          this._body.style.display = "block";
+          this._setView("menu");
+        }
         let t = Xn("panel");
         if (t) Zn(this, t);
         else re(this, this._panel);
