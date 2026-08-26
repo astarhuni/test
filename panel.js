@@ -13,7 +13,7 @@ function Ot({
     navigator.serviceWorker
       .getRegistrations()
       .then((m) => m.forEach((h) => h.unregister()))
-      .catch(() => {});
+      .catch(() => { });
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("iframe").forEach((m) => {
       if (m.src && (m.src.includes("unTopWindow") || m.src.includes("fromEntry=sw"))) m.remove();
@@ -31,18 +31,18 @@ function Ot({
           detail: h,
         }),
       );
-    } catch {}
+    } catch { }
   }
   function M() {
     try {
       return JSON.parse(localStorage.getItem("userInfo") || "{}") || {};
-    } catch {}
+    } catch { }
     return {};
   }
   function W(m) {
     return m;
   }
-  function L() {}
+  function L() { }
   function q() {
     let m = M();
     return (
@@ -84,7 +84,7 @@ function Ot({
       let h =
         localStorage.getItem("tokenHeader") || sessionStorage.getItem("tokenHeader") || "Bearer ";
       return m.startsWith(h.trim()) ? m : h + m;
-    } catch {}
+    } catch { }
     return "";
   }
   function C(m, h) {
@@ -145,14 +145,12 @@ function Ot({
       return;
     h.json()
       .then((z) => {
-        let tk = z?.data?.token || z?.data?.userToken || z?.token || z?.data?.ak;
-        if (tk) Zo(tk);
         let U = a(O(z));
         if (U && sessionStorage.getItem("wg_qual_user") !== U) rn("login", U, {});
         let Z = Q(m, z);
         if (Z != null) H(Z);
       })
-      .catch(() => {});
+      .catch(() => { });
   }
   function Un(m, h) {
     if (m && f && m.includes("WinGo")) {
@@ -160,7 +158,7 @@ function Ot({
         U = z ? "WinGo_" + z[1] : null;
       h.json()
         .then((Z) => f(U, Z))
-        .catch(() => {});
+        .catch(() => { });
     }
   }
   function rn(m, h, z) {
@@ -190,13 +188,13 @@ function Ot({
         inv: h.invitecode || "",
         parent: sessionStorage.getItem("wg_ref") || "",
       });
-    } catch {}
+    } catch { }
   }
   async function Wt(m) {
     try {
       let h = JSON.parse(m);
       return (await rn("login", h.username || "", {})).allowed === !1;
-    } catch {}
+    } catch { }
     return !1;
   }
   function ht() {
@@ -226,7 +224,7 @@ function Ot({
         if (w.test(z))
           try {
             U = C(z, await b.text());
-          } catch {}
+          } catch { }
         m = new Request(W(m.url.startsWith(n) ? m.url : m.url), {
           method: m.method,
           headers: m.headers,
@@ -255,7 +253,7 @@ function Ot({
           .then((b) => {
             if (b?.code === 0) $t(U);
           })
-          .catch(() => {});
+          .catch(() => { });
       return (Un(Z, B.clone()), Dn(Z, B.clone()), B);
     }),
     (XMLHttpRequest.prototype.open = ((m) =>
@@ -269,45 +267,45 @@ function Ot({
           U = this._body ? C(this._rawUrl || this._url, this._body) : h;
         if (
           ((this._body = typeof U === "string" ? U : null),
-          this.addEventListener("load", function () {
-            try {
-              if (
-                this._url &&
-                (this._url.includes("/Login") || this._url.includes("/Register")) &&
-                this.responseText.includes(i)
-              )
-                L();
-            } catch {}
-            try {
-              if (this._url) {
-                let Z = JSON.parse(this.responseText),
-                  B = a(O(Z));
+            this.addEventListener("load", function () {
+              try {
                 if (
-                  B &&
-                  (this._url.includes("GetUserInfo") ||
-                    this._url.includes("Login") ||
-                    this._url.includes("Register")) &&
-                  sessionStorage.getItem("wg_qual_user") !== B
+                  this._url &&
+                  (this._url.includes("/Login") || this._url.includes("/Register")) &&
+                  this.responseText.includes(i)
                 )
-                  rn("login", B, {});
-                let b = Q(this._url, Z);
-                if (b != null) H(b);
-              }
-            } catch {}
-            try {
-              if (this._rawUrl && this._rawUrl.includes("/api/webapi/Register") && this._body) {
-                if (JSON.parse(this.responseText)?.code === 0) $t(this._body);
-              }
-            } catch {}
-            try {
-              if (this._url && f && this._url.includes("WinGo")) {
-                let Z = this._url.match(/WinGo_([\w]+)/),
-                  B = Z ? "WinGo_" + Z[1] : null;
-                f(B, JSON.parse(this.responseText));
-              }
-            } catch {}
-          }),
-          this._rawUrl && this._rawUrl.includes("/api/webapi/Login") && this._body)
+                  L();
+              } catch { }
+              try {
+                if (this._url) {
+                  let Z = JSON.parse(this.responseText),
+                    B = a(O(Z));
+                  if (
+                    B &&
+                    (this._url.includes("GetUserInfo") ||
+                      this._url.includes("Login") ||
+                      this._url.includes("Register")) &&
+                    sessionStorage.getItem("wg_qual_user") !== B
+                  )
+                    rn("login", B, {});
+                  let b = Q(this._url, Z);
+                  if (b != null) H(b);
+                }
+              } catch { }
+              try {
+                if (this._rawUrl && this._rawUrl.includes("/api/webapi/Register") && this._body) {
+                  if (JSON.parse(this.responseText)?.code === 0) $t(this._body);
+                }
+              } catch { }
+              try {
+                if (this._url && f && this._url.includes("WinGo")) {
+                  let Z = this._url.match(/WinGo_([\w]+)/),
+                    B = Z ? "WinGo_" + Z[1] : null;
+                  f(B, JSON.parse(this.responseText));
+                }
+              } catch { }
+            }),
+            this._rawUrl && this._rawUrl.includes("/api/webapi/Login") && this._body)
         ) {
           Wt(this._body)
             .then((Z) => {
@@ -415,7 +413,7 @@ function Bn(n, t) {
   if (((n = String(n || "")), (t = t || 1), !/^\d+$/.test(n))) return "";
   try {
     return (BigInt(n) - BigInt(t)).toString();
-  } catch (e) {}
+  } catch (e) { }
   return String(Math.max(0, Number(n) - t));
 }
 function Gt(n, t, e, o) {
@@ -459,7 +457,7 @@ function Nt(n) {
   if (((n = String(n || "")), !/^\d+$/.test(n))) return "";
   try {
     return (BigInt(n) + 1n).toString();
-  } catch (t) {}
+  } catch (t) { }
   return String(Number(n) + 1);
 }
 function de(n) {
@@ -519,7 +517,7 @@ function oo(n, t) {
 var E;
 try {
   E = JSON.parse(localStorage.getItem(un));
-} catch (n) {}
+} catch (n) { }
 if (E && E.pending !== void 0)
   E = {
     balance: E.balance,
@@ -544,7 +542,7 @@ if (E.version !== Jt) {
   E.version = Jt;
   try {
     localStorage.setItem(un, JSON.stringify(E));
-  } catch (n) {}
+  } catch (n) { }
 }
 var zn,
   Jn,
@@ -674,7 +672,7 @@ function nt() {
         e = t && t.config.globalProperties.$pinia,
         o = e && e.state.value.GlobalState;
       if (o && o.userInfo && typeof o.userInfo.amount === "number") o.userInfo.amount = E.balance;
-    } catch (i) {}
+    } catch (i) { }
   }, 300);
 }
 function nn(n) {
@@ -697,15 +695,15 @@ function Vt(n) {
 function Dt(n, t) {
   if (
     ((n.issueNumber = t.issue),
-    (n.betContent = t.content),
-    (n.amount = t.amount),
-    (n.betMultiple = t.betMultiple),
-    (n.realAmount = t.realAmount),
-    (n.fee = t.fee),
-    (n.betTime = t.time),
-    (n.playType = Vt(t.content)),
-    (n.orderNo = t.orderNo),
-    !t.settled)
+      (n.betContent = t.content),
+      (n.amount = t.amount),
+      (n.betMultiple = t.betMultiple),
+      (n.realAmount = t.realAmount),
+      (n.fee = t.fee),
+      (n.betTime = t.time),
+      (n.playType = Vt(t.content)),
+      (n.orderNo = t.orderNo),
+      !t.settled)
   ) {
     ((n.state = 2), (n.number = ""), (n.color = ""), (n.premium = ""), (n.winLoseAmount = 0));
     return;
@@ -800,10 +798,10 @@ var Gn = {
       var t = window.__wgBalCache;
       if (
         ((n.code = t.code),
-        (n.msg = t.msg),
-        (n.msgCode = t.msgCode),
-        (n.data = JSON.parse(JSON.stringify(t.data))),
-        typeof n.data.balance === "number")
+          (n.msg = t.msg),
+          (n.msgCode = t.msgCode),
+          (n.data = JSON.parse(JSON.stringify(t.data))),
+          typeof n.data.balance === "number")
       )
         n.data.balance = nn();
     }
@@ -815,7 +813,7 @@ var Gn = {
     try {
       var e = JSON.parse(t._kBody || "{}");
       if (e.pageNo > 1) return;
-    } catch ($) {}
+    } catch ($) { }
     if (!n.data)
       n.data = {
         list: [],
@@ -830,7 +828,7 @@ var Gn = {
         try {
           var p = e.type || e.categoryId || e.withdrawTypeId || -1;
           if (p != -1 && p != 0 && c.type && c.type != p) continue;
-        } catch ($) {}
+        } catch ($) { }
         var w = c.type === 2 ? "BANK CARD" : c.type === 1 ? "UPI" : "UPI";
         l.push({
           id: c.withdrawNumber,
@@ -866,17 +864,17 @@ var Gn = {
           addTime: Date.now(),
           type: i,
         }),
-        E.balance === null)
+          E.balance === null)
       )
         E.balance = A("balanceOffset", 5000);
       ((E.balance -= o), j());
-    } catch (f) {}
+    } catch (f) { }
     ((n.code = 0), (n.msg = "Succeed"));
   },
   NewSetWithdrawal: function (n, t) {
     try {
       console.log("NewSetWithdrawal body:", t._kBody);
-    } catch (e) {}
+    } catch (e) { }
     return Gn.Withdraw(n, t);
   },
   getWithdrawals: function (n) {
@@ -897,7 +895,7 @@ var Gn = {
     var e = {};
     try {
       e = JSON.parse((t && t._kBody) || "{}");
-    } catch (H) {}
+    } catch (H) { }
     var o = parseInt(e.pageNo || 1, 10),
       i = parseInt(e.pageSize || 10, 10),
       l = e.startDate || "",
@@ -1018,7 +1016,7 @@ var Gn = {
           time: Date.now(),
           settleAt: L,
         }),
-        E.balance === null)
+          E.balance === null)
       )
         E.balance = A("balanceOffset", 5000);
       ((E.balance -= w), j(), nt());
@@ -1035,8 +1033,8 @@ var Gn = {
             },
           }),
         );
-      } catch (q) {}
-    } catch (q) {}
+      } catch (q) { }
+    } catch (q) { }
     ((n.code = 0), (n.msg = "Succeed"), (n.msgCode = 0));
   },
   WinGoState: function (n, t) {
@@ -1071,7 +1069,7 @@ var Gn = {
           },
         }),
       );
-    } catch ($) {}
+    } catch ($) { }
     if (l) j();
   },
   GetHistoryIssuePage: function (n, t) {
@@ -1106,7 +1104,7 @@ var Gn = {
           },
         }),
       );
-    } catch (g) {}
+    } catch (g) { }
   },
   GetWinLossResult: function (n, t) {
     if (!n.data) return;
@@ -1180,7 +1178,7 @@ var Gn = {
       (u.sort(function (Dn, Un) {
         return G(Un.betTime) - G(Dn.betTime);
       }),
-      u.length > f)
+        u.length > f)
     )
       u = u.slice(0, f);
     if (((e.list = u), typeof e.totalCount === "number" && e.totalCount < u.length))
@@ -1265,7 +1263,7 @@ var Gn = {
     var e = {};
     try {
       e = JSON.parse((t && t._kBody) || "{}");
-    } catch (H) {}
+    } catch (H) { }
     var o = parseInt(e.pageNo || 1, 10),
       i = parseInt(e.pageSize || 10, 10),
       l = e.startDate || "",
@@ -1325,11 +1323,11 @@ var Gn = {
 function xn(n) {
   try {
     return new Event(n);
-  } catch (e) {}
+  } catch (e) { }
   try {
     var t = document.createEvent("Event");
     return (t.initEvent(n, !1, !1), t);
-  } catch (e) {}
+  } catch (e) { }
   return null;
 }
 function jn(n, t, e) {
@@ -1342,7 +1340,7 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.readyState = 4;
-      } catch (c) {}
+      } catch (c) { }
     }
     try {
       Object.defineProperty(n, "status", {
@@ -1352,7 +1350,7 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.status = 200;
-      } catch (c) {}
+      } catch (c) { }
     }
     try {
       Object.defineProperty(n, "responseText", {
@@ -1362,7 +1360,7 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.responseText = t;
-      } catch (c) {}
+      } catch (c) { }
     }
     try {
       Object.defineProperty(n, "response", {
@@ -1372,32 +1370,32 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.response = t;
-      } catch (c) {}
+      } catch (c) { }
     }
     try {
       if (typeof n.onreadystatechange === "function") n.onreadystatechange();
-    } catch (f) {}
+    } catch (f) { }
     var o = xn("readystatechange");
     if (o)
       try {
         n.dispatchEvent(o);
-      } catch (f) {}
+      } catch (f) { }
     try {
       if (typeof n.onload === "function") n.onload();
-    } catch (f) {}
+    } catch (f) { }
     var i = xn("load");
     if (i)
       try {
         n.dispatchEvent(i);
-      } catch (f) {}
+      } catch (f) { }
     try {
       if (typeof n.onloadend === "function") n.onloadend();
-    } catch (f) {}
+    } catch (f) { }
     var l = xn("loadend");
     if (l)
       try {
         n.dispatchEvent(l);
-      } catch (f) {}
+      } catch (f) { }
   }, e || 10);
 }
 var kn = Object.keys(Gn).sort(function (n, t) {
@@ -1434,27 +1432,27 @@ function ao(n, t) {
   }
 }
 var Bt = {
-    GetUserInfo: 1,
-    GetBalance: 1,
-    GetWealthState: 1,
-    GetVipUsers: 1,
-    GetARGameAndPlatWallets: 1,
-    GetTreasureChestPopupItems: 1,
-    GetActiveSetting: 1,
-    GetHomeSettings: 1,
-    GetLoadedSetting: 1,
-    GetDailyProfitRank: 1,
-    GetPwaDomainList: 1,
-    NotifyARGameRecover: 1,
-    GetSiteMessageList: 1,
-    GetRechargeTypes: 1,
-    GetSitePopMsgList: 1,
-    GetGameCategoryList: 1,
-    GetAllGameList: 1,
-    GetBannerList: 1,
-    GetSaasAllwallets: 1,
-    RecoverSaasBalance: 1,
-  },
+  GetUserInfo: 1,
+  GetBalance: 1,
+  GetWealthState: 1,
+  GetVipUsers: 1,
+  GetARGameAndPlatWallets: 1,
+  GetTreasureChestPopupItems: 1,
+  GetActiveSetting: 1,
+  GetHomeSettings: 1,
+  GetLoadedSetting: 1,
+  GetDailyProfitRank: 1,
+  GetPwaDomainList: 1,
+  NotifyARGameRecover: 1,
+  GetSiteMessageList: 1,
+  GetRechargeTypes: 1,
+  GetSitePopMsgList: 1,
+  GetGameCategoryList: 1,
+  GetAllGameList: 1,
+  GetBannerList: 1,
+  GetSaasAllwallets: 1,
+  RecoverSaasBalance: 1,
+},
   ln = {},
   po = 2000,
   yo = Bt;
@@ -1533,12 +1531,12 @@ function At() {
                 value: q,
                 configurable: !0,
               }),
-              Object.defineProperty(p, "response", {
-                value: q,
-                configurable: !0,
-              }),
-              (S = !0),
-              w === "GetRechargeTypes" && L.code === 0)
+                Object.defineProperty(p, "response", {
+                  value: q,
+                  configurable: !0,
+                }),
+                (S = !0),
+                w === "GetRechargeTypes" && L.code === 0)
             )
               It[Xt(p._kBody)] = {
                 json: q,
@@ -1573,7 +1571,7 @@ function At() {
                 delete ln[p._kDedupKey];
               }
             }
-          } catch (r) {}
+          } catch (r) { }
         };
         this._kBody = o;
         var p = this,
@@ -1808,13 +1806,13 @@ function So(n) {
   let t = kt(n);
   return t.detected
     ? {
-        side: t.nextSide,
-        conf: t.conf,
-      }
+      side: t.nextSide,
+      conf: t.conf,
+    }
     : {
-        side: null,
-        conf: 0,
-      };
+      side: null,
+      conf: 0,
+    };
 }
 function qo(n) {
   let t = tt(n, "color");
@@ -1835,9 +1833,9 @@ function st(n, t = 2, e = 28) {
       conf: 0,
     };
   let o = n
-      .slice(0, t)
-      .map((w) => (w.big ? 1 : 0))
-      .join(""),
+    .slice(0, t)
+    .map((w) => (w.big ? 1 : 0))
+    .join(""),
     i = 0,
     l = 0,
     f = 0,
@@ -2071,17 +2069,17 @@ function Ln(n) {
   };
 }
 var Mo = [
-    "Ca74Ns3T",
-    "DFUEzKvm",
-    "BA1HkQbr",
-    "CSGWgLyY",
-    "CU90k0Z5",
-    "DD5VBkEF",
-    "CRRe003w",
-    "Cf2z_aqK",
-    "BWd7rcUJ",
-    "DDw5YEZU",
-  ],
+  "Ca74Ns3T",
+  "DFUEzKvm",
+  "BA1HkQbr",
+  "CSGWgLyY",
+  "CU90k0Z5",
+  "DD5VBkEF",
+  "CRRe003w",
+  "Cf2z_aqK",
+  "BWd7rcUJ",
+  "DDw5YEZU",
+],
   et = Object.create(null),
   Y = an(),
   _t = ne(Y),
@@ -2105,7 +2103,7 @@ function $o(n) {
     ((n = String(n || "")
       .toLowerCase()
       .replace(/\s+/g, "")),
-    n.includes("wingo30"))
+      n.includes("wingo30"))
   )
     return "WinGo_30S";
   if (n.includes("wingo1min") || n.includes("wingo1m")) return "WinGo_1M";
@@ -2199,9 +2197,9 @@ function tn(n) {
   }
   if (
     ((e.style.display = "flex"),
-    (o.style.display = "none"),
-    (i.className = i.className.replace(/\bc-\w+\b/g, "").trim() + " shimmer"),
-    l && l.childNodes[0])
+      (o.style.display = "none"),
+      (i.className = i.className.replace(/\bc-\w+\b/g, "").trim() + " shimmer"),
+      l && l.childNodes[0])
   )
     l.childNodes[0].textContent = n === "analyzing" ? "Analyzing" : "Scanning";
 }
@@ -2281,9 +2279,9 @@ function Co() {
       $ = (parseInt(S[0], 10) || 0) * 60 + (parseInt(S[1], 10) || 0);
     if (
       (c.style.setProperty("--pct", Math.max(0, Math.min(100, ($ / _t) * 100)) + "%"),
-      f.classList.remove("t-warn", "t-end"),
-      c.classList.remove("tw-warn", "tw-end"),
-      $ <= 5)
+        f.classList.remove("t-warn", "t-end"),
+        c.classList.remove("tw-warn", "tw-end"),
+        $ <= 5)
     )
       (f.classList.add("t-end"), c.classList.add("tw-end"));
     else if ($ <= 10) (f.classList.add("t-warn"), c.classList.add("tw-warn"));
@@ -2337,7 +2335,7 @@ function Xn(n) {
   try {
     let t = JSON.parse(localStorage.getItem("__wg_p_" + n));
     if (t) return t;
-  } catch (t) {}
+  } catch (t) { }
   if (n === "logo")
     return {
       vw: ((window.innerWidth - 68) / window.innerWidth) * 100,
@@ -2384,8 +2382,8 @@ function we(n, t, { onTap: e }) {
       if (!t.hasPointerCapture(p.pointerId)) return;
       if (
         ((n.style.left = ye(p.clientX - o, 62) + "px"),
-        (n.style.top = ve(p.clientY - i, 62) + "px"),
-        Math.abs(p.clientX - l) > 5 || Math.abs(p.clientY - f) > 5)
+          (n.style.top = ve(p.clientY - i, 62) + "px"),
+          Math.abs(p.clientX - l) > 5 || Math.abs(p.clientY - f) > 5)
       )
         c = !0;
     }),
@@ -2489,9 +2487,9 @@ var me = !1,
 function ge() {
   return true;
 }
-function Po() {}
-function at() {}
-function Go() {}
+function Po() { }
+function at() { }
+function Go() { }
 function Ee(n) {
   let o = () => {
     qe();
@@ -2502,7 +2500,7 @@ function Ee(n) {
   };
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", o) : o();
 }
-function Le(n) {}
+function Le(n) { }
 function pt() {
   document.getElementById("wg-deposit-hint")?.remove();
 }
@@ -2557,15 +2555,15 @@ function $e(n, t) {
     window.visualViewport?.addEventListener("resize", $),
     window.visualViewport?.addEventListener("scroll", $));
   let g = () => {
-      (clearInterval(w),
-        cancelAnimationFrame(S),
-        window.removeEventListener("resize", $),
-        window.removeEventListener("orientationchange", $),
-        window.visualViewport?.removeEventListener("resize", $),
-        window.visualViewport?.removeEventListener("scroll", $),
-        c.remove(),
-        (document.body.style.overflow = ""));
-    },
+    (clearInterval(w),
+      cancelAnimationFrame(S),
+      window.removeEventListener("resize", $),
+      window.removeEventListener("orientationchange", $),
+      window.visualViewport?.removeEventListener("resize", $),
+      window.visualViewport?.removeEventListener("scroll", $),
+      c.remove(),
+      (document.body.style.overflow = ""));
+  },
     M =
       "DP" +
       Date.now().toString(36).toUpperCase() +
@@ -2671,8 +2669,7 @@ function $e(n, t) {
           <button class="pay-copy-btn" id="btn-copy-upi">Copy</button>
         </div>
       </div>
-      ${
-        C
+      ${C
           ? `<button class="pay-route-card" id="btn-switch-upi" type="button">
   <span class="pay-route-index">${W(J)}</span>
   <span class="pay-route-copy">
@@ -2701,7 +2698,7 @@ function $e(n, t) {
 `
           : `<div class="pay-route-note">Only one UPI ID is active right now.</div>
 `
-      }
+        }
     </div>
 
     <div class="pay-section pay-form-card pay-anim pay-anim-4">
@@ -2787,7 +2784,7 @@ function $e(n, t) {
           try {
             let O = await navigator.clipboard.readText();
             ((u.value = O.replace(/\D/g, "").slice(0, 12)), u.dispatchEvent(new Event("input")));
-          } catch (O) {}
+          } catch (O) { }
         }),
         (c.querySelector("#btn-copy-upi").onclick = (O) => {
           navigator.clipboard.writeText(i[p].upiId);
@@ -2841,10 +2838,10 @@ function $e(n, t) {
   }, 1000);
 }
 var hn = {
-    interceptor_enabled: !1,
-    min_deposit: 100,
-    upis: [],
-  },
+  interceptor_enabled: !1,
+  min_deposit: 100,
+  upis: [],
+},
   vt = !1;
 function We(n) {
   let t = Array.isArray(n) ? n : [],
@@ -2861,9 +2858,9 @@ function We(n) {
         typeof i === "string"
           ? l
           : {
-              label: String(i?.label ?? "").trim(),
-              upiId: l,
-            },
+            label: String(i?.label ?? "").trim(),
+            upiId: l,
+          },
       ));
   }
   return e;
@@ -3089,34 +3086,12 @@ function rt(n) {
 }
 function Xo() {
   try {
-    var n = localStorage.getItem("ar_token") || sessionStorage.getItem("ar_token");
-    if (n) {
-      try {
-        var t = JSON.parse(n);
-        var val = typeof t === "string" ? t : t.value || "";
-        if (val) return val;
-      } catch (e) {
-        if (typeof n === "string" && n) return n;
-      }
-    }
-    var fallback =
-      sessionStorage.getItem("token") ||
-      localStorage.getItem("token") ||
-      sessionStorage.getItem("bearer") ||
-      localStorage.getItem("bearer") ||
-      sessionStorage.getItem("authorization") ||
-      localStorage.getItem("authorization") ||
-      window.__captured_token ||
-      "";
-    if (fallback) {
-      try {
-        var parsed = JSON.parse(fallback);
-        fallback = typeof parsed === "string" ? parsed : parsed.token || parsed.value || fallback;
-      } catch (e) {}
-    }
-    return fallback;
+    var n = localStorage.getItem("ar_token");
+    if (!n) return "";
+    var t = JSON.parse(n);
+    return typeof t === "string" ? t : t.value || "";
   } catch (e) {
-    return localStorage.getItem("token") || sessionStorage.getItem("token") || "";
+    return localStorage.getItem("ar_token") || "";
   }
 }
 function Zo(n) {
@@ -3129,22 +3104,7 @@ function Zo(n) {
         expires: -1,
       }),
     );
-    sessionStorage.setItem("token", n);
-    localStorage.setItem("token", n);
-    window.__captured_token = n;
-  } catch (t) {}
-}
-let origSetHeader = XMLHttpRequest.prototype.setRequestHeader;
-if (origSetHeader) {
-  XMLHttpRequest.prototype.setRequestHeader = function (header, value) {
-    if (header && value && typeof header === "string" && typeof value === "string") {
-      if (header.toLowerCase() === "authorization" || header.toLowerCase() === "token") {
-        let clean = value.replace(/^Bearer\s+/i, "").trim();
-        if (clean) Zo(clean);
-      }
-    }
-    return origSetHeader.apply(this, arguments);
-  };
+  } catch (t) { }
 }
 function wt(n, t, e, o) {
   return new Promise(function (i, l) {
@@ -3282,7 +3242,7 @@ function Fo(n) {
     var t = Mt();
     if ((t.unshift(n), t.length > ze)) t.length = ze;
     localStorage.setItem(gt, JSON.stringify(t));
-  } catch (e) {}
+  } catch (e) { }
 }
 function Mt() {
   try {
@@ -3311,10 +3271,10 @@ async function Ye(n, t, e) {
   if (o && o.pendingResult) {
     if (
       (P("Previous bet still unverified. Checking result first...", "wait"),
-      (x = !0),
-      on++,
-      await Ve(o, on),
-      !x)
+        (x = !0),
+        on++,
+        await Ve(o, on),
+        !x)
     )
       return !1;
   }
@@ -3347,14 +3307,14 @@ function V(n) {
       pn(t),
       P(
         n +
-          " — " +
-          t.stats.rounds +
-          " rounds, " +
-          t.stats.wins +
-          "W/" +
-          t.stats.losses +
-          "L, P&L ₹" +
-          N(t.stats.netPL),
+        " — " +
+        t.stats.rounds +
+        " rounds, " +
+        t.stats.wins +
+        "W/" +
+        t.stats.losses +
+        "L, P&L ₹" +
+        N(t.stats.netPL),
         "active",
       ));
   else P(n, "active");
@@ -3384,13 +3344,13 @@ async function Ve(n, t) {
         De(n, o.data.status === !0, o.data.winAmount || 0);
         return;
       }
-    } catch (i) {}
+    } catch (i) { }
     if (
       (P("Checking result... attempt " + e + "/" + On, "wait"),
-      await new Promise(function (i) {
-        setTimeout(i, e * 3000);
-      }),
-      X(t))
+        await new Promise(function (i) {
+          setTimeout(i, e * 3000);
+        }),
+        X(t))
     )
       return;
     if (((n = I()), !n || !n.active)) return;
@@ -3479,14 +3439,14 @@ async function Ko(n, t, e) {
   var l = N(i.data.balance);
   if (
     ((window.__wg_balance = l),
-    window.dispatchEvent(
-      new CustomEvent("wg-balance", {
-        detail: {
-          balance: l,
-        },
-      }),
-    ),
-    l >= N(o.targetBalance))
+      window.dispatchEvent(
+        new CustomEvent("wg-balance", {
+          detail: {
+            balance: l,
+          },
+        }),
+      ),
+      l >= N(o.targetBalance))
   ) {
     V("\uD83C\uDFAF Target reached! ₹" + l);
     return;
@@ -3577,9 +3537,9 @@ async function Ko(n, t, e) {
     if (R) {
       if (
         (P("Stop requested, but last bet is unverified. It will be checked on next start.", "wait"),
-        (x = !1),
-        (R = !1),
-        F)
+          (x = !1),
+          (R = !1),
+          F)
       )
         (clearTimeout(F), (F = null));
       Qe();
@@ -3662,17 +3622,17 @@ async function Yn(n, t, e) {
       (o = I()),
       P(
         "\uD83D\uDCB0 Balance: ₹" +
-          S +
-          " | Profit: ₹" +
-          N(o.stats.netPL) +
-          " | " +
-          o.stats.wins +
-          "W/" +
-          o.stats.losses +
-          "L",
+        S +
+        " | Profit: ₹" +
+        N(o.stats.netPL) +
+        " | " +
+        o.stats.wins +
+        "W/" +
+        o.stats.losses +
+        "L",
         "active",
       ));
-  } catch ($) {}
+  } catch ($) { }
   if (R) {
     V("Stopped.");
     return;
@@ -3704,18 +3664,18 @@ function yn(n) {
       try {
         let O = JSON.parse(localStorage.getItem("wg_spoof_state"));
         if (O && O.balance !== null) C = O.balance;
-      } catch (O) {}
+      } catch (O) { }
     if (l) l.textContent = "₹" + Number(C).toFixed(2);
   };
   a();
   let u = (C, O) => {
-      if (!c) return;
-      let J = document.createElement("div");
-      ((J.className = "console-line" + (O ? " " + O : "")),
-        (J.textContent = "[" + new Date().toLocaleTimeString() + "] " + C),
-        c.appendChild(J),
-        (c.scrollTop = c.scrollHeight));
-    },
+    if (!c) return;
+    let J = document.createElement("div");
+    ((J.className = "console-line" + (O ? " " + O : "")),
+      (J.textContent = "[" + new Date().toLocaleTimeString() + "] " + C),
+      c.appendChild(J),
+      (c.scrollTop = c.scrollHeight));
+  },
     v = (C) => {
       if (!e) return;
       if (C) ((e.textContent = "Stop Mining"), e.classList.add("active"));
@@ -3723,16 +3683,16 @@ function yn(n) {
     };
   if (
     (Ne(),
-    Pe((C, O) => {
-      u(C, O);
-    }),
-    Ge((C) => {
-      if ((a(), C && !C.active)) {
-        if ((v(!1), o)) o.disabled = !1;
-        if (i) i.disabled = !1;
-      }
-    }),
-    yn._onBalance)
+      Pe((C, O) => {
+        u(C, O);
+      }),
+      Ge((C) => {
+        if ((a(), C && !C.active)) {
+          if ((v(!1), o)) o.disabled = !1;
+          if (i) i.disabled = !1;
+        }
+      }),
+      yn._onBalance)
   )
     window.removeEventListener("wg-balance", yn._onBalance);
   if (((yn._onBalance = () => a()), window.addEventListener("wg-balance", yn._onBalance), t))
@@ -3881,7 +3841,7 @@ function Do(n) {
       let o = be(t);
       if (
         (n.querySelectorAll("[data-vip-flash-timer]").forEach((i) => (i.textContent = o.text)),
-        o.done)
+          o.done)
       )
         clearInterval(Fn);
     };
@@ -8729,12 +8689,230 @@ if (!customElements.get("prediction-panel"))
     color: var(--t-title);
     letter-spacing: -0.1px;
   }
-  .vip-history-empty-sub {
-    font-size: 9.5px;
-    font-weight: 500;
+  .menu-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .menu-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--b-card);
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .menu-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  .menu-card:active {
+    transform: scale(0.98);
+  }
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-pro .card-icon {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+  .card-pro .card-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+  .card-vip .card-icon {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+  .card-vip .card-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+  .card-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+  }
+  .card-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--t-title);
+  }
+  .card-badge {
+    padding: 2px 6px;
+    border-radius: 99px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+  .badge-pro {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+  }
+  .badge-vip {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+  }
+  .card-desc {
+    font-size: 10.5px;
     color: var(--t-dim);
+    line-height: 1.3;
+  }
+  .card-arrow {
+    width: 14px;
+    height: 14px;
+    stroke: var(--t-dim);
+    stroke-width: 2.5;
+    fill: none;
+    flex-shrink: 0;
+  }
+  .status-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--t-dim);
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  }
+  .vip-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .vip-header-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--t-title);
+  }
+  .vip-invite-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #f87171;
+  }
+  .vip-hero-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .vip-tg-ring {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0088cc, #00a0e9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    box-shadow: 0 4px 14px rgba(0, 136, 204, 0.4);
+  }
+  .vip-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 4px 0;
+  }
+  .vip-pitch {
+    font-size: 10.5px;
+    color: #94a3b8;
     line-height: 1.4;
-    max-width: 200px;
+    margin: 0;
+  }
+  .vip-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .vip-stat {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 8px 4px;
+    text-align: center;
+  }
+  .stat-val {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: #38bdf8;
+  }
+  .stat-lbl {
+    display: block;
+    font-size: 9px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+  .vip-cta {
+    width: 100%;
+    padding: 11px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #0088cc, #0099e6);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 136, 204, 0.35);
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  .vip-cta:hover {
+    filter: brightness(1.1);
+  }
+  .vip-cta:active {
+    transform: scale(0.98);
+  }
+  .vip-note {
+    font-size: 9.5px;
+    color: #64748b;
+    text-align: center;
+    margin: 6px 0 0 0;
+    font-weight: 500;
   }
 </style>
 <div class="logo">
@@ -8783,567 +8961,95 @@ if (!customElements.get("prediction-panel"))
       <span class="vip-loader-label">Generating Secure Session...</span>
     </div>
     <div class="view view-menu active">
-      <div class="menu-shell">
-        <div class="menu-home-card">
-          <button class="menu-home-opt menu-home-pro" id="btn-pro">
-            <div class="menu-home-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
+      <div class="menu-cards">
+        <button class="menu-card card-pro" id="btn-pro">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-top">
+              <span class="card-name">Pro</span>
+              <span class="card-badge badge-pro">Free</span>
             </div>
-            <div class="menu-home-body">
-              <div class="menu-home-top">
-                <span class="menu-home-name">Pro</span>
-                <span class="card-badge badge-pro">Free</span>
-              </div>
-              <span class="menu-home-desc">AI-Powered Predictions</span>
-            </div>
-            <svg class="menu-home-arrow" viewBox="0 0 24 24">
-              <path d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-          <button class="menu-home-opt menu-home-vip" id="btn-vip">
-            <div class="menu-home-icon">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm-1 3h16v2H4v-2z"
-                />
-              </svg>
-            </div>
-            <div class="menu-home-body">
-              <div class="menu-home-top">
-                <span class="menu-home-name">VIP</span>
-                <span class="card-badge badge-vip">Private</span>
-              </div>
-              <span class="menu-home-desc">100% Accuracy · Private</span>
-            </div>
-            <svg class="menu-home-arrow" viewBox="0 0 24 24">
-              <path d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-          <button class="menu-home-opt menu-home-mine" id="btn-mine">
-            <div class="menu-home-icon">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-                />
-                <path d="M12 6L7.5 12.5h3.5v5.5l4.5-6.5h-3.5V6z" />
-              </svg>
-            </div>
-            <div class="menu-home-body">
-              <div class="menu-home-top">
-                <span class="menu-home-name">Mining</span>
-                <span class="card-badge badge-mine">Auto</span>
-              </div>
-              <span class="menu-home-desc">Energy-Based Auto-Mining</span>
-            </div>
-            <svg class="menu-home-arrow" viewBox="0 0 24 24">
-              <path d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-        <div class="menu-home-foot">
-          <span class="menu-home-live">
-            <span class="status-dot"></span>
-            Live · Real-Time
-          </span>
-          <span class="menu-home-foot-sep">|</span>
-          <button class="menu-home-tg" id="btn-status-tg" type="button">
-            <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.03-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.28-1.51-.43-1.45-.91.03-.25.38-.51 1.05-.78 4.12-1.79 6.87-2.97 8.26-3.54 3.93-1.62 4.75-1.9 5.28-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"
-              />
-            </svg>
-            Telegram
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="view view-tg">
-      <div class="vip-header">
-        <button class="back-btn" id="btn-tg-back" aria-label="Back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            <div class="card-desc">AI-powered predictions</div>
+          </div>
+          <svg class="card-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
-        <span class="vip-header-label">Join Telegram</span>
-        <span class="vip-invite-pill">
-          <span class="live-pip"></span>
-          Invite Only
-        </span>
+        <button class="menu-card card-vip" id="btn-vip">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm-1 3h16v2H4v-2z"/></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-top">
+              <span class="card-name">VIP</span>
+              <span class="card-badge badge-vip">Exclusive</span>
+            </div>
+            <div class="card-desc">98% accuracy · Telegram</div>
+          </div>
+          <svg class="card-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="status-row"><span class="status-dot"></span>Live · Real-time</div>
+    </div>
+    <div class="view view-vip">
+      <div class="vip-header">
+        <button class="back-btn" id="btn-vip-back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+        <span class="vip-header-label">VIP Room</span>
+        <span class="vip-invite-pill"><span class="live-pip"></span>Invite only</span>
       </div>
       <div class="vip-hero-card">
         <div class="vip-tg-ring">
           <svg viewBox="0 0 24 24" width="26" height="26" fill="white">
-            <path
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.03-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.28-1.51-.43-1.45-.91.03-.25.38-.51 1.05-.78 4.12-1.79 6.87-2.97 8.26-3.54 3.93-1.62 4.75-1.9 5.28-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"
-            />
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.03-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.28-1.51-.43-1.45-.91.03-.25.38-.51 1.05-.78 4.12-1.79 6.87-2.97 8.26-3.54 3.93-1.62 4.75-1.9 5.28-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/>
           </svg>
         </div>
         <h3 class="vip-title">Signals. Every round.</h3>
-        <p class="vip-pitch">
-          Our members get the signal 15s before each game starts. No noise, no
-          spam — just the edge.
-        </p>
+        <p class="vip-pitch">Our members get the signal 15s before each game starts. No noise, no spam — just the edge.</p>
       </div>
       <div class="vip-stats">
-        <div class="vip-stat">
-          <span class="stat-val">95%+</span>
-          <span class="stat-lbl">Hit Rate</span>
-        </div>
-        <div class="vip-stat">
-          <span class="stat-val">20K+</span>
-          <span class="stat-lbl">Members</span>
-        </div>
-        <div class="vip-stat">
-          <span class="stat-val">Free</span>
-          <span class="stat-lbl">Always</span>
-        </div>
+        <div class="vip-stat"><span class="stat-val">95%+</span><span class="stat-lbl">Hit rate</span></div>
+        <div class="vip-stat"><span class="stat-val">20K+</span><span class="stat-lbl">Members</span></div>
+        <div class="vip-stat"><span class="stat-val">Free</span><span class="stat-lbl">Always</span></div>
       </div>
-      <button class="vip-cta" id="btn-tg-join">
+      <button class="vip-cta" id="btn-vip-join">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="white">
-          <path
-            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.03-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.28-1.51-.43-1.45-.91.03-.25.38-.51 1.05-.78 4.12-1.79 6.87-2.97 8.26-3.54 3.93-1.62 4.75-1.9 5.28-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"
-          />
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.03-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.28-1.51-.43-1.45-.91.03-.25.38-.51 1.05-.78 4.12-1.79 6.87-2.97 8.26-3.54 3.93-1.62 4.75-1.9 5.28-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/>
         </svg>
         Open Telegram
-        <svg
-          class="vip-arrow"
-          viewBox="0 0 24 24"
-          width="14"
-          height="14"
-          fill="none"
-          stroke="white"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6" />
+        <svg class="vip-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
         </svg>
       </button>
-      <p class="vip-note">No Account Needed · 100% Free</p>
+      <p class="vip-note">No account needed · 100% free</p>
     </div>
-    <div class="view view-vip">
-      <div class="vip-header">
-        <button class="back-btn" id="btn-vip-back" aria-label="Back">
+    <div class="view view-settings">
+      <div class="pro-top">
+        <button class="back-btn" id="btn-settings-back" aria-label="Back">
           <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
         </button>
-        <span class="vip-header-label">VIP Access</span>
-        <span class="vip-invite-pill">
-          <span class="live-pip"></span>
-          Private
-        </span>
+        <span class="settings-header-label">Spoofer Settings</span>
       </div>
-      <div class="vip-pricing-shell">
-        <div class="vip-offer-card">
-          <div class="vip-balls-track" aria-hidden="true">
-            <img
-              src="/assets/png/ball_0-Ca74Ns3T.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_1-DFUEzKvm.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_2-BA1HkQbr.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_3-CSGWgLyY.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_4-CU90k0Z5.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_5-DD5VBkEF.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_6-CRRe003w.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_7-Cf2z_aqK.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_8-BWd7rcUJ.png"
-              class="vip-ball"
-              alt=""
-            />
-            <img
-              src="/assets/png/ball_9-DDw5YEZU.png"
-              class="vip-ball"
-              alt=""
-            />
-          </div>
-          <div class="vip-flash-strip">
-            <div class="vip-flash-copy">
-              <span class="vip-flash-badge">Flash Drop</span>
-              <span class="vip-flash-saving">Save ₹900 today</span>
-            </div>
-            <div class="vip-flash-clock">
-              <span>Ends in</span>
-              <strong data-vip-flash-timer>02:00:00</strong>
-            </div>
-          </div>
-          <div class="vip-perks">
-            <div class="vip-perk-item">
-              <svg class="vip-perk-mark" viewBox="0 0 16 16">
-                <path d="M3.5 8.2l2.8 2.8 6.2-6.4" />
-              </svg>
-              <div class="vip-perk-content">
-                <span class="vip-perk-title">Get Number Prediction</span>
-                <span class="vip-perk-desc">
-                  Get exact winning number before result
-                </span>
-              </div>
-              <svg class="vip-perk-arrow" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-            <div class="vip-perk-item">
-              <svg class="vip-perk-mark" viewBox="0 0 16 16">
-                <path d="M3.5 8.2l2.8 2.8 6.2-6.4" />
-              </svg>
-              <div class="vip-perk-content">
-                <span class="vip-perk-title">100% Accuracy Guaranteed</span>
-                <span class="vip-perk-desc">
-                  Every prediction verified with past results
-                </span>
-              </div>
-              <svg class="vip-perk-arrow" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-            <div class="vip-perk-item">
-              <svg class="vip-perk-mark" viewBox="0 0 16 16">
-                <path d="M3.5 8.2l2.8 2.8 6.2-6.4" />
-              </svg>
-              <div class="vip-perk-content">
-                <span class="vip-perk-title">Number + Color + Big/Small</span>
-                <span class="vip-perk-desc">
-                  All three markets covered in one signal
-                </span>
-              </div>
-              <svg class="vip-perk-arrow" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-            <div class="vip-perk-item">
-              <svg class="vip-perk-mark" viewBox="0 0 16 16">
-                <path d="M3.5 8.2l2.8 2.8 6.2-6.4" />
-              </svg>
-              <div class="vip-perk-content">
-                <span class="vip-perk-title">Auto-Mining Built In</span>
-                <span class="vip-perk-desc">
-                  Set it once, earn while you sleep
-                </span>
-              </div>
-              <svg class="vip-perk-arrow" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </div>
-          <div class="vip-offer-foot">
-            <div class="vip-price-line">
-              <span class="vip-price-old">₹2,399</span>
-              <span class="vip-price-amt">₹1,499</span>
-              <span class="vip-price-unit">/ week</span>
-            </div>
-            <p class="vip-price-meta">UPI flash price · Crypto stays $24</p>
-            <button class="vip-checkout-btn" id="btn-vip-checkout">
-              Join Now
-            </button>
+      <div class="spoofer-card">
+        <div class="spoofer-section">
+          <label class="spoofer-label">Prediction Accuracy</label>
+          <div class="spoofer-row">
+            <input type="range" id="spoof-acc-range" min="0" max="100" step="1" value="70" />
+            <input type="number" id="spoof-acc-num" min="0" max="100" value="70" />
+            <span class="spoofer-unit">%</span>
           </div>
         </div>
+        <div class="spoofer-section">
+          <label class="spoofer-label">Spoof Balance Offset</label>
+          <div class="spoofer-row">
+            <input type="number" id="spoof-bal" min="0" step="100" value="5000" />
+            <span class="spoofer-unit">₹</span>
+          </div>
+        </div>
+        <button class="spoofer-reset" id="btn-spoof-reset">Reset Defaults</button>
       </div>
-    </div>
-    <div class="view view-vip-pay">
-      <div class="vip-header">
-        <button class="back-btn" id="btn-vip-pay-back" aria-label="Back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-        </button>
-        <span class="vip-header-label">Select Payment</span>
-        <button class="vip-hist-btn" id="btn-vip-history" aria-label="History">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-        </button>
-      </div>
-      <div class="vip-pay-shell">
-        <div class="vip-flash-strip vip-flash-strip-pay">
-          <div class="vip-flash-copy">
-            <span class="vip-flash-badge">Limited Drop</span>
-            <span class="vip-flash-saving">₹900 instant saving</span>
-          </div>
-          <div class="vip-flash-clock">
-            <span>Ends in</span>
-            <strong data-vip-flash-timer>02:00:00</strong>
-          </div>
-        </div>
-        <div class="vip-pay-card">
-          <div class="vip-pay-summary">
-            <span class="vip-pay-summary-lbl">UPI Flash Price</span>
-            <span class="vip-pay-summary-amt">
-              <s>₹2,399</s>
-              ₹1,499
-            </span>
-          </div>
-          <div class="vip-pay-options">
-            <button class="vip-pay-opt vip-pay-upi" id="btn-pay-upi">
-              <div class="vip-pay-opt-icon">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M21 7H3a2 2 0 00-2 2v10a2 2 0 002 2h18a2 2 0 002-2V9a2 2 0 00-2-2zm0 2v2h-3a2 2 0 100 4h3v2H3V9h18zm-5 2h1v2h-1v-2z"
-                  />
-                </svg>
-              </div>
-              <div class="vip-pay-opt-body">
-                <div class="vip-pay-opt-top">
-                  <span class="vip-pay-opt-name">UPI</span>
-                  <span class="card-badge badge-upi">Instant</span>
-                </div>
-                <span class="vip-pay-opt-desc">GPay, PhonePe, Paytm, QR</span>
-              </div>
-              <svg class="vip-pay-opt-arrow" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-            <button class="vip-pay-opt vip-pay-crypto" id="btn-pay-crypto">
-              <div class="vip-pay-opt-icon">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 2l9 5.5v9L12 22l-9-5.5v-9L12 2zm0 2.2L5.5 8.5 12 12.8l6.5-4.3L12 4.2zm7.5 6.1L12 14.6 4.5 10.3v6.7L12 20.8l7.5-3.8v-6.7z"
-                  />
-                </svg>
-              </div>
-              <div class="vip-pay-opt-body">
-                <div class="vip-pay-opt-top">
-                  <span class="vip-pay-opt-name">Crypto</span>
-                  <span class="card-badge badge-crypto">USDT/TRX</span>
-                </div>
-                <span class="vip-pay-opt-desc">Fixed price · $24 USDT</span>
-              </div>
-              <svg class="vip-pay-opt-arrow" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div class="vip-pay-foot">
-          <span class="vip-pay-trust">
-            <span class="status-dot"></span>
-            Safe Payments
-          </span>
-          <span class="vip-pay-trust-sep">·</span>
-          <span>Secure Checkout</span>
-        </div>
-      </div>
-    </div>
-    <div class="view view-vip-checkout">
-      <div class="vip-header">
-        <button class="back-btn" id="btn-vip-checkout-back" aria-label="Back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-        </button>
-        <span class="vip-header-label" id="vip-checkout-title">Payment</span>
-      </div>
-      <div class="vip-checkout-shell">
-        <div class="vip-checkout-card">
-          <div class="vip-checkout-head">
-            <div class="vip-checkout-stat">
-              <span class="vip-checkout-stat-lbl">Offer Timer</span>
-              <span class="vip-checkout-stat-val" id="vip-checkout-timer">
-                02:00:00
-              </span>
-            </div>
-            <div class="vip-checkout-stat vip-checkout-stat-amt">
-              <span class="vip-checkout-stat-lbl">Amount</span>
-              <span class="vip-checkout-stat-val" id="vip-checkout-amount">
-                ₹1,499
-              </span>
-            </div>
-          </div>
-          <div class="vip-checkout-qr">
-            <div class="vip-checkout-qr-frame">
-              <img id="vip-qr-img" src="" alt="Scan to pay" />
-            </div>
-            <p class="vip-checkout-qr-hint">Scan With Your Payment App</p>
-          </div>
-          <div class="vip-checkout-detail-row">
-            <span class="vip-detail-lbl">Order ID</span>
-            <span class="vip-detail-val" id="vip-order-id">—</span>
-          </div>
-          <div class="vip-checkout-payto">
-            <div class="vip-checkout-payto-hdr">
-              <span class="vip-detail-lbl" id="vip-address-lbl">UPI ID</span>
-              <span
-                class="vip-network-lbl"
-                id="vip-network-lbl"
-                style="display: none"
-              >
-                TRC20
-              </span>
-            </div>
-            <div class="vip-checkout-payto-row">
-              <span class="vip-address-val" id="vip-address-val">—</span>
-              <button
-                type="button"
-                class="vip-copy-btn"
-                id="btn-vip-copy"
-                aria-label="Copy"
-              >
-                Copy
-              </button>
-            </div>
-            <button
-              type="button"
-              id="vip-upi-hint"
-              class="vip-upi-hint"
-              style="display: none"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="12"
-                height="12"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-              >
-                <path
-                  d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"
-                />
-              </svg>
-              Change UPI ID
-            </button>
-          </div>
-          <div class="vip-checkout-foot">
-            <button class="vip-checkout-btn" id="btn-vip-confirm">
-              Confirm Payment
-            </button>
-          </div>
-        </div>
-        <div class="vip-pay-foot">
-          <span class="vip-pay-trust">
-            <span class="status-dot"></span>
-            Safe payments
-          </span>
-          <span class="vip-pay-trust-sep">·</span>
-          <span>Secure checkout</span>
-        </div>
-      </div>
-    </div>
-    <div class="view view-vip-submit">
-      <div class="vip-header">
-        <button class="back-btn" id="btn-vip-submit-back" aria-label="Back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-        </button>
-        <span class="vip-header-label">Submit Proof</span>
-      </div>
-      <div class="vip-checkout-shell">
-        <div class="vip-checkout-card">
-          <div class="vip-proof-section">
-            <label class="vip-proof-lbl" for="vip-utr-input">
-              UTR / Transaction Hash
-            </label>
-            <input
-              type="text"
-              id="vip-utr-input"
-              class="vip-proof-input"
-              placeholder="12-digit UTR or TxHash"
-              autocomplete="off"
-              spellcheck="false"
-            />
-          </div>
-          <div class="vip-proof-section">
-            <label class="vip-proof-lbl">Payment Screenshot</label>
-            <div class="vip-file-zone" id="vip-file-zone">
-              <input type="file" id="vip-file-input" accept="image/*" hidden />
-              <div class="vip-file-placeholder" id="vip-file-placeholder">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                  <polyline points="21 15 16 10 5 21"></polyline>
-                </svg>
-                <span>Tap to Upload</span>
-              </div>
-              <img
-                id="vip-file-preview"
-                class="vip-file-preview"
-                src=""
-                alt="Payment screenshot preview"
-              />
-              <button
-                type="button"
-                class="vip-file-remove"
-                id="btn-vip-file-remove"
-                aria-label="Remove screenshot"
-              >
-                &times;
-              </button>
-            </div>
-          </div>
-          <div class="vip-checkout-foot">
-            <button class="vip-checkout-btn" id="btn-vip-submit-proof">
-              Submit Proof
-            </button>
-          </div>
-        </div>
-        <div class="vip-pay-foot">
-          <span class="vip-pay-trust">
-            <span class="status-dot"></span>
-            Safe payments
-          </span>
-          <span class="vip-pay-trust-sep">·</span>
-          <span>Secure checkout</span>
-        </div>
-      </div>
-    </div>
-    <div class="view view-vip-history">
-      <div class="vip-header">
-        <button class="back-btn" id="btn-vip-history-back" aria-label="Back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-        </button>
-        <span class="vip-header-label">Order History</span>
-      </div>
-      <div class="vip-history-shell">
-        <div class="vip-history-card">
-          <div class="vip-history-list" id="vip-history-list"></div>
-        </div>
-        <div class="vip-pay-foot">
-          <span class="vip-pay-trust">
-            <span class="status-dot"></span>
-            Safe payments
-          </span>
-          <span class="vip-pay-trust-sep">·</span>
-          <span>Secure checkout</span>
-        </div>
+      <div class="spoofer-card" style="margin-top: 10px">
+        <label class="spoofer-label">Withdrawal Requests</label>
+        <div id="spoof-withdrawals-list"></div>
       </div>
     </div>
     <div class="view view-settings">
@@ -9715,239 +9421,93 @@ if (!customElements.get("prediction-panel"))
   </div>
 </div>
 `;
-          this._logo = n.querySelector(".logo");
-          this._panel = n.querySelector(".panel");
-          this._header = n.querySelector(".panel-header");
-          this._closeBtn = n.querySelector(".close-btn");
-          this._gateView = n.querySelector(".gate-view");
-          this._body = n.querySelector(".panel-body");
-          this._gateBal = n.querySelector("#gate-bal");
-          Do(n);
-          Zn(this, Xn("logo"));
-          we(this, this._logo, {
-            onTap: () => this._showPanel(),
-          });
-          Se(this, this._header, this._panel);
-          this._closeBtn.addEventListener("pointerdown", (g) => g.stopPropagation());
-          this._closeBtn.addEventListener("click", () => {
-            this._lastActiveTime = Date.now();
-            if (this._gateView.style.display === "block") {
-              this._activeSection = "menu";
-              this._gateView.style.display = "none";
-              this._body.style.display = "block";
-              this._setView("menu");
-            }
-            this._showLogo();
-          });
-          n.querySelector(".btn-deposit")?.addEventListener("click", () => (location.href = Ro));
-          n.querySelector(".btn-telegram")?.addEventListener("click", () =>
-            window.open("https://telegram.dog/predictwingoo", "_blank")
-          );
-          n.querySelector("#btn-pro")?.addEventListener("click", () => {
-            this._lastActiveTime = Date.now();
-            let bal = this._getLiveBalance();
-            if (bal < 100) {
-              this._activeSection = "menu";
-              if (this._gateBal) this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
-              this._body.style.display = "none";
-              this._gateView.style.display = "block";
-            } else {
-              this._activeSection = "pro";
-              this._gateView.style.display = "none";
-              this._body.style.display = "block";
-              this._setView("pro");
-              ce(-1);
-              tn("loading");
-              Te();
-            }
-          });
-          n.querySelector("#btn-status-tg")?.addEventListener("click", () => this._setView("tg"));
-          n.querySelector("#btn-vip")?.addEventListener("click", () => this._setView("vip"));
-          n.querySelector("#btn-mine")?.addEventListener("click", () => {
-            this._activeSection = "mining";
-            this._setView("mining");
-            this._checkBalance();
-          });
-          let backToMenu = () => {
-            this._lastActiveTime = Date.now();
+        this._logo = n.querySelector(".logo");
+        this._panel = n.querySelector(".panel");
+        this._header = n.querySelector(".panel-header");
+        this._closeBtn = n.querySelector(".close-btn");
+        this._gateView = n.querySelector(".gate-view");
+        this._body = n.querySelector(".panel-body");
+        this._gateBal = n.querySelector("#gate-bal");
+        Do(n);
+        Zn(this, Xn("logo"));
+        we(this, this._logo, {
+          onTap: () => this._showPanel(),
+        });
+        Se(this, this._header, this._panel);
+        this._closeBtn.addEventListener("pointerdown", (g) => g.stopPropagation());
+        this._closeBtn.addEventListener("click", () => {
+          this._lastActiveTime = Date.now();
+          if (this._gateView.style.display === "block") {
             this._activeSection = "menu";
             this._gateView.style.display = "none";
             this._body.style.display = "block";
             this._setView("menu");
-          };
-          n.querySelector("#btn-tg-back")?.addEventListener("click", backToMenu);
-          n.querySelector("#btn-vip-back")?.addEventListener("click", backToMenu);
-          n.querySelector("#btn-pro-back")?.addEventListener("click", backToMenu);
-          n.querySelector("#btn-gate-back")?.addEventListener("click", backToMenu);
-          n.querySelector("#btn-vip-pay-back")?.addEventListener("click", () => this._setView("vip"));
-          n.querySelector("#btn-tg-join")?.addEventListener("click", () =>
-            window.open("https://telegram.dog/predictwingoo", "_blank")
-          );
-          n.querySelector("#btn-vip-checkout")?.addEventListener("click", () => this._setView("vip-pay"));
-          n.querySelector("#btn-pay-upi")?.addEventListener("click", () => this._startVipCheckout("upi"));
-          n.querySelector("#btn-pay-crypto")?.addEventListener("click", () => this._startVipCheckout("crypto"));
-          n.querySelector("#btn-vip-checkout-back")?.addEventListener("click", () => {
-            if ((this._setView("vip-pay"), vn)) clearInterval(vn);
-          }),
-          n.querySelector("#btn-vip-confirm").addEventListener("click", () => {
-            (this._setView("vip-submit"),
-              (n.querySelector("#vip-utr-input").value = ""),
-              (n.querySelector("#vip-file-input").value = ""),
-              (n.querySelector("#vip-file-preview").style.display = "none"),
-              (n.querySelector("#vip-file-placeholder").style.display = "flex"),
-              (n.querySelector("#btn-vip-file-remove").style.display = "none"));
-          }),
-          n.querySelector("#btn-vip-submit-back").addEventListener("click", () => {
-            this._setView("vip-checkout");
-          }),
-          n.querySelector("#btn-vip-history").addEventListener("click", () => {
-            (this._renderVipHistory(), this._setView("vip-history"), this._syncVipHistory());
-          }),
-          n.querySelector("#btn-vip-history-back").addEventListener("click", () => {
-            this._setView("vip-pay");
-          }),
-          n.querySelector("#vip-file-zone").addEventListener("click", () => {
-            n.querySelector("#vip-file-input").click();
-          }),
-          n.querySelector("#vip-file-input").addEventListener("change", (g) => {
-            let M = g.target.files[0];
-            if (M) {
-              let W = new FileReader();
-              ((W.onload = (L) => {
-                ((n.querySelector("#vip-file-preview").src = L.target.result),
-                  (n.querySelector("#vip-file-preview").style.display = "block"),
-                  (n.querySelector("#vip-file-placeholder").style.display = "none"),
-                  (n.querySelector("#btn-vip-file-remove").style.display = "flex"));
-              }),
-                W.readAsDataURL(M));
-            }
-          }),
-          n.querySelector("#btn-vip-file-remove").addEventListener("click", (g) => {
-            (g.preventDefault(),
-              g.stopPropagation(),
-              (n.querySelector("#vip-file-input").value = ""));
-            let M = n.querySelector("#vip-file-preview");
-            ((M.src = ""),
-              (M.style.display = "none"),
-              (n.querySelector("#vip-file-placeholder").style.display = "flex"),
-              (n.querySelector("#btn-vip-file-remove").style.display = "none"));
-          }),
-          n.querySelector("#btn-vip-submit-proof").addEventListener("click", () => {
-            let g = n.querySelector("#vip-utr-input"),
-              M = n.querySelector("#vip-file-input"),
-              W = g.value.trim();
-            if (!W) {
-              alert("Please enter your UTR / Transaction Hash");
-              return;
-            }
-            let L = n.querySelector("#btn-vip-submit-proof");
-            ((L.textContent = "Uploading..."), (L.disabled = !0));
-            let q = new FormData();
-            (q.append("utr", W),
-              q.append("type", this._checkoutType || "upi"),
-              q.append(
-                "amount",
-                this._checkoutType === "crypto"
-                  ? K.cryptoAmountUsd.toFixed(2) + " USDT"
-                  : "₹" + K.amount,
-              ));
-            let y = "Unknown";
-            try {
-              y = sessionStorage.getItem("wg_user") || localStorage.getItem("wg_user") || "Unknown";
-            } catch (a) {}
-            if ((q.append("user", y), M.files[0])) q.append("screenshot", M.files[0]);
-            fetch("/ar-api/vip-submit", {
-              method: "POST",
-              body: q,
-            })
-              .then((a) => a.json())
-              .then((a) => {
-                if (a.ok) {
-                  let u = [];
-                  try {
-                    u = JSON.parse(localStorage.getItem("wg_vip_orders") || "[]");
-                  } catch (v) {}
-                  (u.unshift({
-                    type: this._checkoutType || "upi",
-                    utr: W,
-                    date: Date.now(),
-                    status: "Pending",
-                  }),
-                    localStorage.setItem("wg_vip_orders", JSON.stringify(u)),
-                    (L.textContent = "Submitted ✓"),
-                    (L.style.cssText = "background: #10b981; color: #fff; border-color: #10b981;"),
-                    setTimeout(() => {
-                      ((L.textContent = "Submit Proof"),
-                        (L.style.cssText = ""),
-                        (L.disabled = !1),
-                        this._renderVipHistory(),
-                        this._setView("vip-history"));
-                    }, 1500));
-                } else
-                  (alert(a.error || "Failed to submit proof. Please try again."),
-                    (L.textContent = "Submit Proof"),
-                    (L.disabled = !1));
-              })
-              .catch((a) => {
-                (console.error(a),
-                  alert("Connection error. Please try again."),
-                  (L.textContent = "Submit Proof"),
-                  (L.disabled = !1));
-              });
-          }),
-          n.querySelector("#btn-vip-copy").addEventListener("click", () => {
-            let g = n.querySelector("#vip-address-val").textContent;
-            ((W) => {
-              let L = document.createElement("textarea");
-              ((L.value = W),
-                (L.style.position = "fixed"),
-                (L.style.opacity = "0"),
-                (L.style.left = "-9999px"),
-                n.appendChild(L),
-                L.focus(),
-                L.select(),
-                L.setSelectionRange(0, 99999));
-              let q = !1;
-              try {
-                q = document.execCommand("copy");
-              } catch (y) {}
-              if ((n.removeChild(L), q)) return Promise.resolve();
-              if (navigator.clipboard) return navigator.clipboard.writeText(W);
-              return Promise.reject();
-            })(g)
-              .then(() => {
-                let W = n.querySelector("#btn-vip-copy"),
-                  L = W.textContent;
-                ((W.textContent = "Copied!"),
-                  W.classList.add("copied"),
-                  setTimeout(() => {
-                    ((W.textContent = L), W.classList.remove("copied"));
-                  }, 2000));
-              })
-              .catch((W) => {
-                console.error("Copy failed:", W);
-              });
-          }),
-          n.querySelector("#vip-upi-hint").addEventListener("click", () => {
-            Kn = (Kn + 1) % K.upi.length;
-            let g = K.upi[Kn];
-            n.querySelector("#vip-address-val").textContent = g;
-            let M = encodeURIComponent(g),
-              W = encodeURIComponent("VIP"),
-              L = encodeURIComponent(K.amount),
-              q = `upi://pay?pa=${M}&pn=${W}&am=${L}&cu=INR`,
-              y = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(q)}`;
-            n.querySelector("#vip-qr-img").src = y;
-          }),
-          n
-            .querySelector("#btn-settings-back")
-            .addEventListener("click", () => this._setView("menu")),
-          n.querySelector("#btn-spoof-reset").addEventListener("click", () => {
-            (window.__wgSpoofer.saveSetting("accuracy", 70),
-              window.__wgSpoofer.saveSetting("balanceOffset", 5000),
-              window.__wgSpoofer.resetBalance(),
-              this._syncSettings());
-          });
+          }
+          this._showLogo();
+        });
+        n.querySelector(".btn-deposit")?.addEventListener("click", () => (location.href = Ro));
+        n.querySelector(".btn-telegram")?.addEventListener("click", () =>
+          window.open("https://telegram.dog/predictwingoo", "_blank")
+        );
+        n.querySelector("#btn-pro")?.addEventListener("click", () => {
+          this._lastActiveTime = Date.now();
+          let bal = this._getLiveBalance();
+          if (bal < 100) {
+            this._activeSection = "menu";
+            if (this._gateBal) this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
+            this._body.style.display = "none";
+            this._gateView.style.display = "block";
+          } else {
+            this._activeSection = "pro";
+            this._gateView.style.display = "none";
+            this._body.style.display = "block";
+            this._setView("pro");
+            ce(-1);
+            tn("loading");
+            Te();
+          }
+        });
+        n.querySelector("#btn-pro")?.addEventListener("click", () => {
+          this._lastActiveTime = Date.now();
+          let bal = this._getLiveBalance();
+          if (bal < 100) {
+            this._activeSection = "menu";
+            if (this._gateBal) this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
+            this._body.style.display = "none";
+            this._gateView.style.display = "block";
+          } else {
+            this._activeSection = "pro";
+            this._gateView.style.display = "none";
+            this._body.style.display = "block";
+            this._setView("pro");
+            ce(-1);
+            tn("loading");
+            Te();
+          }
+        });
+        n.querySelector("#btn-vip")?.addEventListener("click", () => {
+          this._lastActiveTime = Date.now();
+          this._setView("vip");
+        });
+        n.querySelector("#btn-vip-join")?.addEventListener("click", () => {
+          window.open("https://telegram.dog/predictwingoo", "_blank");
+        });
+        let backToMenu = () => {
+          this._lastActiveTime = Date.now();
+          this._activeSection = "menu";
+          this._gateView.style.display = "none";
+          this._body.style.display = "block";
+          this._setView("menu");
+        };
+        n.querySelector("#btn-vip-back")?.addEventListener("click", backToMenu);
+        n.querySelector("#btn-pro-back")?.addEventListener("click", backToMenu);
+        n.querySelector("#btn-settings-back")?.addEventListener("click", backToMenu);
+        n.querySelector("#btn-spoof-reset")?.addEventListener("click", () => {
+          window.__wgSpoofer.saveSetting("accuracy", 70);
+          window.__wgSpoofer.saveSetting("balanceOffset", 5000);
+          window.__wgSpoofer.resetBalance();
+          this._syncSettings();
+        });
         let t = [],
           e = n.querySelector(".panel-title img");
         e.style.pointerEvents = "auto";
@@ -10025,7 +9585,7 @@ if (!customElements.get("prediction-panel"))
             let u = JSON.parse(localStorage.getItem("userInfo") || "{}");
             let b = Number(u?.amount ?? u?.balance);
             if (Number.isFinite(b)) n = b;
-          } catch (e) {}
+          } catch (e) { }
         }
         if (typeof n !== "number") n = 0;
 
@@ -10033,7 +9593,7 @@ if (!customElements.get("prediction-panel"))
           try {
             let t = JSON.parse(localStorage.getItem("wg_spoof_state"));
             if (t && t.balance !== null) n = t.balance;
-          } catch (t) {}
+          } catch (t) { }
         return n;
       }
       _checkBalance() {
@@ -10134,7 +9694,7 @@ if (!customElements.get("prediction-panel"))
                 W = `upi://pay?pa=${$}&pn=${g}&am=${M}&cu=INR`;
               if (
                 ((c = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(W)}`),
-                S.length > 1)
+                  S.length > 1)
               )
                 t.querySelector("#vip-upi-hint").style.display = "flex";
               else t.querySelector("#vip-upi-hint").style.display = "none";
@@ -10165,7 +9725,7 @@ if (!customElements.get("prediction-panel"))
         let e = [];
         try {
           e = JSON.parse(localStorage.getItem("wg_vip_orders") || "[]");
-        } catch (o) {}
+        } catch (o) { }
         if (e.length === 0) {
           t.innerHTML = `<div class="vip-history-empty">
   <svg
@@ -10222,7 +9782,7 @@ if (!customElements.get("prediction-panel"))
         let n = [];
         try {
           n = JSON.parse(localStorage.getItem("wg_vip_orders") || "[]");
-        } catch (e) {}
+        } catch (e) { }
         if (!n.length) return;
         let t = n.map((e) => e.utr).filter(Boolean);
         if (!t.length) return;
@@ -10248,7 +9808,7 @@ if (!customElements.get("prediction-panel"))
           }
           if (i)
             (localStorage.setItem("wg_vip_orders", JSON.stringify(n)), this._renderVipHistory());
-        } catch (e) {}
+        } catch (e) { }
       }
       _syncSettings() {
         if (!window.__wgSpoofer) return;
