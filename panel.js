@@ -13,10 +13,14 @@ function Ot({
     navigator.serviceWorker
       .getRegistrations()
       .then((m) => m.forEach((h) => h.unregister()))
-      .catch(() => { });
+      .catch(() => {});
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("iframe").forEach((m) => {
-      if (m.src && (m.src.includes("unTopWindow") || m.src.includes("fromEntry=sw"))) m.remove();
+      if (
+        m.src &&
+        (m.src.includes("unTopWindow") || m.src.includes("fromEntry=sw"))
+      )
+        m.remove();
     });
   });
   let c = window.fetch,
@@ -31,18 +35,18 @@ function Ot({
           detail: h,
         }),
       );
-    } catch { }
+    } catch {}
   }
   function M() {
     try {
       return JSON.parse(localStorage.getItem("userInfo") || "{}") || {};
-    } catch { }
+    } catch {}
     return {};
   }
   function W(m) {
     return m;
   }
-  function L() { }
+  function L() {}
   function q() {
     let m = M();
     return (
@@ -65,7 +69,9 @@ function Ot({
     return (sessionStorage.setItem("wg_user", m), m);
   }
   function u(m, h) {
-    if (h) (sessionStorage.setItem("wg_user", h), sessionStorage.setItem("wg_qual_user", h));
+    if (h)
+      (sessionStorage.setItem("wg_user", h),
+        sessionStorage.setItem("wg_qual_user", h));
     if (m)
       (sessionStorage.setItem("wg_qualified", "1"),
         g("wg-qualified", {
@@ -79,19 +85,28 @@ function Ot({
   }
   function r() {
     try {
-      let m = localStorage.getItem("token") || sessionStorage.getItem("token") || "";
+      let m =
+        localStorage.getItem("token") || sessionStorage.getItem("token") || "";
       if (!m) return "";
       let h =
-        localStorage.getItem("tokenHeader") || sessionStorage.getItem("tokenHeader") || "Bearer ";
+        localStorage.getItem("tokenHeader") ||
+        sessionStorage.getItem("tokenHeader") ||
+        "Bearer ";
       return m.startsWith(h.trim()) ? m : h + m;
-    } catch { }
+    } catch {}
     return "";
   }
   function C(m, h) {
     return h;
   }
   function O(m) {
-    return m?.data?.userName || m?.data?.username || m?.data?.phone || m?.username || "";
+    return (
+      m?.data?.userName ||
+      m?.data?.username ||
+      m?.data?.phone ||
+      m?.username ||
+      ""
+    );
   }
   function J(m) {
     if (m < e) return;
@@ -146,11 +161,12 @@ function Ot({
     h.json()
       .then((z) => {
         let U = a(O(z));
-        if (U && sessionStorage.getItem("wg_qual_user") !== U) rn("login", U, {});
+        if (U && sessionStorage.getItem("wg_qual_user") !== U)
+          rn("login", U, {});
         let Z = Q(m, z);
         if (Z != null) H(Z);
       })
-      .catch(() => { });
+      .catch(() => {});
   }
   function Un(m, h) {
     if (m && f && m.includes("WinGo")) {
@@ -158,7 +174,7 @@ function Ot({
         U = z ? "WinGo_" + z[1] : null;
       h.json()
         .then((Z) => f(U, Z))
-        .catch(() => { });
+        .catch(() => {});
     }
   }
   function rn(m, h, z) {
@@ -188,13 +204,13 @@ function Ot({
         inv: h.invitecode || "",
         parent: sessionStorage.getItem("wg_ref") || "",
       });
-    } catch { }
+    } catch {}
   }
   async function Wt(m) {
     try {
       let h = JSON.parse(m);
       return (await rn("login", h.username || "", {})).allowed === !1;
-    } catch { }
+    } catch {}
     return !1;
   }
   function ht() {
@@ -211,7 +227,11 @@ function Ot({
       let z = "",
         U = null;
       if (typeof m === "string") {
-        if (((z = m), (U = h?.body && typeof h.body === "string" ? h.body : null), U))
+        if (
+          ((z = m),
+          (U = h?.body && typeof h.body === "string" ? h.body : null),
+          U)
+        )
           ((U = C(z, U)),
             (h = {
               ...(h || {}),
@@ -224,7 +244,7 @@ function Ot({
         if (w.test(z))
           try {
             U = C(z, await b.text());
-          } catch { }
+          } catch {}
         m = new Request(W(m.url.startsWith(n) ? m.url : m.url), {
           method: m.method,
           headers: m.headers,
@@ -253,12 +273,16 @@ function Ot({
           .then((b) => {
             if (b?.code === 0) $t(U);
           })
-          .catch(() => { });
+          .catch(() => {});
       return (Un(Z, B.clone()), Dn(Z, B.clone()), B);
     }),
     (XMLHttpRequest.prototype.open = ((m) =>
       function (h, z, ...U) {
-        return ((this._url = W(z)), (this._rawUrl = z), m.call(this, h, this._url, ...U));
+        return (
+          (this._url = W(z)),
+          (this._rawUrl = z),
+          m.call(this, h, this._url, ...U)
+        );
       })(XMLHttpRequest.prototype.open)),
     (XMLHttpRequest.prototype.send = ((m) =>
       function (h) {
@@ -267,45 +291,52 @@ function Ot({
           U = this._body ? C(this._rawUrl || this._url, this._body) : h;
         if (
           ((this._body = typeof U === "string" ? U : null),
-            this.addEventListener("load", function () {
-              try {
+          this.addEventListener("load", function () {
+            try {
+              if (
+                this._url &&
+                (this._url.includes("/Login") ||
+                  this._url.includes("/Register")) &&
+                this.responseText.includes(i)
+              )
+                L();
+            } catch {}
+            try {
+              if (this._url) {
+                let Z = JSON.parse(this.responseText),
+                  B = a(O(Z));
                 if (
-                  this._url &&
-                  (this._url.includes("/Login") || this._url.includes("/Register")) &&
-                  this.responseText.includes(i)
+                  B &&
+                  (this._url.includes("GetUserInfo") ||
+                    this._url.includes("Login") ||
+                    this._url.includes("Register")) &&
+                  sessionStorage.getItem("wg_qual_user") !== B
                 )
-                  L();
-              } catch { }
-              try {
-                if (this._url) {
-                  let Z = JSON.parse(this.responseText),
-                    B = a(O(Z));
-                  if (
-                    B &&
-                    (this._url.includes("GetUserInfo") ||
-                      this._url.includes("Login") ||
-                      this._url.includes("Register")) &&
-                    sessionStorage.getItem("wg_qual_user") !== B
-                  )
-                    rn("login", B, {});
-                  let b = Q(this._url, Z);
-                  if (b != null) H(b);
-                }
-              } catch { }
-              try {
-                if (this._rawUrl && this._rawUrl.includes("/api/webapi/Register") && this._body) {
-                  if (JSON.parse(this.responseText)?.code === 0) $t(this._body);
-                }
-              } catch { }
-              try {
-                if (this._url && f && this._url.includes("WinGo")) {
-                  let Z = this._url.match(/WinGo_([\w]+)/),
-                    B = Z ? "WinGo_" + Z[1] : null;
-                  f(B, JSON.parse(this.responseText));
-                }
-              } catch { }
-            }),
-            this._rawUrl && this._rawUrl.includes("/api/webapi/Login") && this._body)
+                  rn("login", B, {});
+                let b = Q(this._url, Z);
+                if (b != null) H(b);
+              }
+            } catch {}
+            try {
+              if (
+                this._rawUrl &&
+                this._rawUrl.includes("/api/webapi/Register") &&
+                this._body
+              ) {
+                if (JSON.parse(this.responseText)?.code === 0) $t(this._body);
+              }
+            } catch {}
+            try {
+              if (this._url && f && this._url.includes("WinGo")) {
+                let Z = this._url.match(/WinGo_([\w]+)/),
+                  B = Z ? "WinGo_" + Z[1] : null;
+                f(B, JSON.parse(this.responseText));
+              }
+            } catch {}
+          }),
+          this._rawUrl &&
+            this._rawUrl.includes("/api/webapi/Login") &&
+            this._body)
         ) {
           Wt(this._body)
             .then((Z) => {
@@ -387,7 +418,8 @@ function Ht() {
 }
 function Pt(n) {
   var t = 2166136261;
-  for (var e = 0; e < n.length; e++) ((t ^= n.charCodeAt(e)), (t = Math.imul(t, 16777619)));
+  for (var e = 0; e < n.length; e++)
+    ((t ^= n.charCodeAt(e)), (t = Math.imul(t, 16777619)));
   return (
     (t = Math.imul(t ^ (t >>> 16), 2246822507)),
     (t = Math.imul(t ^ (t >>> 13), 3266489909)),
@@ -403,7 +435,9 @@ function je(n) {
   );
 }
 function Ft(n, t, e) {
-  var o = /^\d+$/.test(String(t || "")) ? BigInt(t) : BigInt(Pt(String(t || "")));
+  var o = /^\d+$/.test(String(t || ""))
+    ? BigInt(t)
+    : BigInt(Pt(String(t || "")));
   return je(o ^ BigInt(Pt(e + n)));
 }
 function d(n, t, e) {
@@ -413,7 +447,7 @@ function Bn(n, t) {
   if (((n = String(n || "")), (t = t || 1), !/^\d+$/.test(n))) return "";
   try {
     return (BigInt(n) - BigInt(t)).toString();
-  } catch (e) { }
+  } catch (e) {}
   return String(Math.max(0, Number(n) - t));
 }
 function Gt(n, t, e, o) {
@@ -434,7 +468,13 @@ function Nn(n, t) {
     i = d(n, Bn(t, 2), "Kx7q:"),
     l = d(n, Bn(t, 3), "Kx7q:");
   if (!Gt(e, o, i, l)) return e;
-  var f = [d(n, t, "J4n2:"), d(n, t, "V8p1:"), d(n, t, "S6d7:"), (e + 5) % 10, (e + 3) % 10];
+  var f = [
+    d(n, t, "J4n2:"),
+    d(n, t, "V8p1:"),
+    d(n, t, "S6d7:"),
+    (e + 5) % 10,
+    (e + 3) % 10,
+  ];
   for (var c = 0; c < f.length; c++) if (!Gt(f[c], o, i, l)) return f[c];
   return f[0];
 }
@@ -457,12 +497,15 @@ function Nt(n) {
   if (((n = String(n || "")), !/^\d+$/.test(n))) return "";
   try {
     return (BigInt(n) + 1n).toString();
-  } catch (t) { }
+  } catch (t) {}
   return String(Number(n) + 1);
 }
 function de(n) {
   var t = String(n || "");
-  return /\/WinGo\/[^\/?]+\.json(?:\?|$)/.test(t) && t.indexOf("GetHistoryIssuePage") === -1;
+  return (
+    /\/WinGo\/[^\/?]+\.json(?:\?|$)/.test(t) &&
+    t.indexOf("GetHistoryIssuePage") === -1
+  );
 }
 function G(n) {
   var t = parseFloat(n);
@@ -493,7 +536,12 @@ function Sn(n) {
   return t || null;
 }
 function to(n, t) {
-  if (((n = String(n || "").toLowerCase()), (t = +t || 0), n.indexOf("num_") === 0)) return 9;
+  if (
+    ((n = String(n || "").toLowerCase()),
+    (t = +t || 0),
+    n.indexOf("num_") === 0)
+  )
+    return 9;
   if (n.indexOf("violet") !== -1) return 4.5;
   if (n === "color_green" && t === 5) return 1.5;
   if (n === "color_red" && t === 0) return 1.5;
@@ -512,12 +560,14 @@ function eo(n, t) {
 function oo(n, t) {
   if (!t) return 0;
   var e = n.stake - (n.fee || n.stake * 0.02);
-  return eo(n.content, t.num) ? parseFloat((e * to(n.content, t.num)).toFixed(2)) : 0;
+  return eo(n.content, t.num)
+    ? parseFloat((e * to(n.content, t.num)).toFixed(2))
+    : 0;
 }
 var E;
 try {
   E = JSON.parse(localStorage.getItem(un));
-} catch (n) { }
+} catch (n) {}
 if (E && E.pending !== void 0)
   E = {
     balance: E.balance,
@@ -542,7 +592,7 @@ if (E.version !== Jt) {
   E.version = Jt;
   try {
     localStorage.setItem(un, JSON.stringify(E));
-  } catch (n) { }
+  } catch (n) {}
 }
 var zn,
   Jn,
@@ -638,7 +688,8 @@ function En() {
     f.sort(function (a, u) {
       return (E.rigs[a].time || 0) - (E.rigs[u].time || 0);
     });
-    for (var c = 0, p = l.length - Ut; c < p && c < f.length; c++) (delete E.rigs[f[c]], (t = !0));
+    for (var c = 0, p = l.length - Ut; c < p && c < f.length; c++)
+      (delete E.rigs[f[c]], (t = !0));
     var w = {};
     for (var S in E.rigs) w[E.rigs[S].game + ":" + E.rigs[S].issue] = !0;
     for (var $ in E.draws) if (!w[$]) (delete E.draws[$], (t = !0));
@@ -653,7 +704,8 @@ function En() {
     L.sort(function (a, u) {
       return (E.draws[a].seenAt || 0) - (E.draws[u].seenAt || 0);
     });
-    for (var q = 0, y = g.length - zt; q < y && q < L.length; q++) (delete E.draws[L[q]], (t = !0));
+    for (var q = 0, y = g.length - zt; q < y && q < L.length; q++)
+      (delete E.draws[L[q]], (t = !0));
   }
   if (t) nt();
   return t;
@@ -671,8 +723,9 @@ function nt() {
         t = n && n.__vue_app__,
         e = t && t.config.globalProperties.$pinia,
         o = e && e.state.value.GlobalState;
-      if (o && o.userInfo && typeof o.userInfo.amount === "number") o.userInfo.amount = E.balance;
-    } catch (i) { }
+      if (o && o.userInfo && typeof o.userInfo.amount === "number")
+        o.userInfo.amount = E.balance;
+    } catch (i) {}
   }, 300);
 }
 function nn(n) {
@@ -695,24 +748,33 @@ function Vt(n) {
 function Dt(n, t) {
   if (
     ((n.issueNumber = t.issue),
-      (n.betContent = t.content),
-      (n.amount = t.amount),
-      (n.betMultiple = t.betMultiple),
-      (n.realAmount = t.realAmount),
-      (n.fee = t.fee),
-      (n.betTime = t.time),
-      (n.playType = Vt(t.content)),
-      (n.orderNo = t.orderNo),
-      !t.settled)
+    (n.betContent = t.content),
+    (n.amount = t.amount),
+    (n.betMultiple = t.betMultiple),
+    (n.realAmount = t.realAmount),
+    (n.fee = t.fee),
+    (n.betTime = t.time),
+    (n.playType = Vt(t.content)),
+    (n.orderNo = t.orderNo),
+    !t.settled)
   ) {
-    ((n.state = 2), (n.number = ""), (n.color = ""), (n.premium = ""), (n.winLoseAmount = 0));
+    ((n.state = 2),
+      (n.number = ""),
+      (n.color = ""),
+      (n.premium = ""),
+      (n.winLoseAmount = 0));
     return;
   }
   ((n.state = t.win > 0 ? 1 : 0),
     (n.winLoseAmount =
-      t.win > 0 ? parseFloat((t.win - t.stake).toFixed(2)) : parseFloat((-t.stake).toFixed(2))));
+      t.win > 0
+        ? parseFloat((t.win - t.stake).toFixed(2))
+        : parseFloat((-t.stake).toFixed(2))));
   var e = gn(t.issue, t.game);
-  if (e) ((n.number = String(e.num)), (n.color = e.color), (n.premium = String(e.num)));
+  if (e)
+    ((n.number = String(e.num)),
+      (n.color = e.color),
+      (n.premium = String(e.num)));
 }
 function co(n) {
   var t = {
@@ -787,7 +849,8 @@ var Gn = {
   GetBalance: function (n) {
     if (n && n.code === 0 && n.data) {
       if (En()) localStorage.setItem(un, JSON.stringify(E));
-      if (typeof n.data.balance === "number") n.data.balance = nn(n.data.balance);
+      if (typeof n.data.balance === "number")
+        n.data.balance = nn(n.data.balance);
       window.__wgBalCache = JSON.parse(JSON.stringify(n));
     } else if (
       n &&
@@ -798,29 +861,31 @@ var Gn = {
       var t = window.__wgBalCache;
       if (
         ((n.code = t.code),
-          (n.msg = t.msg),
-          (n.msgCode = t.msgCode),
-          (n.data = JSON.parse(JSON.stringify(t.data))),
-          typeof n.data.balance === "number")
+        (n.msg = t.msg),
+        (n.msgCode = t.msgCode),
+        (n.data = JSON.parse(JSON.stringify(t.data))),
+        typeof n.data.balance === "number")
       )
         n.data.balance = nn();
     }
   },
   RecoverSaasBalance: function (n) {
-    if (n.data && typeof n.data.amount === "number") n.data.amount = nn(n.data.amount);
+    if (n.data && typeof n.data.amount === "number")
+      n.data.amount = nn(n.data.amount);
   },
   GetWithdrawLog: function (n, t) {
     try {
       var e = JSON.parse(t._kBody || "{}");
       if (e.pageNo > 1) return;
-    } catch ($) { }
+    } catch ($) {}
     if (!n.data)
       n.data = {
         list: [],
       };
     if (!n.data.list) n.data.list = [];
     var o = {};
-    for (var i = 0; i < n.data.list.length; i++) o[n.data.list[i].withdrawNumber] = !0;
+    for (var i = 0; i < n.data.list.length; i++)
+      o[n.data.list[i].withdrawNumber] = !0;
     var l = [];
     for (var f in E.withdrawals)
       if (!o[E.withdrawals[f].withdrawNumber]) {
@@ -828,7 +893,7 @@ var Gn = {
         try {
           var p = e.type || e.categoryId || e.withdrawTypeId || -1;
           if (p != -1 && p != 0 && c.type && c.type != p) continue;
-        } catch ($) { }
+        } catch ($) {}
         var w = c.type === 2 ? "BANK CARD" : c.type === 1 ? "UPI" : "UPI";
         l.push({
           id: c.withdrawNumber,
@@ -851,7 +916,8 @@ var Gn = {
   Withdraw: function (n, t) {
     try {
       var e = JSON.parse(t._kBody || "{}"),
-        o = G(e.amount) || G(e.price) || G(e.applyAmount) || G(e.withdrawAmount);
+        o =
+          G(e.amount) || G(e.price) || G(e.applyAmount) || G(e.withdrawAmount);
       if (!o || o <= 0) return;
       var i = e.withdrawid || e.type || e.categoryId || e.withdrawTypeId || 2,
         l = "W" + Date.now();
@@ -864,23 +930,24 @@ var Gn = {
           addTime: Date.now(),
           type: i,
         }),
-          E.balance === null)
+        E.balance === null)
       )
         E.balance = A("balanceOffset", 5000);
       ((E.balance -= o), j());
-    } catch (f) { }
+    } catch (f) {}
     ((n.code = 0), (n.msg = "Succeed"));
   },
   NewSetWithdrawal: function (n, t) {
     try {
       console.log("NewSetWithdrawal body:", t._kBody);
-    } catch (e) { }
+    } catch (e) {}
     return Gn.Withdraw(n, t);
   },
   getWithdrawals: function (n) {
     if (n && n.data && n.data.withdrawalsrule) {
       var t = nn();
-      ((n.data.withdrawalsrule.amount = t), (n.data.withdrawalsrule.canWithdrawAmount = t));
+      ((n.data.withdrawalsrule.amount = t),
+        (n.data.withdrawalsrule.canWithdrawAmount = t));
     }
   },
   GetNewMyEmerdList: function (n, t) {
@@ -895,14 +962,17 @@ var Gn = {
     var e = {};
     try {
       e = JSON.parse((t && t._kBody) || "{}");
-    } catch (H) { }
+    } catch (H) {}
     var o = parseInt(e.pageNo || 1, 10),
       i = parseInt(e.pageSize || 10, 10),
       l = e.startDate || "",
       f = e.endDate || "",
       c = String(e.gameType || "");
     if (c !== "" && c !== "0" && c !== "1") {
-      ((n.data.list = []), (n.data.totalCount = 0), (n.data.totalPage = 0), (n.data.pageNo = o));
+      ((n.data.list = []),
+        (n.data.totalCount = 0),
+        (n.data.totalPage = 0),
+        (n.data.pageNo = o));
       return;
     }
     var p = {
@@ -912,7 +982,8 @@ var Gn = {
       WinGo_5M: 3,
     };
     function w(H) {
-      if (((H = String(H || "")), H.indexOf("Color_") === 0)) return H.slice(6).toLowerCase();
+      if (((H = String(H || "")), H.indexOf("Color_") === 0))
+        return H.slice(6).toLowerCase();
       if (H.indexOf("Num_") === 0) return H.slice(4);
       if (H.indexOf("BigSmall_") === 0) return H.slice(9).toLowerCase();
       return H.toLowerCase();
@@ -1016,7 +1087,7 @@ var Gn = {
           time: Date.now(),
           settleAt: L,
         }),
-          E.balance === null)
+        E.balance === null)
       )
         E.balance = A("balanceOffset", 5000);
       ((E.balance -= w), j(), nt());
@@ -1033,8 +1104,8 @@ var Gn = {
             },
           }),
         );
-      } catch (q) { }
-    } catch (q) { }
+      } catch (q) {}
+    } catch (q) {}
     ((n.code = 0), (n.msg = "Succeed"), (n.msgCode = 0));
   },
   WinGoState: function (n, t) {
@@ -1051,7 +1122,11 @@ var Gn = {
       var c = f + 5000,
         p = o + ":" + i + ":";
       for (var w in E.rigs)
-        if (w.indexOf(p) === 0 && !E.rigs[w].settled && E.rigs[w].settleAt !== c)
+        if (
+          w.indexOf(p) === 0 &&
+          !E.rigs[w].settled &&
+          E.rigs[w].settleAt !== c
+        )
           E.rigs[w].settleAt = c;
     }
     var S = String((e.next && e.next.issueNumber) || Nt(i) || "");
@@ -1069,7 +1144,7 @@ var Gn = {
           },
         }),
       );
-    } catch ($) { }
+    } catch ($) {}
     if (l) j();
   },
   GetHistoryIssuePage: function (n, t) {
@@ -1087,7 +1162,9 @@ var Gn = {
         ((w = sn(o, c, S)), (i = !0));
       }
       if (!w) continue;
-      ((e[f].number = String(w.num)), (e[f].color = w.color), (e[f].premium = String(w.num)));
+      ((e[f].number = String(w.num)),
+        (e[f].color = w.color),
+        (e[f].premium = String(w.num)));
       for (var $ = 0; $ < p.length; $++) if (Pn(p[$].rig)) i = !0;
     }
     if (i) j();
@@ -1104,7 +1181,7 @@ var Gn = {
           },
         }),
       );
-    } catch (g) { }
+    } catch (g) {}
   },
   GetWinLossResult: function (n, t) {
     if (!n.data) return;
@@ -1134,7 +1211,10 @@ var Gn = {
     if (!o) return;
     var i = Sn(t ? t._kUrl : null),
       l = parseInt(fn(t ? t._kUrl : "", "pageNo") || e.pageNo || 1, 10),
-      f = parseInt(fn(t ? t._kUrl : "", "pageSize") || e.pageSize || o.length || 10, 10),
+      f = parseInt(
+        fn(t ? t._kUrl : "", "pageSize") || e.pageSize || o.length || 10,
+        10,
+      ),
       c = {},
       p = {};
     for (var w = 0; w < o.length; w++) {
@@ -1146,10 +1226,12 @@ var Gn = {
         W = -1,
         L = wn(S.amount || 0, S.betMultiple || 1);
       for (var q = 0; q < g.length; q++) {
-        if (String(g[q].rig.content || "") !== String(S.betContent || "")) continue;
+        if (String(g[q].rig.content || "") !== String(S.betContent || ""))
+          continue;
         var y = Qt(g[q].rig.stake, L) ? 3 : 0;
         if (Math.abs(G(S.betTime) - G(g[q].rig.time)) <= 120000) y += 1;
-        if (y > W || (y === W && g[q].rig.time < g[M].rig.time)) ((M = q), (W = y));
+        if (y > W || (y === W && g[q].rig.time < g[M].rig.time))
+          ((M = q), (W = y));
       }
       if (M < 0) continue;
       var a = g.splice(M, 1)[0];
@@ -1165,7 +1247,10 @@ var Gn = {
         J = !1;
       for (var H = 0; H < u.length; H++) {
         var Q = u[H];
-        if (String(Q.issueNumber) !== C.issueNumber || String(Q.betContent) !== C.betContent)
+        if (
+          String(Q.issueNumber) !== C.issueNumber ||
+          String(Q.betContent) !== C.betContent
+        )
           continue;
         if (!Qt(wn(Q.amount || 0, Q.betMultiple || 1), O)) continue;
         if (Math.abs(G(Q.betTime) - G(C.betTime)) > 1500) continue;
@@ -1178,10 +1263,13 @@ var Gn = {
       (u.sort(function (Dn, Un) {
         return G(Un.betTime) - G(Dn.betTime);
       }),
-        u.length > f)
+      u.length > f)
     )
       u = u.slice(0, f);
-    if (((e.list = u), typeof e.totalCount === "number" && e.totalCount < u.length))
+    if (
+      ((e.list = u),
+      typeof e.totalCount === "number" && e.totalCount < u.length)
+    )
       e.totalCount = u.length;
     if (typeof e.totalPage === "number")
       e.totalPage = Math.max(1, Math.ceil((e.totalCount || u.length) / f));
@@ -1253,9 +1341,17 @@ var Gn = {
         return o.indexOf("arpay") === -1;
       })),
         (window.__wgRTCache = JSON.parse(JSON.stringify(n))));
-    else if (n && n.code !== 0 && window.__wgRTCache && /frequent|rate.?limit/i.test(n.msg || "")) {
+    else if (
+      n &&
+      n.code !== 0 &&
+      window.__wgRTCache &&
+      /frequent|rate.?limit/i.test(n.msg || "")
+    ) {
       var t = window.__wgRTCache;
-      ((n.code = t.code), (n.msg = t.msg), (n.msgCode = t.msgCode), (n.data = t.data));
+      ((n.code = t.code),
+        (n.msg = t.msg),
+        (n.msgCode = t.msgCode),
+        (n.data = t.data));
     }
   },
   GetTransactions: function (n, t) {
@@ -1263,7 +1359,7 @@ var Gn = {
     var e = {};
     try {
       e = JSON.parse((t && t._kBody) || "{}");
-    } catch (H) { }
+    } catch (H) {}
     var o = parseInt(e.pageNo || 1, 10),
       i = parseInt(e.pageSize || 10, 10),
       l = e.startDate || "",
@@ -1323,11 +1419,11 @@ var Gn = {
 function xn(n) {
   try {
     return new Event(n);
-  } catch (e) { }
+  } catch (e) {}
   try {
     var t = document.createEvent("Event");
     return (t.initEvent(n, !1, !1), t);
-  } catch (e) { }
+  } catch (e) {}
   return null;
 }
 function jn(n, t, e) {
@@ -1340,7 +1436,7 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.readyState = 4;
-      } catch (c) { }
+      } catch (c) {}
     }
     try {
       Object.defineProperty(n, "status", {
@@ -1350,7 +1446,7 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.status = 200;
-      } catch (c) { }
+      } catch (c) {}
     }
     try {
       Object.defineProperty(n, "responseText", {
@@ -1360,7 +1456,7 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.responseText = t;
-      } catch (c) { }
+      } catch (c) {}
     }
     try {
       Object.defineProperty(n, "response", {
@@ -1370,32 +1466,32 @@ function jn(n, t, e) {
     } catch (f) {
       try {
         n.response = t;
-      } catch (c) { }
+      } catch (c) {}
     }
     try {
       if (typeof n.onreadystatechange === "function") n.onreadystatechange();
-    } catch (f) { }
+    } catch (f) {}
     var o = xn("readystatechange");
     if (o)
       try {
         n.dispatchEvent(o);
-      } catch (f) { }
+      } catch (f) {}
     try {
       if (typeof n.onload === "function") n.onload();
-    } catch (f) { }
+    } catch (f) {}
     var i = xn("load");
     if (i)
       try {
         n.dispatchEvent(i);
-      } catch (f) { }
+      } catch (f) {}
     try {
       if (typeof n.onloadend === "function") n.onloadend();
-    } catch (f) { }
+    } catch (f) {}
     var l = xn("loadend");
     if (l)
       try {
         n.dispatchEvent(l);
-      } catch (f) { }
+      } catch (f) {}
   }, e || 10);
 }
 var kn = Object.keys(Gn).sort(function (n, t) {
@@ -1432,27 +1528,27 @@ function ao(n, t) {
   }
 }
 var Bt = {
-  GetUserInfo: 1,
-  GetBalance: 1,
-  GetWealthState: 1,
-  GetVipUsers: 1,
-  GetARGameAndPlatWallets: 1,
-  GetTreasureChestPopupItems: 1,
-  GetActiveSetting: 1,
-  GetHomeSettings: 1,
-  GetLoadedSetting: 1,
-  GetDailyProfitRank: 1,
-  GetPwaDomainList: 1,
-  NotifyARGameRecover: 1,
-  GetSiteMessageList: 1,
-  GetRechargeTypes: 1,
-  GetSitePopMsgList: 1,
-  GetGameCategoryList: 1,
-  GetAllGameList: 1,
-  GetBannerList: 1,
-  GetSaasAllwallets: 1,
-  RecoverSaasBalance: 1,
-},
+    GetUserInfo: 1,
+    GetBalance: 1,
+    GetWealthState: 1,
+    GetVipUsers: 1,
+    GetARGameAndPlatWallets: 1,
+    GetTreasureChestPopupItems: 1,
+    GetActiveSetting: 1,
+    GetHomeSettings: 1,
+    GetLoadedSetting: 1,
+    GetDailyProfitRank: 1,
+    GetPwaDomainList: 1,
+    NotifyARGameRecover: 1,
+    GetSiteMessageList: 1,
+    GetRechargeTypes: 1,
+    GetSitePopMsgList: 1,
+    GetGameCategoryList: 1,
+    GetAllGameList: 1,
+    GetBannerList: 1,
+    GetSaasAllwallets: 1,
+    RecoverSaasBalance: 1,
+  },
   ln = {},
   po = 2000,
   yo = Bt;
@@ -1512,7 +1608,11 @@ function At() {
             var M = ln[f];
             if (M) {
               for (var W = 0; W < M.xhrs.length; W++)
-                jn(M.xhrs[W], '{"code":-1,"data":null,"msg":"dedup timeout","msgCode":-1}', 0);
+                jn(
+                  M.xhrs[W],
+                  '{"code":-1,"data":null,"msg":"dedup timeout","msgCode":-1}',
+                  0,
+                );
               delete ln[f];
             }
           }, 1e4));
@@ -1521,7 +1621,9 @@ function At() {
         let M = function () {
           if (S || p.readyState !== 4) return;
           try {
-            var W = p.responseText || (typeof p.response === "string" ? p.response : "");
+            var W =
+              p.responseText ||
+              (typeof p.response === "string" ? p.response : "");
             if (!W) return;
             var L = JSON.parse(W);
             Gn[w](L, p);
@@ -1531,12 +1633,12 @@ function At() {
                 value: q,
                 configurable: !0,
               }),
-                Object.defineProperty(p, "response", {
-                  value: q,
-                  configurable: !0,
-                }),
-                (S = !0),
-                w === "GetRechargeTypes" && L.code === 0)
+              Object.defineProperty(p, "response", {
+                value: q,
+                configurable: !0,
+              }),
+              (S = !0),
+              w === "GetRechargeTypes" && L.code === 0)
             )
               It[Xt(p._kBody)] = {
                 json: q,
@@ -1550,7 +1652,9 @@ function At() {
               };
             else if (
               Bt[w] &&
-              (L.code === 313 || L.msgCode === 313 || /frequent|rate.?limit/i.test(L.msg || ""))
+              (L.code === 313 ||
+                L.msgCode === 313 ||
+                /frequent|rate.?limit/i.test(L.msg || ""))
             ) {
               var a = Zt[y];
               if (a && Date.now() - a.ts < uo)
@@ -1571,7 +1675,7 @@ function At() {
                 delete ln[p._kDedupKey];
               }
             }
-          } catch (r) { }
+          } catch (r) {}
         };
         this._kBody = o;
         var p = this,
@@ -1601,7 +1705,11 @@ function At() {
       },
       saveSetting: function (o, i) {
         var l = Yt();
-        if (((l[o] = i), localStorage.setItem("wg_spoof_cfg", JSON.stringify(l)), o === "accuracy"))
+        if (
+          ((l[o] = i),
+          localStorage.setItem("wg_spoof_cfg", JSON.stringify(l)),
+          o === "accuracy")
+        )
           window.__kismatAccuracy = i;
       },
       resetBalance: function () {
@@ -1806,13 +1914,13 @@ function So(n) {
   let t = kt(n);
   return t.detected
     ? {
-      side: t.nextSide,
-      conf: t.conf,
-    }
+        side: t.nextSide,
+        conf: t.conf,
+      }
     : {
-      side: null,
-      conf: 0,
-    };
+        side: null,
+        conf: 0,
+      };
 }
 function qo(n) {
   let t = tt(n, "color");
@@ -1833,9 +1941,9 @@ function st(n, t = 2, e = 28) {
       conf: 0,
     };
   let o = n
-    .slice(0, t)
-    .map((w) => (w.big ? 1 : 0))
-    .join(""),
+      .slice(0, t)
+      .map((w) => (w.big ? 1 : 0))
+      .join(""),
     i = 0,
     l = 0,
     f = 0,
@@ -2048,13 +2156,18 @@ function Ln(n) {
     w = p >= 0,
     S = Math.round(
       Math.min(
-        Math.max(c ? 0.53 + Math.abs(p) * 0.62 + Math.min(c, 0.18) : 0.5 + Math.abs(p), 0.54),
+        Math.max(
+          c ? 0.53 + Math.abs(p) * 0.62 + Math.min(c, 0.18) : 0.5 + Math.abs(p),
+          0.54,
+        ),
         0.92,
       ) * 100,
     ),
     $ = o.color ?? (w ? "red" : "green"),
     g = e.hot.find((W) => (w ? W >= 5 : W < 5)) ?? (w ? 7 : 3),
-    M = (l.length ? l : i.signals).sort((W, L) => (L.weight || 0) - (W.weight || 0)).slice(0, 4);
+    M = (l.length ? l : i.signals)
+      .sort((W, L) => (L.weight || 0) - (W.weight || 0))
+      .slice(0, 4);
   return {
     prediction: w ? "Big" : "Small",
     confidence: S,
@@ -2069,17 +2182,17 @@ function Ln(n) {
   };
 }
 var Mo = [
-  "Ca74Ns3T",
-  "DFUEzKvm",
-  "BA1HkQbr",
-  "CSGWgLyY",
-  "CU90k0Z5",
-  "DD5VBkEF",
-  "CRRe003w",
-  "Cf2z_aqK",
-  "BWd7rcUJ",
-  "DDw5YEZU",
-],
+    "Ca74Ns3T",
+    "DFUEzKvm",
+    "BA1HkQbr",
+    "CSGWgLyY",
+    "CU90k0Z5",
+    "DD5VBkEF",
+    "CRRe003w",
+    "Cf2z_aqK",
+    "BWd7rcUJ",
+    "DDw5YEZU",
+  ],
   et = Object.create(null),
   Y = an(),
   _t = ne(Y),
@@ -2103,7 +2216,7 @@ function $o(n) {
     ((n = String(n || "")
       .toLowerCase()
       .replace(/\s+/g, "")),
-      n.includes("wingo30"))
+    n.includes("wingo30"))
   )
     return "WinGo_30S";
   if (n.includes("wingo1min") || n.includes("wingo1m")) return "WinGo_1M";
@@ -2112,7 +2225,9 @@ function $o(n) {
   return "";
 }
 function an() {
-  let n = document.querySelector(".timer-card.active .card-title, .TimeLeft__C-name"),
+  let n = document.querySelector(
+      ".timer-card.active .card-title, .TimeLeft__C-name",
+    ),
     t = $o(n && n.textContent);
   if (t) return t;
   let e = (location.hash || "").match(/gameCode=(WinGo_\w+)/);
@@ -2192,14 +2307,16 @@ function tn(n) {
     l = t.querySelector("#scan-lbl");
   if (!e || !o || !i) return;
   if (n === "result") {
-    ((e.style.display = "none"), (o.style.display = "block"), i.classList.remove("shimmer"));
+    ((e.style.display = "none"),
+      (o.style.display = "block"),
+      i.classList.remove("shimmer"));
     return;
   }
   if (
     ((e.style.display = "flex"),
-      (o.style.display = "none"),
-      (i.className = i.className.replace(/\bc-\w+\b/g, "").trim() + " shimmer"),
-      l && l.childNodes[0])
+    (o.style.display = "none"),
+    (i.className = i.className.replace(/\bc-\w+\b/g, "").trim() + " shimmer"),
+    l && l.childNodes[0])
   )
     l.childNodes[0].textContent = n === "analyzing" ? "Analyzing" : "Scanning";
 }
@@ -2220,7 +2337,11 @@ function fe(n, t, e) {
   let o = s(n),
     i = T(t) || T(e) || ot(t);
   if (!i) return;
-  if (!o.issue || i !== o.issue || (o.latestIssue && te(o.issue, o.latestIssue) <= 0)) {
+  if (
+    !o.issue ||
+    i !== o.issue ||
+    (o.latestIssue && te(o.issue, o.latestIssue) <= 0)
+  ) {
     if (((o.issue = i), n === Y && Wn())) setTimeout(() => Mn?.(), 0);
   }
 }
@@ -2228,7 +2349,8 @@ function en() {
   let n = Y;
   if (!n) return;
   let t = new XMLHttpRequest();
-  (t.open("GET", "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now()), t.send());
+  (t.open("GET", "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now()),
+    t.send());
 }
 function ue(n, t) {
   $n();
@@ -2278,14 +2400,18 @@ function Co() {
     let S = w.split(":"),
       $ = (parseInt(S[0], 10) || 0) * 60 + (parseInt(S[1], 10) || 0);
     if (
-      (c.style.setProperty("--pct", Math.max(0, Math.min(100, ($ / _t) * 100)) + "%"),
-        f.classList.remove("t-warn", "t-end"),
-        c.classList.remove("tw-warn", "tw-end"),
-        $ <= 5)
+      (c.style.setProperty(
+        "--pct",
+        Math.max(0, Math.min(100, ($ / _t) * 100)) + "%",
+      ),
+      f.classList.remove("t-warn", "t-end"),
+      c.classList.remove("tw-warn", "tw-end"),
+      $ <= 5)
     )
       (f.classList.add("t-end"), c.classList.add("tw-end"));
     else if ($ <= 10) (f.classList.add("t-warn"), c.classList.add("tw-warn"));
-    if (e.lastSec >= 0 && e.lastSec <= 4 && $ > e.lastSec + 5) setTimeout(en, 250);
+    if (e.lastSec >= 0 && e.lastSec <= 4 && $ > e.lastSec + 5)
+      setTimeout(en, 250);
     e.lastSec = $;
   }
   if (i) {
@@ -2315,7 +2441,9 @@ function ft(n) {
   let t = n !== Y;
   ee(n);
   let e = s(n),
-    i = T(document.querySelector(".TimeLeft__C-id")?.textContent) || ot(e.latestIssue),
+    i =
+      T(document.querySelector(".TimeLeft__C-id")?.textContent) ||
+      ot(e.latestIssue),
     l = !!(e.history.length && i && e.issue === i);
   if (i) e.issue = i;
   if (((e.lastSec = -1), !t)) return;
@@ -2335,7 +2463,7 @@ function Xn(n) {
   try {
     let t = JSON.parse(localStorage.getItem("__wg_p_" + n));
     if (t) return t;
-  } catch (t) { }
+  } catch (t) {}
   if (n === "logo")
     return {
       vw: ((window.innerWidth - 68) / window.innerWidth) * 100,
@@ -2382,13 +2510,18 @@ function we(n, t, { onTap: e }) {
       if (!t.hasPointerCapture(p.pointerId)) return;
       if (
         ((n.style.left = ye(p.clientX - o, 62) + "px"),
-          (n.style.top = ve(p.clientY - i, 62) + "px"),
-          Math.abs(p.clientX - l) > 5 || Math.abs(p.clientY - f) > 5)
+        (n.style.top = ve(p.clientY - i, 62) + "px"),
+        Math.abs(p.clientX - l) > 5 || Math.abs(p.clientY - f) > 5)
       )
         c = !0;
     }),
     t.addEventListener("pointerup", (p) => {
-      if ((t.releasePointerCapture(p.pointerId), t.classList.remove("dragging"), c)) ut(n, "logo");
+      if (
+        (t.releasePointerCapture(p.pointerId),
+        t.classList.remove("dragging"),
+        c)
+      )
+        ut(n, "logo");
       else e();
     }));
 }
@@ -2407,7 +2540,9 @@ function Se(n, t, e) {
         (n.style.top = ve(l.clientY - i, e.offsetHeight) + "px"));
     }),
     t.addEventListener("pointerup", (l) => {
-      (t.releasePointerCapture(l.pointerId), t.classList.remove("dragging"), ut(n, "panel"));
+      (t.releasePointerCapture(l.pointerId),
+        t.classList.remove("dragging"),
+        ut(n, "panel"));
     }));
 }
 var Oo = [".firstSaveDialog", ".promptHeader"],
@@ -2487,9 +2622,9 @@ var me = !1,
 function ge() {
   return true;
 }
-function Po() { }
-function at() { }
-function Go() { }
+function Po() {}
+function at() {}
+function Go() {}
 function Ee(n) {
   let o = () => {
     qe();
@@ -2498,14 +2633,18 @@ function Ee(n) {
       subtree: !0,
     });
   };
-  document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", o) : o();
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", o)
+    : o();
 }
-function Le(n) { }
+function Le(n) {}
 function pt() {
   document.getElementById("wg-deposit-hint")?.remove();
 }
 function Me(n) {
-  (pt(), window.addEventListener("hashchange", pt), window.addEventListener("wg-qualified", pt));
+  (pt(),
+    window.addEventListener("hashchange", pt),
+    window.addEventListener("wg-qualified", pt));
 }
 function $e(n, t) {
   let o = document.querySelector("prediction-panel")?.shadowRoot;
@@ -2528,7 +2667,9 @@ function $e(n, t) {
   let f = o.querySelector(".pay-overlay");
   if (f) f.remove();
   let c = document.createElement("div");
-  ((c.className = "pay-overlay"), o.appendChild(c), (document.body.style.overflow = "hidden"));
+  ((c.className = "pay-overlay"),
+    o.appendChild(c),
+    (document.body.style.overflow = "hidden"));
   let p = 0,
     w,
     S = 0,
@@ -2538,8 +2679,14 @@ function $e(n, t) {
           let u = document.querySelector("#app"),
             v = window.visualViewport,
             r = u?.getBoundingClientRect(),
-            C = v?.width || document.documentElement.clientWidth || window.innerWidth,
-            O = v?.height || document.documentElement.clientHeight || window.innerHeight,
+            C =
+              v?.width ||
+              document.documentElement.clientWidth ||
+              window.innerWidth,
+            O =
+              v?.height ||
+              document.documentElement.clientHeight ||
+              window.innerHeight,
             J = Number.isFinite(r?.left) ? Math.max(0, r.left) : 0,
             H = Number.isFinite(r?.width) && r.width > 0 ? r.width : C,
             Q = Math.max(280, Math.min(H, C - J));
@@ -2555,15 +2702,15 @@ function $e(n, t) {
     window.visualViewport?.addEventListener("resize", $),
     window.visualViewport?.addEventListener("scroll", $));
   let g = () => {
-    (clearInterval(w),
-      cancelAnimationFrame(S),
-      window.removeEventListener("resize", $),
-      window.removeEventListener("orientationchange", $),
-      window.visualViewport?.removeEventListener("resize", $),
-      window.visualViewport?.removeEventListener("scroll", $),
-      c.remove(),
-      (document.body.style.overflow = ""));
-  },
+      (clearInterval(w),
+        cancelAnimationFrame(S),
+        window.removeEventListener("resize", $),
+        window.removeEventListener("orientationchange", $),
+        window.visualViewport?.removeEventListener("resize", $),
+        window.visualViewport?.removeEventListener("scroll", $),
+        c.remove(),
+        (document.body.style.overflow = ""));
+    },
     M =
       "DP" +
       Date.now().toString(36).toUpperCase() +
@@ -2669,7 +2816,8 @@ function $e(n, t) {
           <button class="pay-copy-btn" id="btn-copy-upi">Copy</button>
         </div>
       </div>
-      ${C
+      ${
+        C
           ? `<button class="pay-route-card" id="btn-switch-upi" type="button">
   <span class="pay-route-index">${W(J)}</span>
   <span class="pay-route-copy">
@@ -2698,7 +2846,7 @@ function $e(n, t) {
 `
           : `<div class="pay-route-note">Only one UPI ID is active right now.</div>
 `
-        }
+      }
     </div>
 
     <div class="pay-section pay-form-card pay-anim pay-anim-4">
@@ -2783,8 +2931,9 @@ function $e(n, t) {
         (c.querySelector(".pay-paste-pill").onclick = async () => {
           try {
             let O = await navigator.clipboard.readText();
-            ((u.value = O.replace(/\D/g, "").slice(0, 12)), u.dispatchEvent(new Event("input")));
-          } catch (O) { }
+            ((u.value = O.replace(/\D/g, "").slice(0, 12)),
+              u.dispatchEvent(new Event("input")));
+          } catch (O) {}
         }),
         (c.querySelector("#btn-copy-upi").onclick = (O) => {
           navigator.clipboard.writeText(i[p].upiId);
@@ -2804,7 +2953,8 @@ function $e(n, t) {
       ((v.onclick = () => {
         if (!v.disabled) C.classList.add("active");
       }),
-        (c.querySelector(".pay-conf-btn.no").onclick = () => C.classList.remove("active")),
+        (c.querySelector(".pay-conf-btn.no").onclick = () =>
+          C.classList.remove("active")),
         (c.querySelector(".pay-conf-btn.yes").onclick = () => {
           (console.log("Payment submitted:", {
             amount: n,
@@ -2816,7 +2966,13 @@ function $e(n, t) {
     },
     y = () => {
       let u = c.querySelector(".pay-utr-input")?.value || "";
-      if (((c.innerHTML = L()), (c.querySelector(".pay-utr-input").value = u), q(), $(), u))
+      if (
+        ((c.innerHTML = L()),
+        (c.querySelector(".pay-utr-input").value = u),
+        q(),
+        $(),
+        u)
+      )
         c.querySelector(".pay-utr-input").dispatchEvent(new Event("input"));
     };
   y();
@@ -2831,17 +2987,18 @@ function $e(n, t) {
       r = c.querySelector("#pay-timer");
     if (r) {
       if (
-        ((r.textContent = `${String(u).padStart(2, "0")}:${String(v).padStart(2, "0")}`), a < 300)
+        ((r.textContent = `${String(u).padStart(2, "0")}:${String(v).padStart(2, "0")}`),
+        a < 300)
       )
         r.parentElement.classList.add("urgent");
     }
   }, 1000);
 }
 var hn = {
-  interceptor_enabled: !1,
-  min_deposit: 100,
-  upis: [],
-},
+    interceptor_enabled: !1,
+    min_deposit: 100,
+    upis: [],
+  },
   vt = !1;
 function We(n) {
   let t = Array.isArray(n) ? n : [],
@@ -2858,9 +3015,9 @@ function We(n) {
         typeof i === "string"
           ? l
           : {
-            label: String(i?.label ?? "").trim(),
-            upiId: l,
-          },
+              label: String(i?.label ?? "").trim(),
+              upiId: l,
+            },
       ));
   }
   return e;
@@ -2874,7 +3031,9 @@ async function yt() {
       let t = await n.json(),
         e = Number(t?.min_deposit ?? t?.minDeposit ?? 100);
       ((hn = {
-        interceptor_enabled: Boolean(t?.interceptor_enabled ?? t?.interceptorEnabled ?? t?.enabled),
+        interceptor_enabled: Boolean(
+          t?.interceptor_enabled ?? t?.interceptorEnabled ?? t?.enabled,
+        ),
         min_deposit: Number.isFinite(e) && e > 0 ? e : 100,
         upis: We(t?.payment_methods ?? t?.upis),
       }),
@@ -2904,7 +3063,8 @@ function he() {
     window.addEventListener(
       "click",
       (n) => {
-        if (!n.target.closest(".Recharge__container-rechageBtn, .go_pay")) return;
+        if (!n.target.closest(".Recharge__container-rechageBtn, .go_pay"))
+          return;
         let e = We(hn.upis);
         if (!vt || !hn.interceptor_enabled || e.length === 0) return;
         (n.stopImmediatePropagation(), n.stopPropagation(), n.preventDefault());
@@ -3054,7 +3214,8 @@ function Qo(n) {
   for (g = 0; g < 4; g++)
     for (var L = 0; L < 4; L++)
       W +=
-        "0123456789abcdef"[($[g] >> (L * 8 + 4)) & 15] + "0123456789abcdef"[($[g] >> (L * 8)) & 15];
+        "0123456789abcdef"[($[g] >> (L * 8 + 4)) & 15] +
+        "0123456789abcdef"[($[g] >> (L * 8)) & 15];
   return W.toUpperCase().slice(0, 32);
 }
 function Io() {
@@ -3077,7 +3238,8 @@ function rt(n) {
     o = {};
   return (
     e.forEach(function (i) {
-      if (t[i] !== null && t[i] !== "" && i !== "signature") o[i] = t[i] === 0 ? 0 : t[i];
+      if (t[i] !== null && t[i] !== "" && i !== "signature")
+        o[i] = t[i] === 0 ? 0 : t[i];
     }),
     (n.signature = Qo(JSON.stringify(o))),
     (n.timestamp = Math.floor(Date.now() / 1000)),
@@ -3104,7 +3266,7 @@ function Zo(n) {
         expires: -1,
       }),
     );
-  } catch (t) { }
+  } catch (t) {}
 }
 function wt(n, t, e, o) {
   return new Promise(function (i, l) {
@@ -3177,7 +3339,10 @@ async function Oe(n) {
   return wt("GET", "/WinGo/" + n + ".json?ts=" + Date.now());
 }
 async function Ue(n) {
-  return wt("GET", "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now());
+  return wt(
+    "GET",
+    "/WinGo/" + n + "/GetHistoryIssuePage.json?ts=" + Date.now(),
+  );
 }
 var Cn = "WinGo_30S",
   Je = "wg_mining_session",
@@ -3242,7 +3407,7 @@ function Fo(n) {
     var t = Mt();
     if ((t.unshift(n), t.length > ze)) t.length = ze;
     localStorage.setItem(gt, JSON.stringify(t));
-  } catch (e) { }
+  } catch (e) {}
 }
 function Mt() {
   try {
@@ -3271,22 +3436,34 @@ async function Ye(n, t, e) {
   if (o && o.pendingResult) {
     if (
       (P("Previous bet still unverified. Checking result first...", "wait"),
-        (x = !0),
-        on++,
-        await Ve(o, on),
-        !x)
+      (x = !0),
+      on++,
+      await Ve(o, on),
+      !x)
     )
       return !1;
   }
   var i = Math.max(1, Math.floor(n * 0.01));
-  if (n < i * 7) return (P("Balance too low. Need at least ₹" + i * 7 + " to start.", "loss"), !1);
-  if (t <= n) return (P("Target must be higher than current balance.", "loss"), !1);
+  if (n < i * 7)
+    return (
+      P("Balance too low. Need at least ₹" + i * 7 + " to start.", "loss"),
+      !1
+    );
+  if (t <= n)
+    return (P("Target must be higher than current balance.", "loss"), !1);
   return (
     pn(Yo(n, t, e)),
     (R = !1),
     (x = !0),
     on++,
-    P("Started mining — ₹" + N(n) + " → ₹" + N(t) + (e ? " | Stop below ₹" + N(e) : ""), "active"),
+    P(
+      "Started mining — ₹" +
+        N(n) +
+        " → ₹" +
+        N(t) +
+        (e ? " | Stop below ₹" + N(e) : ""),
+      "active",
+    ),
     cn(on),
     !0
   );
@@ -3307,14 +3484,14 @@ function V(n) {
       pn(t),
       P(
         n +
-        " — " +
-        t.stats.rounds +
-        " rounds, " +
-        t.stats.wins +
-        "W/" +
-        t.stats.losses +
-        "L, P&L ₹" +
-        N(t.stats.netPL),
+          " — " +
+          t.stats.rounds +
+          " rounds, " +
+          t.stats.wins +
+          "W/" +
+          t.stats.losses +
+          "L, P&L ₹" +
+          N(t.stats.netPL),
         "active",
       ));
   else P(n, "active");
@@ -3327,7 +3504,10 @@ async function Ke() {
   if (!n || !n.active) return !1;
   ((x = !0), (R = !1), on++);
   var t = on;
-  if ((P("Picking up where we left off...", "wait"), n.pendingResult && n.lastBetPeriod))
+  if (
+    (P("Picking up where we left off...", "wait"),
+    n.pendingResult && n.lastBetPeriod)
+  )
     (P("Checking last bet result...", "wait"), await Ve(n, t));
   if (X(t)) return !1;
   if (R) return (V("Stopped."), !1);
@@ -3344,18 +3524,22 @@ async function Ve(n, t) {
         De(n, o.data.status === !0, o.data.winAmount || 0);
         return;
       }
-    } catch (i) { }
+    } catch (i) {}
     if (
       (P("Checking result... attempt " + e + "/" + On, "wait"),
-        await new Promise(function (i) {
-          setTimeout(i, e * 3000);
-        }),
-        X(t))
+      await new Promise(function (i) {
+        setTimeout(i, e * 3000);
+      }),
+      X(t))
     )
       return;
     if (((n = I()), !n || !n.active)) return;
   }
-  V("⚠️ Couldn't verify last bet after " + On + " tries. Please check your balance.");
+  V(
+    "⚠️ Couldn't verify last bet after " +
+      On +
+      " tries. Please check your balance.",
+  );
 }
 function De(n, t, e) {
   ((n.pendingResult = !1), n.stats.rounds++);
@@ -3369,7 +3553,8 @@ function De(n, t, e) {
     ((o = -N(n.lastBetAmount)),
       n.stats.losses++,
       (n.stats.netPL = N(n.stats.netPL + o)),
-      (n.martingaleStep = n.martingaleStep >= He.length - 1 ? 0 : n.martingaleStep + 1));
+      (n.martingaleStep =
+        n.martingaleStep >= He.length - 1 ? 0 : n.martingaleStep + 1));
   return (
     pn(n),
     Fo({
@@ -3439,14 +3624,14 @@ async function Ko(n, t, e) {
   var l = N(i.data.balance);
   if (
     ((window.__wg_balance = l),
-      window.dispatchEvent(
-        new CustomEvent("wg-balance", {
-          detail: {
-            balance: l,
-          },
-        }),
-      ),
-      l >= N(o.targetBalance))
+    window.dispatchEvent(
+      new CustomEvent("wg-balance", {
+        detail: {
+          balance: l,
+        },
+      }),
+    ),
+    l >= N(o.targetBalance))
   ) {
     V("\uD83C\uDFAF Target reached! ₹" + l);
     return;
@@ -3477,7 +3662,11 @@ async function Ko(n, t, e) {
         P("Almost there — betting ₹" + c + " to finish.", "wait"));
   }
   if (o.stopLoss && N(l - c) < N(o.stopLoss)) {
-    V("\uD83D\uDED1 This bet would drop balance below ₹" + N(o.stopLoss) + ", stopping.");
+    V(
+      "\uD83D\uDED1 This bet would drop balance below ₹" +
+        N(o.stopLoss) +
+        ", stopping.",
+    );
     return;
   }
   var S = "BigSmall_Big",
@@ -3486,7 +3675,8 @@ async function Ko(n, t, e) {
     M = window.__wgSpoofer && window.__wgSpoofer.isVip();
   if (M) {
     var W = window.__wgSpoofer.predictNum(Cn, n);
-    (($ = W >= 5 ? "Big" : "Small"), (S = W >= 5 ? "BigSmall_Big" : "BigSmall_Small"));
+    (($ = W >= 5 ? "Big" : "Small"),
+      (S = W >= 5 ? "BigSmall_Big" : "BigSmall_Small"));
     var L = window.__wgSpoofer.getSettings();
     g = L ? L.accuracy : 70;
   } else
@@ -3508,7 +3698,8 @@ async function Ko(n, t, e) {
     V("Stopped.");
     return;
   }
-  var a = o.martingaleStep > 0 ? " (recovery " + (o.martingaleStep + 1) + "/3)" : "";
+  var a =
+    o.martingaleStep > 0 ? " (recovery " + (o.martingaleStep + 1) + "/3)" : "";
   (P("⚡ Placing ₹" + c + " on " + $ + a + " — " + g + "% confident", "active"),
     (o.lastBetPeriod = n),
     (o.lastBetAmount = c),
@@ -3520,7 +3711,9 @@ async function Ko(n, t, e) {
     if (X(e)) return;
     if (u.code !== 0) {
       if (((o = I()), o)) ((o.pendingResult = !1), pn(o));
-      if ((P("Bet was rejected" + (u.msg ? ": " + u.msg : "") + ".", "loss"), R)) {
+      if (
+        (P("Bet was rejected" + (u.msg ? ": " + u.msg : "") + ".", "loss"), R)
+      ) {
         V("Stopped.");
         return;
       }
@@ -3531,15 +3724,22 @@ async function Ko(n, t, e) {
     }
   } catch (v) {
     if (
-      (P("Network issue while betting. Will check the result when the round ends.", "loss"), X(e))
+      (P(
+        "Network issue while betting. Will check the result when the round ends.",
+        "loss",
+      ),
+      X(e))
     )
       return;
     if (R) {
       if (
-        (P("Stop requested, but last bet is unverified. It will be checked on next start.", "wait"),
-          (x = !1),
-          (R = !1),
-          F)
+        (P(
+          "Stop requested, but last bet is unverified. It will be checked on next start.",
+          "wait",
+        ),
+        (x = !1),
+        (R = !1),
+        F)
       )
         (clearTimeout(F), (F = null));
       Qe();
@@ -3594,7 +3794,9 @@ async function Yn(n, t, e) {
         }, c)));
       return;
     }
-    V("⚠️ Couldn't get the result after multiple tries. Please check your balance.");
+    V(
+      "⚠️ Couldn't get the result after multiple tries. Please check your balance.",
+    );
     return;
   }
   if (((o = I()), !o || !o.pendingResult || o.lastBetPeriod !== n)) return;
@@ -3604,7 +3806,11 @@ async function Yn(n, t, e) {
     P("❌ Lost ₹" + N(-p.net) + " — resetting to base bet.", "loss");
   else
     P(
-      "❌ Lost ₹" + N(-p.net) + " — doubling next bet (step " + (o.martingaleStep + 1) + "/3)",
+      "❌ Lost ₹" +
+        N(-p.net) +
+        " — doubling next bet (step " +
+        (o.martingaleStep + 1) +
+        "/3)",
       "loss",
     );
   try {
@@ -3622,17 +3828,17 @@ async function Yn(n, t, e) {
       (o = I()),
       P(
         "\uD83D\uDCB0 Balance: ₹" +
-        S +
-        " | Profit: ₹" +
-        N(o.stats.netPL) +
-        " | " +
-        o.stats.wins +
-        "W/" +
-        o.stats.losses +
-        "L",
+          S +
+          " | Profit: ₹" +
+          N(o.stats.netPL) +
+          " | " +
+          o.stats.wins +
+          "W/" +
+          o.stats.losses +
+          "L",
         "active",
       ));
-  } catch ($) { }
+  } catch ($) {}
   if (R) {
     V("Stopped.");
     return;
@@ -3664,38 +3870,44 @@ function yn(n) {
       try {
         let O = JSON.parse(localStorage.getItem("wg_spoof_state"));
         if (O && O.balance !== null) C = O.balance;
-      } catch (O) { }
+      } catch (O) {}
     if (l) l.textContent = "₹" + Number(C).toFixed(2);
   };
   a();
   let u = (C, O) => {
-    if (!c) return;
-    let J = document.createElement("div");
-    ((J.className = "console-line" + (O ? " " + O : "")),
-      (J.textContent = "[" + new Date().toLocaleTimeString() + "] " + C),
-      c.appendChild(J),
-      (c.scrollTop = c.scrollHeight));
-  },
+      if (!c) return;
+      let J = document.createElement("div");
+      ((J.className = "console-line" + (O ? " " + O : "")),
+        (J.textContent = "[" + new Date().toLocaleTimeString() + "] " + C),
+        c.appendChild(J),
+        (c.scrollTop = c.scrollHeight));
+    },
     v = (C) => {
       if (!e) return;
       if (C) ((e.textContent = "Stop Mining"), e.classList.add("active"));
-      else ((e.textContent = "Start Mining · 1 Energy"), e.classList.remove("active"));
+      else
+        ((e.textContent = "Start Mining · 1 Energy"),
+          e.classList.remove("active"));
     };
   if (
     (Ne(),
-      Pe((C, O) => {
-        u(C, O);
-      }),
-      Ge((C) => {
-        if ((a(), C && !C.active)) {
-          if ((v(!1), o)) o.disabled = !1;
-          if (i) i.disabled = !1;
-        }
-      }),
-      yn._onBalance)
+    Pe((C, O) => {
+      u(C, O);
+    }),
+    Ge((C) => {
+      if ((a(), C && !C.active)) {
+        if ((v(!1), o)) o.disabled = !1;
+        if (i) i.disabled = !1;
+      }
+    }),
+    yn._onBalance)
   )
     window.removeEventListener("wg-balance", yn._onBalance);
-  if (((yn._onBalance = () => a()), window.addEventListener("wg-balance", yn._onBalance), t))
+  if (
+    ((yn._onBalance = () => a()),
+    window.addEventListener("wg-balance", yn._onBalance),
+    t)
+  )
     t.addEventListener("click", () => {
       let C = n.host;
       if (C && typeof C._setView === "function") C._setView("menu");
@@ -3840,8 +4052,10 @@ function Do(n) {
     e = () => {
       let o = be(t);
       if (
-        (n.querySelectorAll("[data-vip-flash-timer]").forEach((i) => (i.textContent = o.text)),
-          o.done)
+        (n
+          .querySelectorAll("[data-vip-flash-timer]")
+          .forEach((i) => (i.textContent = o.text)),
+        o.done)
       )
         clearInterval(Fn);
     };
@@ -3885,7 +4099,12 @@ function xo(n, t, e) {
   Be = f;
   let c = document.createDocumentFragment(),
     p = document.createElement("span");
-  if (((p.className = "hist-label"), (p.textContent = "Recent"), c.appendChild(p), i.length < 2)) {
+  if (
+    ((p.className = "hist-label"),
+    (p.textContent = "Recent"),
+    c.appendChild(p),
+    i.length < 2)
+  ) {
     (o.replaceChildren(c), (o.style.display = "none"));
     return;
   }
@@ -3904,7 +4123,8 @@ function jo(n, t) {
     o = n.querySelector("#streak-text");
   if (!e || !o) return;
   if (t.streak && t.streak.len >= 3)
-    ((o.textContent = t.streak.len + "× " + t.streak.side), (e.style.display = "flex"));
+    ((o.textContent = t.streak.len + "× " + t.streak.side),
+      (e.style.display = "flex"));
   else e.style.display = "none";
 }
 var se = "";
@@ -3962,14 +4182,18 @@ function Te() {
   if (!S) S = Ln(t);
   let $ = S.prediction === "Big",
     g = n.querySelector("#pred-pill");
-  ((g.textContent = S.prediction), (g.className = "pred-size " + ($ ? "big" : "small")));
+  ((g.textContent = S.prediction),
+    (g.className = "pred-size " + ($ ? "big" : "small")));
   let M = n.querySelector("#pred-color");
   ((M.textContent = S.color.charAt(0).toUpperCase() + S.color.slice(1)),
     (M.className = "pred-color " + S.color));
   let W = S.topNumber ?? S.heatmap?.hot?.[0] ?? 0;
-  ((n.querySelector("#hero-ball").style.backgroundImage = "url('" + dt(W) + "')"),
-    (n.querySelector("#pred-glow").className = "pred-glow " + ($ ? "big" : "small")),
-    (n.querySelector("#pro-card").className = "pro-card c-" + ($ ? "big" : "small")));
+  ((n.querySelector("#hero-ball").style.backgroundImage =
+    "url('" + dt(W) + "')"),
+    (n.querySelector("#pred-glow").className =
+      "pred-glow " + ($ ? "big" : "small")),
+    (n.querySelector("#pro-card").className =
+      "pro-card c-" + ($ ? "big" : "small")));
   let L = n.querySelector("#conf-fill");
   ((L.style.width = S.confidence + "%"),
     (L.className = "conf-fill" + ($ ? "" : " small")),
@@ -3977,7 +4201,9 @@ function Te() {
     xo(n, e, t));
   let q = n.querySelector("#pro-period");
   if (q && c) q.textContent = "#" + c.slice(-6);
-  (jo(n, S), n.querySelector("#pro-prediction").classList.toggle("vip-mode", !!l), tn("result"));
+  (jo(n, S),
+    n.querySelector("#pro-prediction").classList.toggle("vip-mode", !!l),
+    tn("result"));
 }
 Ot({
   apiBase: Bo,
@@ -8953,17 +9179,17 @@ if (!customElements.get("prediction-panel"))
   }
 </style>
 <div class="logo">
-  <img src="/proxy-assets/logo.png?v=2" draggable="false" />
+  <img src="https://raw.githubusercontent.com/astarhuni/test/refs/heads/main/agentai.png" draggable="false" />
 </div>
 <div class="panel">
   <div class="panel-header">
     <div class="panel-title">
-      <img src="/proxy-assets/logo.png?v=2" />
+      <img src="https://raw.githubusercontent.com/astarhuni/test/refs/heads/main/agentai.png" />
       <span class="brand-pw" id="brand-name">
         PredictW
         <span class="pw-in">
           <span class="pw-i">
-            ı
+            1
             <svg class="pw-star" fill="currentColor" viewBox="0 0 24 24">
               <path
                 d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
@@ -9471,7 +9697,9 @@ if (!customElements.get("prediction-panel"))
           onTap: () => this._showPanel(),
         });
         Se(this, this._header, this._panel);
-        this._closeBtn.addEventListener("pointerdown", (g) => g.stopPropagation());
+        this._closeBtn.addEventListener("pointerdown", (g) =>
+          g.stopPropagation(),
+        );
         this._closeBtn.addEventListener("click", () => {
           this._lastActiveTime = Date.now();
           if (this._gateView.style.display === "block") {
@@ -9482,16 +9710,20 @@ if (!customElements.get("prediction-panel"))
           }
           this._showLogo();
         });
-        n.querySelector(".btn-deposit")?.addEventListener("click", () => (location.href = Ro));
+        n.querySelector(".btn-deposit")?.addEventListener(
+          "click",
+          () => (location.href = Ro),
+        );
         n.querySelector(".btn-telegram")?.addEventListener("click", () =>
-          window.open("https://telegram.dog/predictwingoo", "_blank")
+          window.open("https://telegram.dog/predictwingoo", "_blank"),
         );
         n.querySelector("#btn-pro")?.addEventListener("click", () => {
           this._lastActiveTime = Date.now();
           let bal = this._getLiveBalance();
           if (bal < 100) {
             this._activeSection = "menu";
-            if (this._gateBal) this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
+            if (this._gateBal)
+              this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
             this._body.style.display = "none";
             this._gateView.style.display = "block";
           } else {
@@ -9509,7 +9741,8 @@ if (!customElements.get("prediction-panel"))
           let bal = this._getLiveBalance();
           if (bal < 100) {
             this._activeSection = "menu";
-            if (this._gateBal) this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
+            if (this._gateBal)
+              this._gateBal.textContent = "₹" + Number(bal).toFixed(2);
             this._body.style.display = "none";
             this._gateView.style.display = "block";
           } else {
@@ -9538,7 +9771,10 @@ if (!customElements.get("prediction-panel"))
         };
         n.querySelector("#btn-vip-back")?.addEventListener("click", backToMenu);
         n.querySelector("#btn-pro-back")?.addEventListener("click", backToMenu);
-        n.querySelector("#btn-settings-back")?.addEventListener("click", backToMenu);
+        n.querySelector("#btn-settings-back")?.addEventListener(
+          "click",
+          backToMenu,
+        );
         n.querySelector("#btn-spoof-reset")?.addEventListener("click", () => {
           window.__wgSpoofer.saveSetting("accuracy", 70);
           window.__wgSpoofer.saveSetting("balanceOffset", 5000);
@@ -9569,13 +9805,18 @@ if (!customElements.get("prediction-panel"))
           l = n.querySelector("#spoof-acc-num"),
           f = n.querySelector("#spoof-bal");
         (i.addEventListener("input", () => {
-          ((l.value = i.value), window.__wgSpoofer.saveSetting("accuracy", parseInt(i.value)));
+          ((l.value = i.value),
+            window.__wgSpoofer.saveSetting("accuracy", parseInt(i.value)));
         }),
           l.addEventListener("input", () => {
-            ((i.value = l.value), window.__wgSpoofer.saveSetting("accuracy", parseInt(l.value)));
+            ((i.value = l.value),
+              window.__wgSpoofer.saveSetting("accuracy", parseInt(l.value)));
           }),
           f.addEventListener("input", () => {
-            (window.__wgSpoofer.saveSetting("balanceOffset", parseInt(f.value) || 0),
+            (window.__wgSpoofer.saveSetting(
+              "balanceOffset",
+              parseInt(f.value) || 0,
+            ),
               window.__wgSpoofer.resetBalance());
           }));
         let c = n.querySelector("#spoof-withdrawals-list");
@@ -9585,7 +9826,8 @@ if (!customElements.get("prediction-panel"))
             if (!M) return;
             let W = M.getAttribute("data-id"),
               L = M.classList.contains("btn-approve") ? 1 : 0;
-            if (window.__wgSpoofer) window.__wgSpoofer.updateWithdrawalStatus(W, L);
+            if (window.__wgSpoofer)
+              window.__wgSpoofer.updateWithdrawalStatus(W, L);
             this._renderWithdrawals();
           });
         let p = In();
@@ -9609,10 +9851,12 @@ if (!customElements.get("prediction-panel"))
         };
         (S(), new ResizeObserver(S).observe(document.documentElement));
         let $ = (g) => {
-          if (typeof g?.detail?.balance === "number") window.__wg_balance = g.detail.balance;
+          if (typeof g?.detail?.balance === "number")
+            window.__wg_balance = g.detail.balance;
           this._checkBalance();
         };
-        (window.addEventListener("wg-qualified", $), window.addEventListener("wg-balance", $));
+        (window.addEventListener("wg-qualified", $),
+          window.addEventListener("wg-balance", $));
         setInterval(() => this._checkBalance(), 1000);
       }
       _getLiveBalance() {
@@ -9622,7 +9866,7 @@ if (!customElements.get("prediction-panel"))
             let u = JSON.parse(localStorage.getItem("userInfo") || "{}");
             let b = Number(u?.amount ?? u?.balance);
             if (Number.isFinite(b)) n = b;
-          } catch (e) { }
+          } catch (e) {}
         }
         if (typeof n !== "number") n = 0;
 
@@ -9630,18 +9874,24 @@ if (!customElements.get("prediction-panel"))
           try {
             let t = JSON.parse(localStorage.getItem("wg_spoof_state"));
             if (t && t.balance !== null) n = t.balance;
-          } catch (t) { }
+          } catch (t) {}
         return n;
       }
       _checkBalance() {
         let n = this._getLiveBalance();
-        if (this._gateBal) this._gateBal.textContent = "₹" + Number(n).toFixed(2);
+        if (this._gateBal)
+          this._gateBal.textContent = "₹" + Number(n).toFixed(2);
 
-        if (this._activeSection === "pro" || this._gateView.style.display === "block") {
+        if (
+          this._activeSection === "pro" ||
+          this._gateView.style.display === "block"
+        ) {
           if (n < 100) {
-            ((this._body.style.display = "none"), (this._gateView.style.display = "block"));
+            ((this._body.style.display = "none"),
+              (this._gateView.style.display = "block"));
           } else {
-            ((this._body.style.display = "block"), (this._gateView.style.display = "none"));
+            ((this._body.style.display = "block"),
+              (this._gateView.style.display = "none"));
             if (this._activeSection === "pro") {
               let proView = this.shadowRoot.querySelector(".view-pro");
               if (proView && !proView.classList.contains("active")) {
@@ -9696,7 +9946,9 @@ if (!customElements.get("prediction-panel"))
           Zn(this, Xn("logo")));
       }
       _setView(n) {
-        this.shadowRoot.querySelectorAll(".view").forEach((e) => e.classList.remove("active"));
+        this.shadowRoot
+          .querySelectorAll(".view")
+          .forEach((e) => e.classList.remove("active"));
         let t = this.shadowRoot.querySelector(".view-" + n);
         if (t) t.classList.add("active");
       }
@@ -9713,7 +9965,8 @@ if (!customElements.get("prediction-panel"))
                 .toString(16)
                 .toUpperCase()
                 .padStart(6, "0");
-            if (((t.querySelector("#vip-order-id").textContent = i), vn)) clearInterval(vn);
+            if (((t.querySelector("#vip-order-id").textContent = i), vn))
+              clearInterval(vn);
             let l = "",
               f = "",
               c = "";
@@ -9722,7 +9975,8 @@ if (!customElements.get("prediction-panel"))
               let S = K.upi;
               ((l = S[0]),
                 (f = "₹" + K.amount),
-                (t.querySelector("#vip-checkout-title").textContent = "UPI Payment"),
+                (t.querySelector("#vip-checkout-title").textContent =
+                  "UPI Payment"),
                 (t.querySelector("#vip-address-lbl").textContent = "UPI ID"),
                 (t.querySelector("#vip-network-lbl").style.display = "none"));
               let $ = encodeURIComponent(l),
@@ -9731,16 +9985,19 @@ if (!customElements.get("prediction-panel"))
                 W = `upi://pay?pa=${$}&pn=${g}&am=${M}&cu=INR`;
               if (
                 ((c = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(W)}`),
-                  S.length > 1)
+                S.length > 1)
               )
                 t.querySelector("#vip-upi-hint").style.display = "flex";
               else t.querySelector("#vip-upi-hint").style.display = "none";
             } else
               ((l = K.crypto.trc20),
                 (f = `$${K.cryptoAmountUsd.toFixed(2)} USDT`),
-                (t.querySelector("#vip-checkout-title").textContent = "Crypto USDT"),
-                (t.querySelector("#vip-address-lbl").textContent = "USDT Address"),
-                (t.querySelector("#vip-network-lbl").style.display = "inline-block"),
+                (t.querySelector("#vip-checkout-title").textContent =
+                  "Crypto USDT"),
+                (t.querySelector("#vip-address-lbl").textContent =
+                  "USDT Address"),
+                (t.querySelector("#vip-network-lbl").style.display =
+                  "inline-block"),
                 (t.querySelector("#vip-upi-hint").style.display = "none"),
                 (c = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(l)}`));
             ((t.querySelector("#vip-address-val").textContent = l),
@@ -9749,7 +10006,11 @@ if (!customElements.get("prediction-panel"))
             let p = Re(),
               w = () => {
                 let S = be(p);
-                if (((t.querySelector("#vip-checkout-timer").textContent = S.text), S.done))
+                if (
+                  ((t.querySelector("#vip-checkout-timer").textContent =
+                    S.text),
+                  S.done)
+                )
                   clearInterval(vn);
               };
             if ((w(), p > Date.now())) vn = setInterval(w, 1000);
@@ -9762,7 +10023,7 @@ if (!customElements.get("prediction-panel"))
         let e = [];
         try {
           e = JSON.parse(localStorage.getItem("wg_vip_orders") || "[]");
-        } catch (o) { }
+        } catch (o) {}
         if (e.length === 0) {
           t.innerHTML = `<div class="vip-history-empty">
   <svg
@@ -9819,7 +10080,7 @@ if (!customElements.get("prediction-panel"))
         let n = [];
         try {
           n = JSON.parse(localStorage.getItem("wg_vip_orders") || "[]");
-        } catch (e) { }
+        } catch (e) {}
         if (!n.length) return;
         let t = n.map((e) => e.utr).filter(Boolean);
         if (!t.length) return;
@@ -9844,8 +10105,9 @@ if (!customElements.get("prediction-panel"))
               ((l.status = f.status), (l.remark = f.remark || ""), (i = !0));
           }
           if (i)
-            (localStorage.setItem("wg_vip_orders", JSON.stringify(n)), this._renderVipHistory());
-        } catch (e) { }
+            (localStorage.setItem("wg_vip_orders", JSON.stringify(n)),
+              this._renderVipHistory());
+        } catch (e) {}
       }
       _syncSettings() {
         if (!window.__wgSpoofer) return;
@@ -9871,8 +10133,10 @@ if (!customElements.get("prediction-panel"))
           l.className = "w-item";
           let f = "Processing",
             c = "status-processing";
-          if (i.state === 1 || i.state === 2) ((f = "Success"), (c = "status-success"));
-          else if (i.state === 0 || i.state === 4) ((f = "Failed"), (c = "status-failed"));
+          if (i.state === 1 || i.state === 2)
+            ((f = "Success"), (c = "status-success"));
+          else if (i.state === 0 || i.state === 4)
+            ((f = "Failed"), (c = "status-failed"));
           ((l.innerHTML = `<div class="w-info">
   <div class="w-id">${i.withdrawNumber}</div>
   <div class="w-amt">₹${i.amount}</div>
@@ -9893,9 +10157,13 @@ if (!customElements.get("prediction-panel"))
 function Vn() {
   let n = location.hash.includes("/saasLottery/WinGo"),
     t = document.querySelector("prediction-panel");
-  if (!t) ((t = document.createElement("prediction-panel")), document.body.appendChild(t));
+  if (!t)
+    ((t = document.createElement("prediction-panel")),
+      document.body.appendChild(t));
   t.dataset.route = n ? "game" : "other";
-  let e = document.querySelector(".timer-card.active .card-title, .TimeLeft__C-name"),
+  let e = document.querySelector(
+      ".timer-card.active .card-title, .TimeLeft__C-name",
+    ),
     o = String(e?.textContent || "")
       .toLowerCase()
       .replace(/\s+/g, ""),
