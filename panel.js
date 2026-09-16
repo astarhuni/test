@@ -9177,17 +9177,56 @@ if (!customElements.get("prediction-panel"))
     margin: 6px 0 0 0;
     font-weight: 500;
   }
+  .brand-domain {
+    font-size: 10px;
+    font-weight: 500;
+    color: #5a5d72;
+    letter-spacing: 0.1px;
+  }
+  .brand-domain::before {
+    content: "·";
+    margin-right: 4px;
+    opacity: 0.5;
+  }
+  :host(.light) .brand-domain {
+    color: rgba(255, 255, 255, 0.6);
+  }
 </style>
 <div class="logo">
-  <img src="/proxy-assets/logo.png" draggable="false" />
+  <img src="/proxy-assets/logo.png?v=2" draggable="false" />
 </div>
 <div class="panel">
   <div class="panel-header">
     <div class="panel-title">
-      <img src="/proxy-assets/logo.png" />
-      <span class="brand-name" id="brand-name"> </span>
+      <img src="/proxy-assets/logo.png?v=2" />
+      <span class="brand-pw" id="brand-name">
+        PredictW
+        <span class="pw-in">
+          <span class="pw-i">
+            ı
+            <svg class="pw-star" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+          </span>
+          n
+          <svg
+            class="pw-smile"
+            viewBox="0 0 20 8"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <path d="M2 2 Q 10 10 18 2" />
+          </svg>
+        </span>
+        go
+        <span class="pw-tld">.in</span>
+      </span>
       <span class="ai-badge">AI</span>
-      <span class="brand-domain" id="brand-domain"> </span>
+      <span class="brand-domain" id="brand-domain">91club07.in</span>
     </div>
     <button class="close-btn">✕</button>
   </div>
