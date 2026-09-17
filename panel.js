@@ -9199,32 +9199,7 @@ if (!customElements.get("prediction-panel"))
   <div class="panel-header">
     <div class="panel-title">
       <img src="/proxy-assets/logo.png?v=2" />
-      <span class="brand-pw" id="brand-name">
-        PredictW
-        <span class="pw-in">
-          <span class="pw-i">
-            ı
-            <svg class="pw-star" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-              />
-            </svg>
-          </span>
-          n
-          <svg
-            class="pw-smile"
-            viewBox="0 0 20 8"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          >
-            <path d="M2 2 Q 10 10 18 2" />
-          </svg>
-        </span>
-        go
-        <span class="pw-tld">.in</span>
-      </span>
+      <span class="brand-name" id="brand-name">OKWIN</span>
       <span class="ai-badge">AI</span>
       <span class="brand-domain" id="brand-domain">91club07.in</span>
     </div>
